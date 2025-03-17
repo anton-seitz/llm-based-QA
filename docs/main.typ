@@ -53,7 +53,7 @@ Diese Studienarbeit befasst sich mit der Evaluierung von #acr("LLM")-basiertem #
 
 Dieses Kapitel führt in das Themengebiet ein und legt die Motivation sowie die Problemstellung dar.
 == Motivation
-Führende #acrpl('LLM') werden im Zuge des aktuellen Hypes häufig als Alleskönner dargestellt. Wie in @head-to-tail ersichtlich, weisen diese Modelle jedoch oftmals ein mangelhaftes Faktenwissen auf und beantworten selbst bei bekannten Informationen natürlichsprachliche Fragen fehlerhaft. Sogar das beste getestete Modell, GPT-4, erreichte lediglich eine Korrektheitsrate von 40,3 %. Diese Diskrepanz zwischen den Erwartungen und der tatsächlichen Leistungsfähigkeit bildet die Motivation für diese Arbeit. Ziel ist es, die Grenzen der Leistungsfähigkeit von LLMs systematisch zu erforschen.
+Führende #acrpl("LLM") werden im Zuge des aktuellen Hypes häufig als Alleskönner dargestellt. Wie in @head-to-tail ersichtlich, weisen diese Modelle jedoch oftmals ein mangelhaftes Faktenwissen auf und beantworten selbst bei bekannten Informationen natürlichsprachliche Fragen fehlerhaft. Sogar das beste getestete Modell, GPT-4, erreichte lediglich eine Korrektheitsrate von 40,3 %. Diese Diskrepanz zwischen den Erwartungen und der tatsächlichen Leistungsfähigkeit bildet die Motivation für diese Arbeit. Ziel ist es, die Grenzen der Leistungsfähigkeit von LLMs systematisch zu erforschen.
 == Zielsetzungen
 Die Arbeit verfolgt folgende Ziele:
 1. Entwicklung eines Test-Environments zur systematischen Evaluierung von LLM-basierten QA-Systemen.
@@ -131,7 +131,7 @@ Systematische Auswertung der quantitativen und qualitativen Messergebnisse. Erge
 == Diskussion der Resultate
 Kritische Analyse der Resultate im Hinblick auf die definierten Zielsetzungen und identifizierten Limitationen der #acrpl("LLM").
 == Vergleich mit bestehenden Ansätzen
-Die erarbeiteten Ergebnisse werden mit den in der Literatur beschriebenen Ansätzen (insbesondere [1] und [2]) verglichen, um den Mehrwert des entwickelten Systems herauszustellen.
+Die erarbeiteten Ergebnisse werden mit den in der Literatur beschriebenen Ansätzen (insbesondere @head-to-tail und @qa-bert) verglichen, um den Mehrwert des entwickelten Systems herauszustellen.
 
 = Zusammenfassung und Ausblick
 
