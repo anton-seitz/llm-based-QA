@@ -19,7 +19,7 @@
   authors: (
     (
       name: "Anton Seitz",
-      student-id: "0000000",
+      student-id: "3626401",
       course: "INF22B",
       course-of-studies: "Informatik"
     ),
@@ -47,7 +47,7 @@
 
 = Kurzbeschreibung der Arbeit
 
-Diese Studienarbeit befasst sich mit der Evaluierung von #acr("LLM")-basiertem #acr("QA"). Dabei wird untersucht, wie #acrpl("LLM") in der Lage sind, natürlich formulierte Fragen basierend auf einem definierten Textkorpus automatisch zu beantworten. Der Textkorpus wird aus fachspezifischen Quellen (z. B. judo-spezifische Literatur, Wettkampfdaten) und ergänzend aus öffentlich zugänglichen Daten wie Wikipedia-Artikeln zusammengestellt. Die Ausgangssituation ist geprägt durch den rasanten Fortschritt im Bereich der künstlichen Intelligenz und #acr("NLP"). Trotz der beeindruckenden Leistungsfähigkeit weisen aktuelle Modelle oftmals Defizite in Bezug auf Faktenwissen und Detailgenauigkeit auf. Ziel dieser Arbeit ist es, die Antwortqualität – gemessen an Kriterien wie Korrektheit, Vollständigkeit und Relevanz – systematisch zu bewerten und potenzielle Einsatzbereiche, beispielsweise im Kundensupport oder internen Wissensmanagement, zu identifizieren.
+Diese Studienarbeit befasst sich mit der Evaluierung von #acr("LLM")-basiertem #acr("QA"). Dabei wird untersucht, wie #acrpl("LLM") in der Lage sind, natürlich formulierte Fragen basierend auf einem definierten Textkorpus automatisch zu beantworten. Der Textkorpus wird aus fachspezifischen Quellen (z. B. judo-spezifische Literatur, Wettkampfdaten) und ergänzend aus öffentlich zugänglichen Daten wie Wikipedia-Artikeln zusammengestellt. Die Ausgangssituation ist geprägt durch den rasanten Fortschritt im Bereich der künstlichen Intelligenz und #acr("NLP"). Trotz der beeindruckenden Leistungsfähigkeit weisen aktuelle Modelle oftmals Defizite in Bezug auf Faktenwissen und Detailgenauigkeit auf. Ziel dieser Arbeit ist es, die Antwortqualität – gemessen an Kriterien wie Korrektheit, Vollständigkeit und Relevanz – systematisch zu bewerten und potenzielle Einsatzbereiche zu identifizieren.
 
 = Einleitung
 
@@ -74,16 +74,27 @@ Ein Überblick über aktuelle Entwicklungen und Forschungsarbeiten im Bereich #a
 == Question Answering
 
 Hier wird das Konzept des #acr("QA") umfassend dargestellt.
-== Modelltypen: Open Domain vs. Closed Domain
+
+=== Modelltypen: Open Domain vs. Closed Domain
+
 QA-Systeme können in zwei Kategorien unterteilt werden:
+
 - Open Domain QA: Systeme, die mit breit gefächerten, öffentlichen Wissenskorpora (z. B. Wikipedia) arbeiten und allgemeine Fragen beantworten.
 - Closed Domain QA: Systeme, die auf spezifische, thematisch eingeschränkte Korpora (z. B. judo-spezifische Literatur) fokussiert sind und detaillierte, fachspezifische Informationen liefern.
-== Methoden des QA
+
+=== Typen von Question Answering Modellen
+
+- Extractive Question Answering: Ein tief lernendes Modell, das eine Antwort liefert, wenn ein Textkorpus (also ein Kontext) gegeben ist. Das Modell "durchsucht" die Dokumente, um die beste Antwort auf die Frage zu finden. Es funktioniert im Wesentlichen wie ein Suchwerkzeug.
+- Open Generative Question Answering: Ein Modell, das auf Grundlage eines Kontextes Text generiert. Im Gegensatz zum extraktiven Modell muss die Antwort nicht wörtlich im Text stehen.
+- Closed Generative Question Answering: Ein Modell, bei dem kein Kontext bereitgestellt wird und die Antwort vom Modell generiert wird.
+
+=== Methoden des QA
+
 Vorstellung der unterschiedlichen Ansätze, von retrievalbasierten Methoden – bei denen relevante Textpassagen aus einem Korpus extrahiert werden – bis hin zu generativen Ansätzen, bei denen Antworten synthetisch erstellt werden.
-== Implementierungspipelines
+
+=== Implementierungspipelines
+
 Erläuterung, wie #acr("QA")-Systeme in der Praxis umgesetzt werden. Beispielsweise wird die Integration von BERT- bzw. RoBERTa-basierten Modellen anhand des in [2] vorgestellten Konzepts erläutert.
-== Anwendungsfälle
-Analyse praktischer Einsatzszenarien, wie etwa im Kundensupport, in Trainingsumgebungen oder im Wissensmanagement, in denen #acr("QA")-Systeme einen signifikanten Mehrwert bieten.
 
 = Metriken und Evaluationsmethoden
 
@@ -102,9 +113,6 @@ Das konzeptionelle Vorgehen bei der Entwicklung des Test-Environments wird hier 
 Beschreibung der geplanten Architektur, inklusive der Integration des ausgewählten #acr("LLM") und der Anbindung an den definierten Textkorpus, der aus judo-spezifischen Quellen und ergänzend aus Wikipedia besteht.
 == Design des Test-Environments
 Ausarbeitung der Strategien zur Generierung von Testfragen und der Festlegung von Referenzantworten. Dabei wird ein flexibles Framework entwickelt, das an verschiedene Evaluationsszenarien angepasst werden kann.
-== Use Case Definition
-Identifikation potenzieller praktischer Einsatzbereiche, in denen das entwickelte #acr("QA")-System einen signifikanten Mehrwert bieten kann.
-
 = Realisierung
 
 Dieses Kapitel beschreibt die praktische Umsetzung des Konzepts.
