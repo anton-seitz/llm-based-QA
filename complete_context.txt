@@ -38,80 +38,8 @@ Men’s judo competitions were first included at the Olympic Games in Tokyo in 1
 Judo’s direction has changed since its inception. Kanō designed judo to be a safe, cooperative method of physical education. Jūdōka spend a great amount of time learning to fall safely. Even in randori, the person performing the throw (the tori) helps the person receiving (the uke) to the ground by holding onto his arm and guiding him to a safe fall. By contrast, in Western wrestling one does not help an opponent to fall, and coaches spend little if any time teaching their wrestlers how to fall safely. As judo competitions became more popular, however, jūdōka began to exhibit the competitive spirit more usually found in Western wrestlers; they began concentrating on judo as a sport rather than as a drill or a way of life. The inclusion of judo in the Olympic Games marked the turning point in this transformation.
 
 This competitive spirit can be seen in the change in the attitude of many jūdōka in regard to scoring. Only clean throws demonstrating superior timing and a knowledge of body mechanics were rewarded with a score in the pre-Olympic period. Currently in judo, the scoring system awards an ippon (“one point”) for a conclusive technique that wins a match by its successful execution, a waza-ari (half point), and minor points (called yuko). In a major shift from traditional judo, in a modern match a jūdōka will often play conservatively and work for a win based only on partial scores from minor points, rather than risking all in the attempt for an ippon. This shift to competitive judo has been aided by the success of European and Russian jūdōka, influenced by their strong wrestling traditions and in particular the Russian development of sambo (which was itself based upon judo).
-Dakin Burdick
-martial art
-Table of Contents
-Introduction
-References & Edit History
-Related Topics
-Images & Videos
-karate Tokyo Metropolitan Police Academy: martial-arts training
-How to become a karate champion
-Watch a mixed martial arts tournament in London
-How to learn karate
-Quizzes
-Assorted sports balls including a basketball, football, soccer ball, tennis ball, baseball and others.
-American Sports Nicknames
-People in a gym in martial arts training exercising Taekwondo, the trainer has a black belt.
-Quick Quiz: Martial Arts
-Related Questions
-
-    When did Jet Li make his film debut?
-    When did Jet Li start training in martial arts?
-    What is Bruce Lee famous for?
-    How did Bruce Lee die?
-
-Sports & Recreation
-Olympic Sports
-karate
-karate Karate black belts sparring.
-martial art
-Written and fact-checked by
-Last Updated: Jan 31, 2025 • Article History
-
-Key People:
-    Bruce Lee
-    Jet Li
-
-Related Topics:
-    judo
-    capoeira
-    kendo
-    tai chi chuan
-    karate
-
-News • Parents frustrated by school bullying turn to martial arts and self-defence to promote confidence • Mar. 2, 2025, 8:20 AM ET (ABC News (Australia))
-
-martial art, any of various fighting sports or skills, mainly of East Asian origin, such as kung fu (Pinyin gongfu), judo, karate, and kendō.
-
-Martial arts can be divided into the armed and unarmed arts. The former include archery, spearmanship, and swordsmanship; the latter, which originated in China, emphasize striking with the feet and hands or grappling. In Japan, traditionally a warrior’s training emphasized archery, swordsmanship, unarmed combat, and swimming in armour. Members of other classes interested in combat concentrated on arts using the staff, everyday work implements (such as thrashing flails, sickles, and knives), and unarmed combat. Perhaps the most versatile practice was ninjutsu, which was developed for military spies in feudal Japan and also included training in disguise, escape, concealment, geography, meteorology, medicine, and explosives. In modern times, derivatives of some of the armed martial arts, such as kendō (fencing) and kyūdō (archery), are practiced as sports. Derivatives of the unarmed forms of combat, such as judo, sumo, karate, and tae kwon do, are practiced, as are self-defense forms, such as aikido, hapkido, and kung fu. Simplified forms of tai chi chuan (taijiquan), a Chinese form of unarmed combat, are popular as healthful exercise, quite divorced from martial origins. Derivatives of many of the armed and unarmed forms are practiced as a means of spiritual development.
-
-The primary unifying aspect of the East Asian martial arts, which sets them apart from other martial arts, is the influence of Daoism and Zen Buddhism. This influence has resulted in a strong emphasis on the mental and spiritual state of the practitioner, a state in which the rationalizing and calculating functions of the mind are suspended so that the mind and body can react immediately as a unit, reflecting the changing situation around the combatant. When this state is perfected, the everyday experience of the dualism of subject and object vanishes. Since this mental and physical state is also central to Daoism and Zen, and must be experienced to be grasped, many of their adherents practice the martial arts as a part of their philosophical and spiritual training. Conversely, numerous practitioners of the martial arts take up the practice of these philosophies.
-Assorted sports balls including a basketball, football, soccer ball, tennis ball, baseball and others.
-Britannica Quiz
-American Sports Nicknames
-
-The 20th century witnessed a significant growth in the popularity of East Asian martial arts in the West, and both judo (1964) and tae kwon do (2000) were added to the Olympic Games as full medal sports. By the early 21st century a syncretic discipline known as mixed martial arts, which incorporated fighting techniques from various cultural traditions, had also achieved prominence.
-
-Start a Wiki
-Sign In
-Fan Central
-Current
-Skip to content
-Martial Arts Wiki
-161
-pages
-
-    Explore
-    Wiki Content
-    Community
-
-in: Article stubs, Japanese Martial Arts, Needs References	
-Judo	
-Sign in to edit
 Judo
-Have an image of this martial art?
-Then please upload it!
+Japanese Martial Arts
 Also called 	Kano Jujutsu
 Country of origin 	Japan
 Parent arts 	Jujutsu
@@ -311,10 +239,6 @@ the Chinese concept of tao. Thus Kano renamed it Judo.
 
 Wikipedia The Free Encyclopedia
 
-    Donate
-    Create account
-    Log in
-
 Contents
 (Top)
 Nage-waza (投げ技): throwing techniques
@@ -332,37 +256,6 @@ Atemi-waza (当て身技): body-striking techniques
     External links
 
 List of judo techniques
-
-    Article
-    Talk
-
-    Read
-    Edit
-    View history
-
-Tools
-
-Appearance
-Text
-
-    Small
-    Standard
-    Large
-
-Width
-
-    Standard
-    Wide
-
-Color (beta)
-
-    Automatic
-    Light
-    Dark
-
-From Wikipedia, the free encyclopedia
-	
-This article's lead section may be too short to adequately summarize the key points. Please consider expanding the lead to provide an accessible overview of all important aspects of the article. (November 2021)
 
 This is a list of judo techniques. They are categorized into throwing techniques (nage-waza), grappling techniques (katame-waza), body-striking techniques (atemi-waza), blocks and parries (uke-waza), receiving/breakfall techniques (ukemi), and resuscitation techniques (kappo).
 
@@ -808,25 +701,6 @@ Non-Japanese kata
 Category:
 
     Lists of judo techniques
-
-    This page was last edited on 1 March 2025, at 20:43 (UTC).
-    Text is available under the Creative Commons Attribution-ShareAlike 4.0 License; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
-
-    Privacy policy
-    About Wikipedia
-    Disclaimers
-    Contact Wikipedia
-    Code of Conduct
-    Developers
-    Statistics
-    Cookie statement
-    Mobile view
-
-    Wikimedia Foundation
-    Powered by MediaWiki
-
-List of judo techniques
-Add topic
 
 
 Judo vs. Jiu-Jitsu: The Ultimate Comparison
@@ -1588,39 +1462,6 @@ Authority control databases Edit this at Wikidata
 Categories:
 
     JudoDōGendai budoSummer Olympic sportsJapanese martial artsSport in JapanGrapplingMixed martial arts stylesSports originating in Japan
-
-    This page was last edited on 21 March 2025, at 16:43 (UTC).
-    Text is available under the Creative Commons Attribution-ShareAlike 4.0 License; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
-
-    Privacy policy
-    About Wikipedia
-    Disclaimers
-    Contact Wikipedia
-    Code of Conduct
-    Developers
-    Statistics
-    Cookie statement
-    Mobile view
-
-    Wikimedia Foundation
-    Powered by MediaWiki
-
-Judo
-Add topic
-
-
-
-
-Wikipedia The Free Encyclopedia
-
-    Donate
-    Create account
-    Log in
-
-Contents
-(Top)
-Founder
-
 Highest grades
 
     Male – Kōdōkan 10th dan
@@ -1628,46 +1469,6 @@ Highest grades
     Male – 10th dan, National Governing Body or Continental Union
     Independent Bodies, 10th dan
     Female – 10th dan, National Governing Body
-
-Pioneers
-
-Notable competitors
-
-        Male
-        Female
-    Others
-    See also
-    References
-    External links
-
-List of judoka
-
-    Article
-    Talk
-
-    Read
-    Edit
-    View history
-
-Tools
-
-Appearance
-Text
-
-    Small
-    Standard
-    Large
-
-Width
-
-    Standard
-    Wide
-
-Color (beta)
-
-    Automatic
-    Light
-    Dark
 
 From Wikipedia, the free encyclopedia
 Kyuzo Mifune and Jigoro Kano

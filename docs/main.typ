@@ -52,8 +52,10 @@ Diese Studienarbeit befasst sich mit der Evaluierung von #acr("LLM")-basiertem #
 = Einleitung
 
 Dieses Kapitel führt in das Themengebiet ein und legt die Motivation sowie die Problemstellung dar.
+
 == Motivation
 Führende #acrpl("LLM") werden im Zuge des aktuellen Hypes häufig als Alleskönner dargestellt. Wie in @head-to-tail ersichtlich, weisen diese Modelle jedoch oftmals ein mangelhaftes Faktenwissen auf und beantworten selbst bei bekannten Informationen natürlichsprachliche Fragen fehlerhaft. Sogar das beste getestete Modell, GPT-4, erreichte lediglich eine Korrektheitsrate von 40,3 %. Diese Diskrepanz zwischen den Erwartungen und der tatsächlichen Leistungsfähigkeit bildet die Motivation für diese Arbeit. Ziel ist es, die Grenzen der Leistungsfähigkeit von LLMs systematisch zu erforschen.
+
 == Zielsetzungen
 Die Arbeit verfolgt folgende Ziele:
 1. Entwicklung eines Test-Environments zur systematischen Evaluierung von LLM-basierten QA-Systemen.
@@ -61,92 +63,96 @@ Die Arbeit verfolgt folgende Ziele:
 3. Identifikation von Einsatzbereichen, in denen LLM-basierte QA-Systeme einen Mehrwert bieten können.
 
 = Grundlagen und Definitionen
+
 Im folgenden werden die Grundlagen und Funktionsweisen von #acrpl("LLM") sowie die Konzepte von #acr("QA") erläutert.
+
 == LLMs
 Dieses Kapitel beleuchtet die Grundlagen und Funktionsweisen von #acrpl("LLM").
+
 === Architektur und Trainingsparadigmen
 Es werden die zugrundeliegenden tiefen neuronalen Netzwerke, die Rolle umfangreicher Trainingsdatensätze und die Auswirkungen verschiedener Trainingsparadigmen erläutert.
+
 === Stärken und Limitationen
 Die Leistungsfähigkeit der Modelle wird kritisch diskutiert – basierend auf Erkenntnissen aus [1] – wobei auch die bekannten Schwächen im Bereich des Faktenwissens thematisiert werden.
+
 === Stand der Forschung
 Ein Überblick über aktuelle Entwicklungen und Forschungsarbeiten im Bereich #acrpl("LLM") bietet die Basis für diese Arbeit.
 
-== Question Answering
+= Abgrenzung zu anderen Arbeiten
 
-Hier wird das Konzept des #acr("QA") umfassend dargestellt.
-
-=== Modelltypen: Open Domain vs. Closed Domain
-
-QA-Systeme können in zwei Kategorien unterteilt werden:
-
-- Open Domain QA: Systeme, die mit breit gefächerten, öffentlichen Wissenskorpora (z. B. Wikipedia) arbeiten und allgemeine Fragen beantworten.
-- Closed Domain QA: Systeme, die auf spezifische, thematisch eingeschränkte Korpora (z. B. judo-spezifische Literatur) fokussiert sind und detaillierte, fachspezifische Informationen liefern.
-
-=== Typen von Question Answering Modellen
-
-- Extractive Question Answering: Ein tief lernendes Modell, das eine Antwort liefert, wenn ein Textkorpus (also ein Kontext) gegeben ist. Das Modell "durchsucht" die Dokumente, um die beste Antwort auf die Frage zu finden. Es funktioniert im Wesentlichen wie ein Suchwerkzeug.
-- Open Generative Question Answering: Ein Modell, das auf Grundlage eines Kontextes Text generiert. Im Gegensatz zum extraktiven Modell muss die Antwort nicht wörtlich im Text stehen.
-- Closed Generative Question Answering: Ein Modell, bei dem kein Kontext bereitgestellt wird und die Antwort vom Modell generiert wird.
-
-=== Methoden des QA
-
-Vorstellung der unterschiedlichen Ansätze, von retrievalbasierten Methoden – bei denen relevante Textpassagen aus einem Korpus extrahiert werden – bis hin zu generativen Ansätzen, bei denen Antworten synthetisch erstellt werden.
-
-=== Implementierungspipelines
-
-Erläuterung, wie #acr("QA")-Systeme in der Praxis umgesetzt werden. Beispielsweise wird die Integration von BERT- bzw. RoBERTa-basierten Modellen anhand des in [2] vorgestellten Konzepts erläutert.
+Dieses Kapitel setzt sich kritisch mit bestehenden Ansätzen und Arbeiten auseinander, die sich ebenfalls mit der Evaluierung von QA-Systemen befassen. Dabei werden die Unterschiede in der Methodik, den verwendeten Datensätzen und den angewandten Evaluationsmetriken herausgearbeitet.
 
 = Metriken und Evaluationsmethoden
 
 Dieses Kapitel beschreibt die Kennzahlen und Verfahren zur Bewertung der #acr("QA")-Systeme.
+
 == Quantitative Kennzahlen
 Detaillierte Beschreibung von Metriken wie Genauigkeit, Präzision, Recall und F1-Score zur objektiven Messung der Antwortqualität.
+
 == Qualitative Evaluationsansätze
 Erörterung von Verfahren zur inhaltlichen Bewertung, beispielsweise durch Expertenreviews oder den Vergleich mit vorab definierten Referenzantworten.
+
 == Validierung der Ergebnisse
 Methoden zur Überprüfung der Reproduzierbarkeit und Aussagekraft der experimentellen Daten werden vorgestellt.
 
 = Konzept
 
 Das konzeptionelle Vorgehen bei der Entwicklung des Test-Environments wird hier erläutert.
+
 == Systemarchitektur
 Beschreibung der geplanten Architektur, inklusive der Integration des ausgewählten #acr("LLM") und der Anbindung an den definierten Textkorpus, der aus judo-spezifischen Quellen und ergänzend aus Wikipedia besteht.
+
 == Design des Test-Environments
 Ausarbeitung der Strategien zur Generierung von Testfragen und der Festlegung von Referenzantworten. Dabei wird ein flexibles Framework entwickelt, das an verschiedene Evaluationsszenarien angepasst werden kann.
+
 = Realisierung
 
 Dieses Kapitel beschreibt die praktische Umsetzung des Konzepts.
+
 == Implementierungsdetails
 Die QA-Pipeline wird mithilfe der Huggingface-Transformers-Bibliothek implementiert. Dabei wird ein vortrainiertes Modell, wie z. B. *deepset/roberta-base-squad2*, genutzt. Der Aufbau der Pipeline orientiert sich an einem modifizierten Python-Skript, das an das in [2] gezeigte Colab-Beispiel angelehnt ist. Dieses Skript übernimmt unter anderem folgende Aufgaben:
 - Laden des Modells und Tokenizers
 - Übergabe von Frage- und Kontextdaten zur Inferenz
 - Ausgabe der generierten Antwort samt zugehöriger Metriken
+
 == Software- und Hardwareumgebung
 Beschreibung der eingesetzten technischen Ressourcen, wie #acr("GPU")-gestützte Server oder Cloud-Services, die zur Beschleunigung der Inferenz und eventueller Experimente genutzt werden.
+
 == Test- und Validierungsszenarien
 Darstellung der durchgeführten Tests, einschließlich der Variation von Fragestellungen (sowohl Open Domain als auch Closed Domain) und der kontinuierlichen Evaluierung der Zwischenergebnisse mittels der zuvor definierten Metriken.
+
 == Datenbeschaffung
 Der Textkorpus wird durch die Aggregation verschiedener Quellen erstellt:
 - Fachspezifische Literatur: Judo-Regelwerke, Trainingshandbücher und Wettkampfdaten.
 - Öffentliche Quellen: Artikel und Einträge von Wikipedia, die durch Web-Scraping oder APIs bezogen werden können.
 - Eigene Notizen: Ergänzende, vom Autor erstellte Daten, um den Korpus zu erweitern.
 
+= Anwendungen
+
+In diesem Kapitel werden praxisrelevante Einsatzmöglichkeiten von QA-Systemen aufgezeigt. Es werden beispielhaft Anwendungen in Bereichen wie Kundensupport, Wissensmanagement, E-Learning und automatisierten Informationsdiensten vorgestellt. Dabei wird diskutiert, wie die Evaluierungsergebnisse als Grundlage für die Implementierung und Optimierung von QA-Lösungen in der Praxis dienen können.
+
 = Evaluierung
 
 In diesem Kapitel werden die experimentellen Ergebnisse analysiert und interpretiert.
+
 == Ergebnisauswertung
 Systematische Auswertung der quantitativen und qualitativen Messergebnisse. Ergebnisse werden grafisch (z. B. in Diagrammen) dargestellt.
+
 == Diskussion der Resultate
 Kritische Analyse der Resultate im Hinblick auf die definierten Zielsetzungen und identifizierten Limitationen der #acrpl("LLM").
+
 == Vergleich mit bestehenden Ansätzen
 Die erarbeiteten Ergebnisse werden mit den in der Literatur beschriebenen Ansätzen (insbesondere @head-to-tail und @qa-bert) verglichen, um den Mehrwert des entwickelten Systems herauszustellen.
 
 = Zusammenfassung und Ausblick
 
 Das abschließende Kapitel fasst die gewonnenen Erkenntnisse zusammen und gibt einen Ausblick auf zukünftige Entwicklungen.
+
 == Schlussfolgerungen
 Zusammenfassung der wesentlichen Ergebnisse und Bewertung, inwiefern die definierten Ziele erreicht wurden.
+
 == Empfehlungen für zukünftige Arbeiten
 Ableitung von Empfehlungen und potenziellen Erweiterungen für weiterführende Forschungen im Bereich #acr("LLM")-basiertes #acr("QA").
+
 == Reflexion und Ausblick
 Kritische Reflexion der Limitationen der durchgeführten Experimente und ein Ausblick auf zukünftige technologische Entwicklungen.

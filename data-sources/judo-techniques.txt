@@ -2,10 +2,6 @@
 
 Wikipedia The Free Encyclopedia
 
-    Donate
-    Create account
-    Log in
-
 Contents
 (Top)
 Nage-waza (投げ技): throwing techniques
@@ -23,37 +19,6 @@ Atemi-waza (当て身技): body-striking techniques
     External links
 
 List of judo techniques
-
-    Article
-    Talk
-
-    Read
-    Edit
-    View history
-
-Tools
-
-Appearance
-Text
-
-    Small
-    Standard
-    Large
-
-Width
-
-    Standard
-    Wide
-
-Color (beta)
-
-    Automatic
-    Light
-    Dark
-
-From Wikipedia, the free encyclopedia
-	
-This article's lead section may be too short to adequately summarize the key points. Please consider expanding the lead to provide an accessible overview of all important aspects of the article. (November 2021)
 
 This is a list of judo techniques. They are categorized into throwing techniques (nage-waza), grappling techniques (katame-waza), body-striking techniques (atemi-waza), blocks and parries (uke-waza), receiving/breakfall techniques (ukemi), and resuscitation techniques (kappo).
 
@@ -499,23 +464,4 @@ Non-Japanese kata
 Category:
 
     Lists of judo techniques
-
-    This page was last edited on 1 March 2025, at 20:43 (UTC).
-    Text is available under the Creative Commons Attribution-ShareAlike 4.0 License; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
-
-    Privacy policy
-    About Wikipedia
-    Disclaimers
-    Contact Wikipedia
-    Code of Conduct
-    Developers
-    Statistics
-    Cookie statement
-    Mobile view
-
-    Wikimedia Foundation
-    Powered by MediaWiki
-
-List of judo techniques
-Add topic
 
