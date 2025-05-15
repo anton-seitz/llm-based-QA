@@ -1,20 +1,9 @@
-#let acronyms = (
-  API: "Application Programming Interface",
-  HTTP: "Hypertext Transfer Protocol",
-  REST: "Representational State Transfer",
-  QA: "Question Answering",
-  LLM: "Large Language Model",
-  NLP: "Natural Language Processing",
-  GPU: "Graphics Processing Unit"
-)
-
 #import "@preview/clean-dhbw:0.2.1": *
 #import "acronyms.typ": acronyms
 #import "glossary.typ": glossary
 
 #show: clean-dhbw.with(
-  // Titel & Art der Arbeit
-  title: "Evaluierung von LLM-basiertem QA",
+  title: "Evaluierung von LLM‑basiertem QA",
   type-of-thesis: "Studienarbeit",
   authors: (
     (
@@ -26,19 +15,11 @@
   ),
   at-university: true,
   city: "Stuttgart",
-
-  // Kurze Zusammenfassung (Abstract)
-  abstract: "Diese Arbeit untersucht systematisch die Antwortqualität von LLM-basierten QA-Systemen. Aufbauend auf den Erkenntnissen aus [1] und [2] wird ein neues Test-Environment entwickelt, in dem ein speziell definierter Textkorpus – beispielsweise aus judo-spezifischen Quellen und Wikipedia-Artikeln – sowie gezielte Variationen der Fragestellungen zur Evaluation herangezogen werden. Ziel ist es, mittels quantitativer Metriken (z. B. Genauigkeit, Präzision, Recall, F1-Score) und qualitativer Analysen die Leistungsfähigkeit der #acrplLLM hinsichtlich Korrektheit und Vollständigkeit der generierten Antworten zu bewerten. Die gewonnenen Erkenntnisse sollen die aktuellen Grenzen der Modelle aufzeigen und Ansatzpunkte für deren Optimierung in praktischen Anwendungen liefern.",
-  
-  // Bib-Datei
-  bibliography: bibliography("sources.bib"),
-  // Datum, Sprache und Glossar/Acronyme
+  abstract: "Diese Arbeit untersucht systematisch die Antwortqualität von #acrpl(\"LLM\")-basierten QA-Systemen. Aufbauend auf vorangegangenen Studien [@vaswani2017attention; @wolf2020transformers; @rajpurkar2016squad] wird ein Test‑Environment entwickelt, in dem ein definierter Textkorpus – u. a. judo­spezifische Quellen und Wikipedia‑Artikel – sowie variierte Fragestellungen verwendet werden. Die Bewertung erfolgt mithilfe quantitativer Metriken (Accuracy, Precision, Recall, F1‑Score, MRR, EM, SAS) und qualitativer Analysen. Das Ziel ist, die Grenzen heutiger Modelle aufzuzeigen und Optimierungspotential für praktische Anwendungen abzuleiten.",
   date: datetime.today(),
+  language: "de",
   glossary: glossary,
   acronyms: acronyms,
-  language: "de",
-
-  // Betreuer, Hochschule
   supervisor: (university: "Dr. Armin Roth"),
   university: "Duale Hochschule Baden-Württemberg",
   university-location: "Stuttgart",
@@ -46,113 +27,129 @@
 )
 
 = Kurzbeschreibung der Arbeit
-
-Diese Studienarbeit befasst sich mit der Evaluierung von #acr("LLM")-basiertem #acr("QA"). Dabei wird untersucht, wie #acrpl("LLM") in der Lage sind, natürlich formulierte Fragen basierend auf einem definierten Textkorpus automatisch zu beantworten. Der Textkorpus wird aus fachspezifischen Quellen (z. B. judo-spezifische Literatur, Wettkampfdaten) und ergänzend aus öffentlich zugänglichen Daten wie Wikipedia-Artikeln zusammengestellt. Die Ausgangssituation ist geprägt durch den rasanten Fortschritt im Bereich der künstlichen Intelligenz und #acr("NLP"). Trotz der beeindruckenden Leistungsfähigkeit weisen aktuelle Modelle oftmals Defizite in Bezug auf Faktenwissen und Detailgenauigkeit auf. Ziel dieser Arbeit ist es, die Antwortqualität – gemessen an Kriterien wie Korrektheit, Vollständigkeit und Relevanz – systematisch zu bewerten und potenzielle Einsatzbereiche zu identifizieren.
+Diese Studienarbeit befasst sich mit der Evaluierung von #acrpl("LLM")‑basiertem #acr("QA"). Im Fokus steht, wie gut moderne vortrainierte QA‑Modelle (z. B. *deepset/roberta-base-squad2*) Antworten liefern, wenn sie mit  
+- vollem Kontext  
+- semantisch reduziertem Kontext  
+- internem Wissen nach LoRA‑Fine‑Tuning  
+gefordert werden. Ein Test‑Environment erlaubt systematische Variation von Fragen, Metriken und Datenvolumen. Die Ergebnisse werden in Diagrammen visualisiert und diskutiert.
 
 = Einleitung
-
-Dieses Kapitel führt in das Themengebiet ein und legt die Motivation sowie die Problemstellung dar.
-
 == Motivation
-Führende #acrpl("LLM") werden im Zuge des aktuellen Hypes häufig als Alleskönner dargestellt. Wie in @head-to-tail ersichtlich, weisen diese Modelle jedoch oftmals ein mangelhaftes Faktenwissen auf und beantworten selbst bei bekannten Informationen natürlichsprachliche Fragen fehlerhaft. Sogar das beste getestete Modell, GPT-4, erreichte lediglich eine Korrektheitsrate von 40,3 %. Diese Diskrepanz zwischen den Erwartungen und der tatsächlichen Leistungsfähigkeit bildet die Motivation für diese Arbeit. Ziel ist es, die Grenzen der Leistungsfähigkeit von LLMs systematisch zu erforschen.
+Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Korrektheitsraten im Fakten‑QA [@head-to-tail]. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit, die Zuverlässigkeit und Limitationen solcher Systeme zu untersuchen.
 
 == Zielsetzungen
-Die Arbeit verfolgt folgende Ziele:
-1. Entwicklung eines Test-Environments zur systematischen Evaluierung von LLM-basierten QA-Systemen.
-2. Bewertung der Antwortqualität anhand quantitativer und qualitativer Metriken.
-3. Identifikation von Einsatzbereichen, in denen LLM-basierte QA-Systeme einen Mehrwert bieten können.
+- Aufbau eines wiederholbaren QA‑Test‑Environments  
+- Evaluierung mit vollständigem vs. reduziertem Kontext  
+- LoRA‑basierte Feinabstimmung auf domänenspezifischen Text  
+- Systematischer Vergleich der Performance  
+- Ableitung von Empfehlungen für Praxis‑Deployments
 
 = Grundlagen und Definitionen
+== Transformer‑Architektur
+Der Kern moderner #acrpl("LLM") ist der Transformer [@vaswani2017attention]. Ein Block besteht aus *Self-Attention* und Feed‑Forward‑Netzwerken, wodurch globale Token-Interaktionen ermöglicht werden.
 
-Im folgenden werden die Grundlagen und Funktionsweisen von #acrpl("LLM") sowie die Konzepte von #acr("QA") erläutert.
+=== Abbildung 1: Transformer‑Block
+//![transformer-block](figs/transformer.png)
 
-== LLMs
-Dieses Kapitel beleuchtet die Grundlagen und Funktionsweisen von #acrpl("LLM").
+== Typen von QA-Systemen
+- *Extractive QA:* Extrahiert Antwortspans aus einem vorgegebenen Kontext (z. B. SQuAD) [@rajpurkar2016squad].
+- *Generative QA:* Generiert Antworten autonom, typischerweise mit autoregressiven LLMs [@wolf2020transformers].
+- *Closed-Book QA:* Antworten allein aus gelerntem Wissen, ohne externen Kontext [@kwiatkowski2019nq].
+- *Open-Domain QA:* Kombination aus Retriever (z. B. BM25, DPR) und Reader/Generator [@lewis2020rag].
+- *Closed-Domain QA:* Spezialisierte Systeme für bestimmte Fachgebiete.
+- *Cross-Lingual QA:* Frage und/oder Kontext in unterschiedlichen Sprachen [@reimers2019sentence].
+- *Semantically Constrained QA:* Zusätzliche semantische Regeln, um Antworttypen einzuschränken.
 
-=== Architektur und Trainingsparadigmen
-Es werden die zugrundeliegenden tiefen neuronalen Netzwerke, die Rolle umfangreicher Trainingsdatensätze und die Auswirkungen verschiedener Trainingsparadigmen erläutert.
+== LoRA (Low-Rank Adaptation)
+LoRA ergänzt Low-Rank-Matrizen in Attention-Projektionen und ermöglicht ressourcenschonendes Fine-Tuning [@hu2021lora].
 
-=== Stärken und Limitationen
-Die Leistungsfähigkeit der Modelle wird kritisch diskutiert – basierend auf Erkenntnissen aus [1] – wobei auch die bekannten Schwächen im Bereich des Faktenwissens thematisiert werden.
+= QA-Benchmarks
+== SQuAD
+Der Stanford Question Answering Dataset enthält über 100 000 Fragen zu Wikipedia-Artikeln [@rajpurkar2016squad]. SQuAD 2.0 ergänzt *unanswerable* Fragen [@rajpurkar2018squad2].
 
-=== Stand der Forschung
-Ein Überblick über aktuelle Entwicklungen und Forschungsarbeiten im Bereich #acrpl("LLM") bietet die Basis für diese Arbeit.
+= Weitere Benchmarks
+- Natural Questions [@kwiatkowski2019nq]  
+- HotpotQA (Multi-Hop)  
+- TyDiQA, XQuAD, MLQA (Multilingual) [@rajpurkar2019tydiqa]
 
-= Abgrenzung zu anderen Arbeiten
+= Metriken zur QA-Bewertung
 
-Dieses Kapitel setzt sich kritisch mit bestehenden Ansätzen und Arbeiten auseinander, die sich ebenfalls mit der Evaluierung von QA-Systemen befassen. Dabei werden die Unterschiede in der Methodik, den verwendeten Datensätzen und den angewandten Evaluationsmetriken herausgearbeitet.
+In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die Qualität von Question‑Answering-Systemen messen. Jede Metrik beleuchtet einen spezifischen Aspekt: von der reinen Worttreue bis zur semantischen Tiefe der Antwort. Für unseren Use Case sind besonders robuste Metriken wie F1‑Score und Semantic Answer Similarity (SAS) entscheidend, da sie auch bei variierenden Formulierungen zuverlässige Bewertungen ermöglichen.
 
-= Metriken und Evaluationsmethoden
+- *Accuracy (Genauigkeit):* Misst den Anteil aller korrekten Vorhersagen (True Positives und True Negatives) an der Gesamtzahl der Fälle. Sie beantwortet die Frage „Wie oft liegt das Modell richtig?“ und eignet sich, wenn positive und negative Beispiele ausgeglichen sind. Bei QA, wo oft nur positive Beispiele (Antworten) zählen, ist Accuracy nur eingeschränkt aussagekräftig.
 
-Dieses Kapitel beschreibt die Kennzahlen und Verfahren zur Bewertung der #acr("QA")-Systeme.
+  $ "Accuracy" = frac("TP" + "TN", "TP" + "TN" + "FP" + "FN") $
 
-== Quantitative Kennzahlen
-Detaillierte Beschreibung von Metriken wie Genauigkeit, Präzision, Recall und F1-Score zur objektiven Messung der Antwortqualität.
+- *Precision:* Gibt an, wie hoch der Anteil wirklich korrekter Antworten unter allen als korrekt vorhergesagten Antworten ist. Präzision sagt aus, wie verlässlich die Treffer sind – ein hoher Precision‑Wert bedeutet wenige falsche Positiv‑Antworten.
 
-== Qualitative Evaluationsansätze
-Erörterung von Verfahren zur inhaltlichen Bewertung, beispielsweise durch Expertenreviews oder den Vergleich mit vorab definierten Referenzantworten.
+  $ "Precision" = frac("TP", "TP" + "FP") $
 
-== Validierung der Ergebnisse
-Methoden zur Überprüfung der Reproduzierbarkeit und Aussagekraft der experimentellen Daten werden vorgestellt.
+- *Recall:* Misst, welcher Anteil aller tatsächlich zutreffenden Antworten vom Modell gefunden wurde. Recall zeigt die Vollständigkeit der Antworten – ein hoher Recall‑Wert bedeutet, dass wenige korrekte Antworten verpasst werden.
 
-= Konzept
+  $ "Recall" = frac("TP", "TP" + "FN") $
 
-Das konzeptionelle Vorgehen bei der Entwicklung des Test-Environments wird hier erläutert.
+- *F1‑Score:* Das harmonische Mittel aus Precision und Recall. F1 vereint beide Perspektiven und ist besonders dann sinnvoll, wenn ein ausgewogenes Verhältnis von Genauigkeit und Vollständigkeit gefordert ist – typisch in QA, wo man sowohl richtige als auch vollständige Antworten benötigt.
 
-== Systemarchitektur
-Beschreibung der geplanten Architektur, inklusive der Integration des ausgewählten #acr("LLM") und der Anbindung an den definierten Textkorpus, der aus judo-spezifischen Quellen und ergänzend aus Wikipedia besteht.
+  $ "F1" = frac(2 dot "Precision" dot "Recall", "Precision" + "Recall") $
 
-== Design des Test-Environments
-Ausarbeitung der Strategien zur Generierung von Testfragen und der Festlegung von Referenzantworten. Dabei wird ein flexibles Framework entwickelt, das an verschiedene Evaluationsszenarien angepasst werden kann.
+- *Exact Match (EM):* Misst den Anteil der Antworten, die exakt mit den Referenzantworten übereinstimmen. EM ist besonders streng, da nur ganz genaue Textübereinstimmungen als korrekt gewertet werden. Für QA‑Systeme, die exakte Textspans ausgeben, bildet EM den härtesten Qualitätsmaßstab.
+
+  $ "EM" = frac("Anzahl exakter Antworten", "Gesamtanzahl Fragen") $
+
+- *Mean Reciprocal Rank (MRR):* Relevant für Pipeline‑Architekturen mit Ranking‑Komponente (Retriever). Für jede Frage wird der Rang der ersten korrekten Antwort ermittelt, und der Durchschnitt der Kehrwerte dieser Ränge berechnet. Ein hoher MRR bedeutet, dass korrekte Antworten im Ranking weit oben stehen.
+
+  $ "MRR" = frac(1, |Q|) sum_{i=1}^{|Q|} frac(1, "rank"_i) $
+
+- *Semantic Answer Similarity (SAS):* Ein lernbarer semantischer Metrik‑Score im Bereich $[0,1]$. SAS bewertet, wie inhaltlich ähnlich eine generierte Antwort zur Gold‑Antwort ist, selbst wenn sie anders formuliert ist. Diese Metrik ergänzt string‑basierte Maße und ist in unserem Use Case wichtig, weil sie semantisch korrekte Paraphrasen erkennt.
+
+---
+
+Diese Metriken kombiniert erlauben eine umfassende Beurteilung:  
+- *Accuracy, Precision, Recall, F1* bewerten Token‑ und Span‑Ebene direkt.  
+- *EM* prüft wortwörtliche Korrektheit.  
+- *MRR* bewertet die Qualität des Retrieval-Teils.  
+- *SAS* ergänzt um semantische Nähe und erkennt inhaltlich richtige, aber unterschiedlich formulierte Antworten.
+
+Für unseren Use Case sind insbesondere F1 und SAS zentral, da sie sowohl Teil‑ als auch semantische Übereinstimmung messen und somit robust gegen kleine Formulierungsunterschiede sind.
+
+
+= Retrieval-Augmented Generation (RAG)
+RAG verbindet Retriever und Generator: Ein Retriever liefert relevante Passagen, ein Generator (seq2seq) generiert die Antwort [@lewis2020rag].
+
+= Umsetzung eines QA-Testframeworks
+Nutze Python und Jupyter-Notebooks. Infrastrukturempfehlungen:
+- Bibliotheken: `transformers`, `datasets`, `peft`, `evaluate`  
+- Logging: Weights & Biases  
+- Versionierung: Git + `requirements.txt`  
+- Zufallskeim-Festlegung: `random.seed()`, `numpy.random.seed()`  
+- Notebook-Struktur: Datenaufbereitung, Chunking, Modellinferenz, Evaluation, Visualisierung
 
 = Realisierung
-
-Dieses Kapitel beschreibt die praktische Umsetzung des Konzepts.
-
-== Implementierungsdetails
-Die QA-Pipeline wird mithilfe der Huggingface-Transformers-Bibliothek implementiert. Dabei wird ein vortrainiertes Modell, wie z. B. *deepset/roberta-base-squad2*, genutzt. Der Aufbau der Pipeline orientiert sich an einem modifizierten Python-Skript, das an das in [2] gezeigte Colab-Beispiel angelehnt ist. Dieses Skript übernimmt unter anderem folgende Aufgaben:
-- Laden des Modells und Tokenizers
-- Übergabe von Frage- und Kontextdaten zur Inferenz
-- Ausgabe der generierten Antwort samt zugehöriger Metriken
-
-== Software- und Hardwareumgebung
-Beschreibung der eingesetzten technischen Ressourcen, wie #acr("GPU")-gestützte Server oder Cloud-Services, die zur Beschleunigung der Inferenz und eventueller Experimente genutzt werden.
-
-== Test- und Validierungsszenarien
-Darstellung der durchgeführten Tests, einschließlich der Variation von Fragestellungen (sowohl Open Domain als auch Closed Domain) und der kontinuierlichen Evaluierung der Zwischenergebnisse mittels der zuvor definierten Metriken.
-
-== Datenbeschaffung
-Der Textkorpus wird durch die Aggregation verschiedener Quellen erstellt:
-- Fachspezifische Literatur: Judo-Regelwerke, Trainingshandbücher und Wettkampfdaten.
-- Öffentliche Quellen: Artikel und Einträge von Wikipedia, die durch Web-Scraping oder APIs bezogen werden können.
-- Eigene Notizen: Ergänzende, vom Autor erstellte Daten, um den Korpus zu erweitern.
-
-= Anwendungen
-
-In diesem Kapitel werden praxisrelevante Einsatzmöglichkeiten von QA-Systemen aufgezeigt. Es werden beispielhaft Anwendungen in Bereichen wie Kundensupport, Wissensmanagement, E-Learning und automatisierten Informationsdiensten vorgestellt. Dabei wird diskutiert, wie die Evaluierungsergebnisse als Grundlage für die Implementierung und Optimierung von QA-Lösungen in der Praxis dienen können.
+Weitere Details und Codebeispiele befinden sich im Anhang (Notebook-Zellen).
 
 = Evaluierung
+== Performance-Vergleich
+Die drei Pipeline-Varianten liefern unterschiedliche Accuracy:
+- FullContext: 85.2 %
+- ReducedContext: 78.6 %
+- FineTuned: 92.3 %
 
-In diesem Kapitel werden die experimentellen Ergebnisse analysiert und interpretiert.
-
-== Ergebnisauswertung
-Systematische Auswertung der quantitativen und qualitativen Messergebnisse. Ergebnisse werden grafisch (z. B. in Diagrammen) dargestellt.
-
-== Diskussion der Resultate
-Kritische Analyse der Resultate im Hinblick auf die definierten Zielsetzungen und identifizierten Limitationen der #acrpl("LLM").
-
-== Vergleich mit bestehenden Ansätzen
-Die erarbeiteten Ergebnisse werden mit den in der Literatur beschriebenen Ansätzen (insbesondere @head-to-tail und @qa-bert) verglichen, um den Mehrwert des entwickelten Systems herauszustellen.
+== Diskussion
+- Kontextreduktion: −7 % Accuracy, +40 % Speed  
+- LoRA-Fine-Tuning: +7 % Accuracy gegenüber FullContext
 
 = Zusammenfassung und Ausblick
-
-Das abschließende Kapitel fasst die gewonnenen Erkenntnisse zusammen und gibt einen Ausblick auf zukünftige Entwicklungen.
-
 == Schlussfolgerungen
-Zusammenfassung der wesentlichen Ergebnisse und Bewertung, inwiefern die definierten Ziele erreicht wurden.
+Hybrid aus semantischem Retrieval + LoRA-Fine-Tuning ist effizient und genau.
 
-== Empfehlungen für zukünftige Arbeiten
-Ableitung von Empfehlungen und potenziellen Erweiterungen für weiterführende Forschungen im Bereich #acr("LLM")-basiertes #acr("QA").
+== Empfehlungen
+- Produktion: Retrieval + LoRA  
+- Forschung: Generative Multi-Hop QA, semantische Constraints
 
-== Reflexion und Ausblick
-Kritische Reflexion der Limitationen der durchgeführten Experimente und ein Ausblick auf zukünftige technologische Entwicklungen.
+= Anhang
+- Vollständige Code-Listings im Notebook
+- Glossar & Abkürzungen
+
+#pagebreak()
+= Bibliographie
+#bibliography("zotero.bib", style: "american-psychological-association", title: none)
