@@ -2,6 +2,7 @@
 #import "acronyms.typ": acronyms
 #import "glossary.typ": glossary
 
+
 #show: clean-dhbw.with(
   title: "Evaluierung von LLM‑basiertem QA",
   type-of-thesis: "Studienarbeit",
@@ -26,6 +27,7 @@
   university-location: "Stuttgart",
   university-short: "DHBW"
 )
+#set text(size: 12pt)
 
 = Kurzbeschreibung der Arbeit
 Diese Studienarbeit befasst sich mit der Evaluierung von #acrpl("LLM")‑basiertem #acr("QA"). Im Fokus steht, wie gut moderne vortrainierte QA‑Modelle (z. B. *deepset/roberta-base-squad2*) Antworten liefern, wenn sie mit  
@@ -46,6 +48,67 @@ Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Korrekt
 - Ableitung von Empfehlungen für Praxis‑Deployments
 
 = Grundlagen und Definitionen
+
+== Question‑Answering‑ Systeme
+
+=== Was sind Question‑Answering‑Systeme?  
+Question‑Answering‑Systeme (QA‑Systeme) sind Anwendungen, die automatisch auf natürlichsprachliche Fragen Text­antworten liefern. Sie kombinieren Information Retrieval (z. B. Dokumentensuche) und Natural Language Processing (z. B. Named Entity Recognition, Parsing), um in einem Korpus oder internem Modellwissen die richtige Antwort zu finden.
+
+=== Arten von Wissen  
+Knowledge lässt sich in verschiedene Kategorien unterteilen, die für QA‑Systeme relevant sind. Basierend auf dem Dokument *Types and qualities of knowledge* lassen sich folgende Typen unterscheiden:
+
+- *Factual Knowledge* (auch *Conceptual knowledge*):  
+  Dieses Wissen umfasst statische Fakten und Konzepte, z. B. „Berlin ist die Hauptstadt Deutschlands“. QA‑Systeme greifen hier häufig auf explizite Datenbanken oder Textpassagen zurück @knowledge.
+
+- *Procedural Knowledge*:  
+  Beschreibt Abläufe und Handlungsanweisungen, z. B. Kochrezepte oder Montageanleitungen. QA im prozeduralen Bereich muss oft Schritt‑für‑Schritt antworten.
+
+- *Metacognitive Knowledge*:  
+  Umfasst Wissen über die eigenen Wissensgrenzen und -prozesse, etwa „Ich weiß, dass ich etwas nicht weiß“. Für QA weniger direkt relevant, kann aber bei Unsicherheitserkennung helfen.
+
+- *Semantic Knowledge*:  
+  Erklärt Bedeutungen und Zusammenhänge zwischen Konzepten, z. B. Taxonomien in Ontologien. Semantisch angereicherte QA‑Systeme nutzen dieses Wissen, um Antworten präziser zu formulieren.
+
+- *Contextual Knowledge*:  
+  Form von Wissen, das an einen bestimmten Kontext gebunden ist (z. B. aktuelle Nachrichten, persönliche Vorlieben). Open‑Domain‑QA‑Systeme müssen dynamisch darauf zugreifen.
+
+Wir konzentrieren uns in dieser Arbeit auf *Factual Knowledge* („Conceptual knowledge“), da aktuelle LLMs hier erhebliche Defizite zeigen. Studien belegen, dass selbst GPT‑4 im Fakten‑QA nur ca. 40,3 % korrekte Antworten liefert, obwohl diese Informationen während Pre‑Training oft mehrfach auftauchen (@head-to-tail).
+
+=== Typen von QA‑Systemen
+/*
+- *Extractive QA*  
+  Das System erhält eine Frage und einen Kontexttext und markiert den besten Antwortspan im Text. Die Antworten stammen wortwörtlich aus dem Dokument, zum Beispiel im SQuAD–Datensatz [@rajpurkar2016squad; @rajpurkar2018squad2]. Reader-Modelle basieren häufig auf BERT-ähnlichen Encodern, die den relevanten Abschnitt im Text „ziehen“ [@devlin2019bert; @wolf2020transformers].
+*/
+- *Extractive QA*: 
+  
+  Bei dieser Methode erhält das Modell eine Frage und einen zusammenhängenden Textabschnitt (Kontext). Es identifiziert dann genau den oder die Wortgruppen (Spans), die die beste Antwort enthalten. Zum Beispiel sucht ein System in einem Wikipedia-Artikel nach der Textstelle, die erklärt, wofür Einstein den Nobelpreis erhielt @rajpurkar2016squad. Extractive QA ist besonders zuverlässig, da die Antwort wortwörtlich aus dem vorgegebenen Text stammt und so keine inhaltliche Erfindung (Halluzination) erfolgt.
+  - *Arbeitsweise:* Das Modell nutzt einen Token-basierten Klassifikator, um Start- und End-Position der Antwort im Kontext vorherzusagen.
+  - *Vorteile:* Hohe Präzision und Nachvollziehbarkeit; geringe Gefahr von Halluzinationen.
+  - *Nachteile:* Antworten müssen wortwörtlich im Kontext stehen; keine freie Formulierung.
+
+- *Generative QA*  
+  Hier erzeugt das Modell die Antwort eigenständig aus Frage und Kontext, statt sie wortwörtlich zu übernehmen. Moderne LLMs wie GPT‑Modelle erstellen frei formulierte Fließtext-Antworten @wolf2020transformers.
+
+- *Closed‑Book QA*  
+  Das Modell nutzt nur im Pretraining erworbenes Wissen, ohne zusätzliche Kontext-Eingabe. Typisches Beispiel sind GPT‑basierten Chatbots, die über intern gelernten Wissensspeicher verfügen @wolf2020transformers.
+
+- *Open‑Domain QA*  
+  Systeme greifen auf ein großes Wissensreservoir (z.B. Wikipedia) zu. Ein Retriever identifiziert relevante Dokumente, die ein Reader oder Generator anschließend für die Antwort nutzt (Retrieval-Augmented Generation) @lewis2020rag.
+
+- *Closed‑Domain QA*  
+  Beschränkt auf ein Fachgebiet (z.B. Medizin). Hier kann das System auf Domänen‑Ontologien oder spezialisierte Korpora zugreifen, um präzisere Antworten zu liefern @kwiatkowski2019nq.
+
+- *Cross‑Lingual QA*  
+  Frage und/oder Kontext können in unterschiedlichen Sprachen sein. Benchmarks wie TyDiQA oder MLQA prüfen die Fähigkeit, in mehreren Sprachen zu antworten @rajpurkar2019tydiqa.
+
+- *Semantically Constrained QA*  
+  Nutzt zusätzliche semantische Regeln oder Ontologien, um nur Antworten eines bestimmten Typs zuzulassen. Diese Form steigert die Präzision in spezialisierten Anwendungen @reimers2019sentence.
+
+Für unseren Anwendungsfall haben wir uns für Extractive QA entschieden, da hier die Antworten direkt als Textspans aus einem vorgegebenen Dokument extrahiert werden und somit hohe Präzision und Nachvollziehbarkeit gewährleisten. Anders als bei generativen Modellen, die freie Fließtext-Antworten erzeugen und dabei zu Halluzinationen neigen können @wolf2020transformers, sucht das Extractive‑System gezielt nach der Start‑ und Endposition der korrekten Antwort im Kontexttext, wie es beispielsweise im SQuAD‑Datensatz üblich ist @rajpurkar2016squad. So lassen sich falsche Vorhersagen einfach analysieren und korrigieren, weil der Modell‑Output immer klar auf eine Textstelle zurückzuführen ist. Zudem bedarf es kaum Prompt‑Engineering, sondern lediglich einer geeigneten HuggingFace‑Pipeline, die in Jupyter‑Notebooks effizient auf verschiedene Dokumente skaliert. Diese Kombination aus Verlässlichkeit, schneller Integrationsfähigkeit und geringem Anpassungsaufwand macht Extractive QA für unsere Evaluierung ideal.
+
+== Aktuelle LLMs: Architektur und Training
+Im Folgenden werden nötige Grundlagen zu den Themen #acr("KI") und insbesondere #acr("LLM") und deren Fine-Tuning geschaffen. 
+
 
 == Künstliche Intelligenz  
 Künstliche Intelligenz (KI) ist der Oberbegriff für Technologien, die Computern ermöglichen, menschliche Denkprozesse wie Lernen, Schlussfolgern und Entscheidungsfindung zu simulieren @IBM2024_WhatIsAI. Moderne KI setzt vor allem auf Machine Learning:  
@@ -90,64 +153,6 @@ LLMs durchlaufen zwei Phasen:
 - *Fine‑Tuning*  
   Spezialisierung auf Aufgaben oder Domänen. Moderne Systeme wie GPT-4 nutzen zusätzlich *Reinforcement Learning from Human Feedback* (RLHF) [@hu2021lora].
 
-= Question‑Answering‑Systeme
-
-== Was sind Question‑Answering‑Systeme?  
-Question‑Answering‑Systeme (QA‑Systeme) sind Anwendungen, die automatisch auf natürlichsprachliche Fragen Text­antworten liefern. Sie kombinieren Information Retrieval (z. B. Dokumentensuche) und Natural Language Processing (z. B. Named Entity Recognition, Parsing), um in einem Korpus oder internem Modellwissen die richtige Antwort zu finden.
-
-== Arten von Wissen  
-Knowledge lässt sich in verschiedene Kategorien unterteilen, die für QA‑Systeme relevant sind. Basierend auf dem Dokument *Types and qualities of knowledge* lassen sich folgende Typen unterscheiden:
-
-- *Factual Knowledge* (auch *Conceptual knowledge*):  
-  Dieses Wissen umfasst statische Fakten und Konzepte, z. B. „Berlin ist die Hauptstadt Deutschlands“. QA‑Systeme greifen hier häufig auf explizite Datenbanken oder Textpassagen zurück @knowledge.
-
-- *Procedural Knowledge*:  
-  Beschreibt Abläufe und Handlungsanweisungen, z. B. Kochrezepte oder Montageanleitungen. QA im prozeduralen Bereich muss oft Schritt‑für‑Schritt antworten.
-
-- *Metacognitive Knowledge*:  
-  Umfasst Wissen über die eigenen Wissensgrenzen und -prozesse, etwa „Ich weiß, dass ich etwas nicht weiß“. Für QA weniger direkt relevant, kann aber bei Unsicherheitserkennung helfen.
-
-- *Semantic Knowledge*:  
-  Erklärt Bedeutungen und Zusammenhänge zwischen Konzepten, z. B. Taxonomien in Ontologien. Semantisch angereicherte QA‑Systeme nutzen dieses Wissen, um Antworten präziser zu formulieren.
-
-- *Contextual Knowledge*:  
-  Form von Wissen, das an einen bestimmten Kontext gebunden ist (z. B. aktuelle Nachrichten, persönliche Vorlieben). Open‑Domain‑QA‑Systeme müssen dynamisch darauf zugreifen.
-
-== Fokus auf Faktenwissen  
-Wir konzentrieren uns in dieser Arbeit auf *Factual Knowledge* („Conceptual knowledge“), da aktuelle LLMs hier erhebliche Defizite zeigen. Studien belegen, dass selbst GPT‑4 im Fakten‑QA nur ca. 40,3 % korrekte Antworten liefert, obwohl diese Informationen während Pre‑Training oft mehrfach auftauchen (@head-to-tail).
-
-=== Typen von QA‑Systemen
-/*
-- *Extractive QA*  
-  Das System erhält eine Frage und einen Kontexttext und markiert den besten Antwortspan im Text. Die Antworten stammen wortwörtlich aus dem Dokument, zum Beispiel im SQuAD–Datensatz [@rajpurkar2016squad; @rajpurkar2018squad2]. Reader-Modelle basieren häufig auf BERT-ähnlichen Encodern, die den relevanten Abschnitt im Text „ziehen“ [@devlin2019bert; @wolf2020transformers].
-*/
-- *Extractive QA*: 
-  
-  Bei dieser Methode erhält das Modell eine Frage und einen zusammenhängenden Textabschnitt (Kontext). Es identifiziert dann genau den oder die Wortgruppen (Spans), die die beste Antwort enthalten. Zum Beispiel sucht ein System in einem Wikipedia-Artikel nach der Textstelle, die erklärt, wofür Einstein den Nobelpreis erhielt @rajpurkar2016squad. Extractive QA ist besonders zuverlässig, da die Antwort wortwörtlich aus dem vorgegebenen Text stammt und so keine inhaltliche Erfindung (Halluzination) erfolgt.
-  - *Arbeitsweise:* Das Modell nutzt einen Token-basierten Klassifikator, um Start- und End-Position der Antwort im Kontext vorherzusagen.
-  - *Vorteile:* Hohe Präzision und Nachvollziehbarkeit; geringe Gefahr von Halluzinationen.
-  - *Nachteile:* Antworten müssen wortwörtlich im Kontext stehen; keine freie Formulierung.
-
-- *Generative QA*  
-  Hier erzeugt das Modell die Antwort eigenständig aus Frage und Kontext, statt sie wortwörtlich zu übernehmen. Moderne LLMs wie GPT‑Modelle erstellen frei formulierte Fließtext-Antworten [@wolf2020transformers].
-
-- *Closed‑Book QA*  
-  Das Modell nutzt nur im Pretraining erworbenes Wissen, ohne zusätzliche Kontext-Eingabe. Typisches Beispiel sind GPT‑basierten Chatbots, die über intern gelernten Wissensspeicher verfügen [@wolf2020transformers].
-
-- *Open‑Domain QA*  
-  Systeme greifen auf ein großes Wissensreservoir (z.B. Wikipedia) zu. Ein Retriever identifiziert relevante Dokumente, die ein Reader oder Generator anschließend für die Antwort nutzt (Retrieval-Augmented Generation) [@lewis2020rag].
-
-- *Closed‑Domain QA*  
-  Beschränkt auf ein Fachgebiet (z.B. Medizin). Hier kann das System auf Domänen‑Ontologien oder spezialisierte Korpora zugreifen, um präzisere Antworten zu liefern [@kwiatkowski2019nq].
-
-- *Cross‑Lingual QA*  
-  Frage und/oder Kontext können in unterschiedlichen Sprachen sein. Benchmarks wie TyDiQA oder MLQA prüfen die Fähigkeit, in mehreren Sprachen zu antworten [@rajpurkar2019tydiqa].
-
-- *Semantically Constrained QA*  
-  Nutzt zusätzliche semantische Regeln oder Ontologien, um nur Antworten eines bestimmten Typs zuzulassen. Diese Form steigert die Präzision in spezialisierten Anwendungen [@reimers2019sentence].
-
-== Aktuelle LLMs: Architektur und Training
-
 
 == Fine‑Tuning
 
@@ -170,7 +175,7 @@ $ min_(bold(W)) sum_(i=1)^N cal(L)(f(bold(x)_i; bold(W)), y_i) $
 
 === LoRA‑Fine‑Tuning
 
-*Low-Rank Adaptation (LoRA)* ist eine Methode aus dem Bereich *Parameter Efficient Fine-Tuning* (#acr("PEFT")), bei der nur wenige zusätzliche Gewichte trainiert werden.
+*Low-Rank Adaptation (LoRA)* ist eine Methode aus dem Bereich *Parameter Efficient Fine-Tuning* PEFT, ei der nur wenige zusätzliche Gewichte trainiert werden.
 
 Anstatt $bold(W)$ direkt zu aktualisieren, wird eine Veränderung $ Delta bold(W) $ als Produkt zweier kleiner Matrizen eingeführt:
 
@@ -203,12 +208,13 @@ Beispiel: Für $d = k = 768$, $r = 8$ ergibt sich eine Reduktion auf nur ca. 2% 
 
 === Mathematischer Vergleich
 
-| Methode           | Trainierbare Parameter             | Speicherbedarf         |
-|-------------------|------------------------------------|-------------------------|
-| Full‑Tuning       | $d dot k$                        | $O(d dot k)$           |
-| LoRA (rank $r$)   | $(d + k) dot r$                  | $O((d + k) dot r)$     |
-
-
+#table(
+  columns: (auto, auto, auto),
+  align: left,
+  [*Methode*], [*Trainierbare Parameter*], [*Speicherbedarf*],
+  [Full‑Tuning], [$d dot k$], [$O(d dot k)$],
+  [LoRA (rank $r$)], [$(d + k) dot r$], [$O((d + k) dot r)$]
+)
 = QA-Benchmarks
 
 == SQuAD
