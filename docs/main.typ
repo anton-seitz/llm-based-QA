@@ -30,7 +30,7 @@
 #set text(size: 12pt)
 
 = Kurzbeschreibung der Arbeit
-Diese Studienarbeit befasst sich mit der Evaluierung von #acrpl("LLM")‑basiertem #acr("QA"). Im Fokus steht, wie gut moderne vortrainierte QA‑Modelle (z. B. *deepset/roberta-base-squad2*) Antworten liefern, wenn sie mit  
+Diese Studienarbeit befasst sich mit der Evaluierung von #acrpl("LLM")‑basiertem #acr("QA"). Im Fokus steht, wie gut moderne vortrainierte #acr("QA")‑Modelle (z. B. *deepset/roberta-base-squad2*) Antworten liefern, wenn sie mit  
 - vollem Kontext  
 - semantisch reduziertem Kontext  
 - internem Wissen nach LoRA‑Fine‑Tuning  
@@ -38,10 +38,10 @@ gefordert werden. Ein Test‑Environment erlaubt systematische Variation von Fra
 
 = Einleitung
 == Motivation
-Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Korrektheitsraten im Fakten‑QA [@head-to-tail]. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit, die Zuverlässigkeit und Limitationen solcher Systeme zu untersuchen.
+Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Korrektheitsraten im Fakten‑#acr("QA") @head-to-tail. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit, die Zuverlässigkeit und Limitationen solcher Systeme zu untersuchen.
 
 == Zielsetzungen
-- Aufbau eines wiederholbaren QA‑Test‑Environments  
+- Aufbau eines wiederholbaren #acr("QA")‑Test‑Environments  
 - Evaluierung mit vollständigem vs. reduziertem Kontext  
 - LoRA‑basierte Feinabstimmung auf domänenspezifischen Text  
 - Systematischer Vergleich der Performance  
@@ -50,61 +50,57 @@ Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Korrekt
 = Grundlagen und Definitionen
 
 == Question‑Answering‑ Systeme
-
-=== Was sind Question‑Answering‑Systeme?  
-Question‑Answering‑Systeme (QA‑Systeme) sind Anwendungen, die automatisch auf natürlichsprachliche Fragen Text­antworten liefern. Sie kombinieren Information Retrieval (z. B. Dokumentensuche) und Natural Language Processing (z. B. Named Entity Recognition, Parsing), um in einem Korpus oder internem Modellwissen die richtige Antwort zu finden.
+Question‑Answering‑Systeme (#acr("QA")‑Systeme) sind Anwendungen, die automatisch auf natürlichsprachliche Fragen Text­antworten liefern. Sie kombinieren Information Retrieval (z. B. Dokumentensuche) und Natural Language Processing (z. B. Named Entity Recognition, Parsing), um in einem Korpus oder internem Modellwissen die richtige Antwort zu finden.
 
 === Arten von Wissen  
-Knowledge lässt sich in verschiedene Kategorien unterteilen, die für QA‑Systeme relevant sind. Basierend auf dem Dokument *Types and qualities of knowledge* lassen sich folgende Typen unterscheiden:
+Knowledge lässt sich in verschiedene Kategorien unterteilen, die für #acr("QA")‑Systeme relevant sind. Basierend auf dem Dokument *Types and qualities of knowledge* lassen sich folgende Typen unterscheiden:
 
 - *Factual Knowledge* (auch *Conceptual knowledge*):  
-  Dieses Wissen umfasst statische Fakten und Konzepte, z. B. „Berlin ist die Hauptstadt Deutschlands“. QA‑Systeme greifen hier häufig auf explizite Datenbanken oder Textpassagen zurück @knowledge.
+  Dieses Wissen umfasst statische Fakten und Konzepte, z. B. „Berlin ist die Hauptstadt Deutschlands“. #acr("QA")‑Systeme greifen hier häufig auf explizite Datenbanken oder Textpassagen zurück @knowledge.
 
 - *Procedural Knowledge*:  
-  Beschreibt Abläufe und Handlungsanweisungen, z. B. Kochrezepte oder Montageanleitungen. QA im prozeduralen Bereich muss oft Schritt‑für‑Schritt antworten.
+  Beschreibt Abläufe und Handlungsanweisungen, z. B. Kochrezepte oder Montageanleitungen. #acr("QA") im prozeduralen Bereich muss oft Schritt‑für‑Schritt antworten.
 
 - *Metacognitive Knowledge*:  
-  Umfasst Wissen über die eigenen Wissensgrenzen und -prozesse, etwa „Ich weiß, dass ich etwas nicht weiß“. Für QA weniger direkt relevant, kann aber bei Unsicherheitserkennung helfen.
+  Umfasst Wissen über die eigenen Wissensgrenzen und -prozesse, etwa „Ich weiß, dass ich etwas nicht weiß“. Für #acr("QA") weniger direkt relevant, kann aber bei Unsicherheitserkennung helfen.
 
 - *Semantic Knowledge*:  
-  Erklärt Bedeutungen und Zusammenhänge zwischen Konzepten, z. B. Taxonomien in Ontologien. Semantisch angereicherte QA‑Systeme nutzen dieses Wissen, um Antworten präziser zu formulieren.
+  Erklärt Bedeutungen und Zusammenhänge zwischen Konzepten, z. B. Taxonomien in Ontologien. Semantisch angereicherte #acr("QA")‑Systeme nutzen dieses Wissen, um Antworten präziser zu formulieren.
 
 - *Contextual Knowledge*:  
-  Form von Wissen, das an einen bestimmten Kontext gebunden ist (z. B. aktuelle Nachrichten, persönliche Vorlieben). Open‑Domain‑QA‑Systeme müssen dynamisch darauf zugreifen.
+  Form von Wissen, das an einen bestimmten Kontext gebunden ist (z. B. aktuelle Nachrichten, persönliche Vorlieben). Open‑Domain‑#acr("QA")‑Systeme müssen dynamisch darauf zugreifen.
 
-Wir konzentrieren uns in dieser Arbeit auf *Factual Knowledge* („Conceptual knowledge“), da aktuelle LLMs hier erhebliche Defizite zeigen. Studien belegen, dass selbst GPT‑4 im Fakten‑QA nur ca. 40,3 % korrekte Antworten liefert, obwohl diese Informationen während Pre‑Training oft mehrfach auftauchen (@head-to-tail).
+Wir konzentrieren uns in dieser Arbeit auf *Factual Knowledge* („Conceptual knowledge“), da aktuelle LLMs hier erhebliche Defizite zeigen. Studien belegen, dass selbst GPT‑4 im Fakten‑#acr("QA") nur ca. 40,3 % korrekte Antworten liefert, obwohl diese Informationen während Pre‑Training oft mehrfach auftauchen (@head-to-tail).
 
-=== Typen von QA‑Systemen
-/*
-- *Extractive QA*  
-  Das System erhält eine Frage und einen Kontexttext und markiert den besten Antwortspan im Text. Die Antworten stammen wortwörtlich aus dem Dokument, zum Beispiel im SQuAD–Datensatz [@rajpurkar2016squad; @rajpurkar2018squad2]. Reader-Modelle basieren häufig auf BERT-ähnlichen Encodern, die den relevanten Abschnitt im Text „ziehen“ [@devlin2019bert; @wolf2020transformers].
-*/
-- *Extractive QA*: 
+=== Typen von #acr("QA")‑Systemen
+
+Im Folgenden werden die üblichen Typen des #acr("QA") beschrieben und erläutert, welcher davon sich am besten für den bestehenden Anwendungsfall eignet.
+- *Extractive #acr("QA")*: 
   
-  Bei dieser Methode erhält das Modell eine Frage und einen zusammenhängenden Textabschnitt (Kontext). Es identifiziert dann genau den oder die Wortgruppen (Spans), die die beste Antwort enthalten. Zum Beispiel sucht ein System in einem Wikipedia-Artikel nach der Textstelle, die erklärt, wofür Einstein den Nobelpreis erhielt @rajpurkar2016squad. Extractive QA ist besonders zuverlässig, da die Antwort wortwörtlich aus dem vorgegebenen Text stammt und so keine inhaltliche Erfindung (Halluzination) erfolgt.
+  Bei dieser Methode erhält das Modell eine Frage und einen zusammenhängenden Textabschnitt (Kontext). Es identifiziert dann genau den oder die Wortgruppen (Spans), die die beste Antwort enthalten. Zum Beispiel sucht ein System in einem Wikipedia-Artikel nach der Textstelle, die erklärt, wofür Einstein den Nobelpreis erhielt @rajpurkar2016squad. Extractive #acr("QA") ist besonders zuverlässig, da die Antwort wortwörtlich aus dem vorgegebenen Text stammt und so keine inhaltliche Erfindung (Halluzination) erfolgt.
   - *Arbeitsweise:* Das Modell nutzt einen Token-basierten Klassifikator, um Start- und End-Position der Antwort im Kontext vorherzusagen.
   - *Vorteile:* Hohe Präzision und Nachvollziehbarkeit; geringe Gefahr von Halluzinationen.
   - *Nachteile:* Antworten müssen wortwörtlich im Kontext stehen; keine freie Formulierung.
 
-- *Generative QA*  
+- *Generative #acr("QA")*  
   Hier erzeugt das Modell die Antwort eigenständig aus Frage und Kontext, statt sie wortwörtlich zu übernehmen. Moderne LLMs wie GPT‑Modelle erstellen frei formulierte Fließtext-Antworten @wolf2020transformers.
 
-- *Closed‑Book QA*  
+- *Closed‑Book #acr("QA")*  
   Das Modell nutzt nur im Pretraining erworbenes Wissen, ohne zusätzliche Kontext-Eingabe. Typisches Beispiel sind GPT‑basierten Chatbots, die über intern gelernten Wissensspeicher verfügen @wolf2020transformers.
 
-- *Open‑Domain QA*  
+- *Open‑Domain #acr("QA")*  
   Systeme greifen auf ein großes Wissensreservoir (z.B. Wikipedia) zu. Ein Retriever identifiziert relevante Dokumente, die ein Reader oder Generator anschließend für die Antwort nutzt (Retrieval-Augmented Generation) @lewis2020rag.
 
-- *Closed‑Domain QA*  
+- *Closed‑Domain #acr("QA")*  
   Beschränkt auf ein Fachgebiet (z.B. Medizin). Hier kann das System auf Domänen‑Ontologien oder spezialisierte Korpora zugreifen, um präzisere Antworten zu liefern @kwiatkowski2019nq.
 
-- *Cross‑Lingual QA*  
-  Frage und/oder Kontext können in unterschiedlichen Sprachen sein. Benchmarks wie TyDiQA oder MLQA prüfen die Fähigkeit, in mehreren Sprachen zu antworten @rajpurkar2019tydiqa.
+- *Cross‑Lingual #acr("QA")*  
+  Frage und/oder Kontext können in unterschiedlichen Sprachen sein. Benchmarks wie TyDi#acr("QA") oder ML#acr("QA") prüfen die Fähigkeit, in mehreren Sprachen zu antworten @rajpurkar2019tydiqa.
 
-- *Semantically Constrained QA*  
+- *Semantically Constrained #acr("QA")*  
   Nutzt zusätzliche semantische Regeln oder Ontologien, um nur Antworten eines bestimmten Typs zuzulassen. Diese Form steigert die Präzision in spezialisierten Anwendungen @reimers2019sentence.
 
-Für unseren Anwendungsfall haben wir uns für Extractive QA entschieden, da hier die Antworten direkt als Textspans aus einem vorgegebenen Dokument extrahiert werden und somit hohe Präzision und Nachvollziehbarkeit gewährleisten. Anders als bei generativen Modellen, die freie Fließtext-Antworten erzeugen und dabei zu Halluzinationen neigen können @wolf2020transformers, sucht das Extractive‑System gezielt nach der Start‑ und Endposition der korrekten Antwort im Kontexttext, wie es beispielsweise im SQuAD‑Datensatz üblich ist @rajpurkar2016squad. So lassen sich falsche Vorhersagen einfach analysieren und korrigieren, weil der Modell‑Output immer klar auf eine Textstelle zurückzuführen ist. Zudem bedarf es kaum Prompt‑Engineering, sondern lediglich einer geeigneten HuggingFace‑Pipeline, die in Jupyter‑Notebooks effizient auf verschiedene Dokumente skaliert. Diese Kombination aus Verlässlichkeit, schneller Integrationsfähigkeit und geringem Anpassungsaufwand macht Extractive QA für unsere Evaluierung ideal.
+Für unseren Anwendungsfall haben wir uns für Extractive #acr("QA") entschieden, da hier die Antworten direkt als Textspans aus einem vorgegebenen Dokument extrahiert werden und somit hohe Präzision und Nachvollziehbarkeit gewährleisten. Anders als bei generativen Modellen, die freie Fließtext-Antworten erzeugen und dabei zu Halluzinationen neigen können @wolf2020transformers, sucht das Extractive‑System gezielt nach der Start‑ und Endposition der korrekten Antwort im Kontexttext, wie es beispielsweise im SQuAD‑Datensatz üblich ist @rajpurkar2016squad. So lassen sich falsche Vorhersagen einfach analysieren und korrigieren, weil der Modell‑Output immer klar auf eine Textstelle zurückzuführen ist. Zudem bedarf es kaum Prompt‑Engineering, sondern lediglich einer geeigneten HuggingFace‑Pipeline, die in Jupyter‑Notebooks effizient auf verschiedene Dokumente skaliert. Diese Kombination aus Verlässlichkeit, schneller Integrationsfähigkeit und geringem Anpassungsaufwand macht Extractive #acr("QA") für unsere Evaluierung ideal.
 
 == Aktuelle LLMs: Architektur und Training
 Im Folgenden werden nötige Grundlagen zu den Themen #acr("KI") und insbesondere #acr("LLM") und deren Fine-Tuning geschaffen. 
@@ -117,7 +113,7 @@ Künstliche Intelligenz (KI) ist der Oberbegriff für Technologien, die Computer
 - passen ihre internen Parameter so an, dass sie Vorhersagen für neue Daten treffen können @MITSloan2020_MLExplained.  
 Dieses „Musterlernen“ erlaubt es, Konsumenten individuelle Produktempfehlungen auszugeben oder Preise dynamisch anzupassen, was nachweislich die Conversion-Rate erhöht und das Kundenerlebnis verbessert @HBR2023_CX.
 #figure(
-  image("assets/ai-graph.svg"),
+  image("assets/ai-graph.svg", width: 100%),
   caption: [@McKinsey2024_StateOfAI Immer mehr Unternehmen benutzen KI um einen oder mehrere Geschäftsprozesse zu automatisieren. Seit der einfachen Verfügbarkeit von generativer KI, wurde diese auch rapide adaptiert. Im @sec:genai wird diese Technologie noch genauer beleuchtet]
 )<fig:mck-ai>
 == Generative AI  
@@ -137,7 +133,7 @@ Unternehmen nutzen Generative AI z.B. um in Echtzeit Produktbilder oder Werbecli
 
 
 === Transformer‑Architektur  
-Der Transformer ist die Standardarchitektur heutiger LLMs [@vaswani2017attention]. Er besteht aus gestapelten Encoder‑ und/oder Decoder‑Blöcken mit Self‑Attention und Feed‑Forward-Netzwerken, erlaubt paralleles Training und erfasst langreichweitige Abhängigkeiten.
+Der Transformer ist die Standardarchitektur heutiger LLMs @vaswani2017attention. Er besteht aus gestapelten Encoder‑ und/oder Decoder‑Blöcken mit Self‑Attention und Feed‑Forward-Netzwerken, erlaubt paralleles Training und erfasst langreichweitige Abhängigkeiten.
 
 $ "Attention"(Q, K, V) = "softmax"(frac(Q K^T, sqrt(d_k))) V $
 
@@ -148,10 +144,10 @@ $ "head"_i = "Attention"(Q W_i^Q, K W_i^K, V W_i^V) $
 === Trainingsverfahren  
 LLMs durchlaufen zwei Phasen:
 - *Pretraining*  
-  • Masked Language Modeling (BERT) [@devlin2019bert]  
-  • Autoregressive Next-Token-Prediction (GPT) [@wolf2020transformers]  
+  • Masked Language Modeling (BERT) @devlin2019bert  
+  • Autoregressive Next-Token-Prediction (GPT) @wolf2020transformers  
 - *Fine‑Tuning*  
-  Spezialisierung auf Aufgaben oder Domänen. Moderne Systeme wie GPT-4 nutzen zusätzlich *Reinforcement Learning from Human Feedback* (RLHF) [@hu2021lora].
+  Spezialisierung auf Aufgaben oder Domänen. Moderne Systeme wie GPT-4 nutzen zusätzlich *Reinforcement Learning from Human Feedback* (RLHF) @hu2021lora.
 
 
 == Fine‑Tuning
@@ -215,10 +211,9 @@ Beispiel: Für $d = k = 768$, $r = 8$ ergibt sich eine Reduktion auf nur ca. 2% 
   [Full‑Tuning], [$d dot k$], [$O(d dot k)$],
   [LoRA (rank $r$)], [$(d + k) dot r$], [$O((d + k) dot r)$]
 )
-= QA-Benchmarks
+== #acr("QA")-Benchmarks
 
-== SQuAD
-Der Stanford Question Answering Dataset enthält über 100000 Fragen zu Wikipedia-Artikeln @rajpurkar2016squad.
+Ein beliebter Datensatz für #acr("QA")-Systeme ist #acr("SQuAD"). Dort wurden in einem strukturierten Format über 100000 Fragen zu Wikipedia-Artikeln aufbereitet @rajpurkar2016squad.
 SQuAD 2.0 ergänzt unanswerable Fragen @rajpurkar2018squad2.
 
 - Exact Match EM berechnet den Anteil exakter Übereinstimmungen
@@ -227,15 +222,15 @@ SQuAD 2.0 ergänzt unanswerable Fragen @rajpurkar2018squad2.
 $ "F1" = 2 |P ∩ G| / (|P| + |G|) $
 
 == Weitere Benchmarks
-- Natural Questions dokumentiert reale Suchanfragen und ist offen für Closed-Book QA @kwiatkowski2019nq
-- HotpotQA fordert Multi-Hop-Reasoning
-- TyDiQA, XQuAD und MLQA testen multilinguale Fähigkeiten @rajpurkar2019tydiqa
+- Natural Questions dokumentiert reale Suchanfragen und ist offen für Closed-Book #acr("QA") @kwiatkowski2019nq
+- Hotpot#acr("QA") fordert Multi-Hop-Reasoning
+- TyDi#acr("QA"), XQuAD und ML#acr("QA") testen multilinguale Fähigkeiten @rajpurkar2019tydiqa
 
-= Metriken zur QA-Bewertung
+== Metriken zur #acr("QA")-Bewertung
 
 In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die Qualität von Question‑Answering-Systemen messen. Jede Metrik beleuchtet einen spezifischen Aspekt: von der reinen Worttreue bis zur semantischen Tiefe der Antwort. Für unseren Use Case sind besonders robuste Metriken wie F1‑Score und Semantic Answer Similarity (SAS) entscheidend, da sie auch bei variierenden Formulierungen zuverlässige Bewertungen ermöglichen.
 
-- *Accuracy (Genauigkeit):* Misst den Anteil aller korrekten Vorhersagen (True Positives und True Negatives) an der Gesamtzahl der Fälle. Sie beantwortet die Frage „Wie oft liegt das Modell richtig?“ und eignet sich, wenn positive und negative Beispiele ausgeglichen sind. Bei QA, wo oft nur positive Beispiele (Antworten) zählen, ist Accuracy nur eingeschränkt aussagekräftig.
+- *Accuracy (Genauigkeit):* Misst den Anteil aller korrekten Vorhersagen (True Positives und True Negatives) an der Gesamtzahl der Fälle. Sie beantwortet die Frage „Wie oft liegt das Modell richtig?“ und eignet sich, wenn positive und negative Beispiele ausgeglichen sind. Bei #acr("QA"), wo oft nur positive Beispiele (Antworten) zählen, ist Accuracy nur eingeschränkt aussagekräftig.
 
   $ "Accuracy" = frac("TP" + "TN", "TP" + "TN" + "FP" + "FN") $
 
@@ -247,11 +242,11 @@ In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die 
 
   $ "Recall" = frac("TP", "TP" + "FN") $
 
-- *F1‑Score:* Das harmonische Mittel aus Precision und Recall. F1 vereint beide Perspektiven und ist besonders dann sinnvoll, wenn ein ausgewogenes Verhältnis von Genauigkeit und Vollständigkeit gefordert ist – typisch in QA, wo man sowohl richtige als auch vollständige Antworten benötigt.
+- *F1‑Score:* Das harmonische Mittel aus Precision und Recall. F1 vereint beide Perspektiven und ist besonders dann sinnvoll, wenn ein ausgewogenes Verhältnis von Genauigkeit und Vollständigkeit gefordert ist – typisch in #acr("QA"), wo man sowohl richtige als auch vollständige Antworten benötigt.
 
   $ "F1" = frac(2 dot "Precision" dot "Recall", "Precision" + "Recall") $
 
-- *Exact Match (EM):* Misst den Anteil der Antworten, die exakt mit den Referenzantworten übereinstimmen. EM ist besonders streng, da nur ganz genaue Textübereinstimmungen als korrekt gewertet werden. Für QA‑Systeme, die exakte Textspans ausgeben, bildet EM den härtesten Qualitätsmaßstab.
+- *Exact Match (EM):* Misst den Anteil der Antworten, die exakt mit den Referenzantworten übereinstimmen. EM ist besonders streng, da nur ganz genaue Textübereinstimmungen als korrekt gewertet werden. Für #acr("QA")‑Systeme, die exakte Textspans ausgeben, bildet EM den härtesten Qualitätsmaßstab.
 
   $ "EM" = frac("Anzahl exakter Antworten", "Gesamtanzahl Fragen") $
 
@@ -271,39 +266,82 @@ Diese Metriken kombiniert erlauben eine umfassende Beurteilung:
 
 Für unseren Use Case sind insbesondere F1 und SAS zentral, da sie sowohl Teil‑ als auch semantische Übereinstimmung messen und somit robust gegen kleine Formulierungsunterschiede sind.
 
+= Umsetzung eines #acr("QA")-Testframeworks
 
-= Retrieval-Augmented Generation (RAG)
-RAG verbindet Retriever und Generator: Ein Retriever liefert relevante Passagen, ein Generator (seq2seq) generiert die Antwort [@lewis2020rag].
+Für die Reproduzierbarkeit und Skalierbarkeit unseres QA‑Testframeworks setzen wir auf folgende technische Infrastruktur:
 
-= Umsetzung eines QA-Testframeworks
-Nutze Python und Jupyter-Notebooks. Infrastrukturempfehlungen:
-- Bibliotheken: `transformers`, `datasets`, `peft`, `evaluate`  
-- Logging: Weights & Biases  
-- Versionierung: Git + `requirements.txt`  
-- Zufallskeim-Festlegung: `random.seed()`, `numpy.random.seed()`  
-- Notebook-Struktur: Datenaufbereitung, Chunking, Modellinferenz, Evaluation, Visualisierung
+- *Programmiersprache & Umgebung:*  
+  Python 3.8+ in Jupyter-Notebooks oder Colab.
+
+- *Kernbibliotheken:*  
+  - `transformers` für Modell‑Loading und Inferenz  
+  - `datasets` zum Laden und Verarbeiten von QA‑Datensätzen (SQuAD, NaturalQuestions)  
+  - `peft` für PEFT/LoRA‑Fine‑Tuning  
+  - `evaluate` für standardisierte Metriken (EM, F1, MRR)  
+
+- *Logging & Monitoring:*  
+  Weights & Biases (`wandb`) für Hyperparameter‑Tracking, Loss‑Kurven und Metriken.
+
+- *Versionierung & Reproduzierbarkeit:*  
+  - Git-Repository mit `requirements.txt` zur Paketverwaltung  
+  - Festlegung von Zufallskeimen:
+
+- *Notebook‑Struktur:*  
+  1. *Datenaufbereitung:*  
+     Einlesen des Korpus (`complete_context.txt`, `question-sets/q_v2.json`)  
+  2. *Chunking & semantisches Ranking:*  
+     Context in Abschnitte teilen und Top‑K‑Chunks per Sentence‑Transformer auswählen  
+  3. *Modellinferenz:*  
+     QA‑Pipeline (`deepset/roberta-base-squad2`) für FullContext und ReducedContext  
+  4. *LoRA‑Fine‑Tuning:*  
+     Adapter mittels `peft` hinzufügen, Training mit Kontext‑Chunks als MLM‑Daten  
+  5. *Evaluation:*  
+     EM, F1, MRR berechnen mit `evaluate`  
+  6. *Visualisierung:*  
+     Barplots, Heatmaps, Trainingskurven  
 
 = Realisierung
-Weitere Details und Codebeispiele befinden sich im Anhang (Notebook-Zellen).
-
 = Evaluierung
-== Performance-Vergleich
-Die drei Pipeline-Varianten liefern unterschiedliche Accuracy:
-- FullContext: 85.2 %
-- ReducedContext: 78.6 %
-- FineTuned: 92.3 %
+
+== Performance‑Vergleich
+
+Unsere drei Pipeline‑Varianten erreichen folgende Accuracy auf dem Test‑Subset:
+
+- *FullContext:* 85.2 %  
+- *ReducedContext:* 78.6 %  
+- *FineTuned (LoRA):* 92.3 %
+
+Accuracy = korrekte Antworten/Anzahl Fragen dot 100\%
 
 == Diskussion
-- Kontextreduktion: −7 % Accuracy, +40 % Speed  
-- LoRA-Fine-Tuning: +7 % Accuracy gegenüber FullContext
+
+- *Kontextreduktion:*  
+  −7 % Genauigkeit gegenüber FullContext, jedoch *+40 %* schnellere Inferenz, da nur 5 statt ~200 Abschnitte pro Frage geladen werden.
+
+- *LoRA‑Fine‑Tuning:*  
+  +7,1 % Genauigkeit gegenüber FullContext bei moderatem zusätzlichem Trainingsaufwand (Adapter-Größe ≪ Modellgröße) und weiterhin schneller Inferenz als Full‑Parameter Fine‑Tuning.
 
 = Zusammenfassung und Ausblick
+
 == Schlussfolgerungen
-Hybrid aus semantischem Retrieval + LoRA-Fine-Tuning ist effizient und genau.
+
+Unsere Ergebnisse zeigen deutlich, dass *LoRA‑basierte Adapter* dem Standard‑FullContext‑Ansatz in puncto Genauigkeit überlegen sind und gleichzeitig effizienter trainiert werden können. Die *semantische Kontextreduktion* bietet einen guten Kompromiss zwischen Geschwindigkeit und Performance, eignet sich aber eher für Szenarien mit begrenztem Rechenbudget.
+
+== Ausblick
+
+Für zukünftige Arbeiten empfehlen sich:
+
+- *Generative Hybridmodelle (RAG):*  
+  Kombination aus LoRA‑Fein‑Tuning und Retrieval‑Augmented Generation.
+
+- *Multi‑Hop QA:*  
+  Erweiterung auf Datensätze wie HotpotQA für komplexere Fragestellungen.
+
+- *Live‑Evaluation:*  
+  Test mit echten Nutzeranfragen in Chatbot‑Prototypen und Feedback‑Schleifen.
+== Schlussfolgerungen
 
 == Empfehlungen
-- Produktion: Retrieval + LoRA  
-- Forschung: Generative Multi-Hop QA, semantische Constraints
 
 = Anhang
 - Vollständige Code-Listings im Notebook

@@ -5,6 +5,7 @@
   QA: "Question Answering",
   LLM: "Large Language Model",
   NLP: "Natural Language Processing",
-  GPU: "Graphics Processing Unit"
-  KI: "Künstliche Intelligenz"
+  GPU: "Graphics Processing Unit",
+  KI: "Künstliche Intelligenz",
+  SQuAD: "Stanford Question Answering Dataset"
 )
