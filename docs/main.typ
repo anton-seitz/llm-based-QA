@@ -298,9 +298,78 @@ Für die Reproduzierbarkeit und Skalierbarkeit unseres QA‑Testframeworks setze
   6. *Visualisierung:*  
      Barplots, Heatmaps, Trainingskurven  
 
-= Realisierung
-= Evaluierung
 
+= Realisierung
+
+Zunächst wurde ein umfangreicher Textkorpus zusammengestellt. Als Thema wurde *Judo* gewählt, da sich der Entwickler gut damit auskennt und Judo sich besonders für Faktenwissen-Tests eignet. Es gibt zahlreiche Details – von Technikklassifizierungen über historische Daten bis hin zu Wettkampfergebnissen –, die sich gut abfragen lassen.
+
+Quellen und ihre Begründung:
+- https://en.wikipedia.org/wiki/Judo  
+  Wikipedia liefert eine umfassende Übersicht über Geschichte, Regeln und Begriffe.  
+- https://en.wikipedia.org/wiki/List_of_judo_techniques  
+  Detaillierte Auflistung aller Techniken, ideal für technische Beispiele.  
+- https://en.wikipedia.org/wiki/List_of_judoka  
+  Informationen zu bedeutenden Judoka, nützlich für biografische Fragen.  
+- https://martialarts.fandom.com/wiki/Judo  
+  Populärkulturelle Perspektive und weiterführende Details.  
+- https://chas-ma.com/JudoManual/Chapter_2%28HistoryofJudo%29.pdf  
+  Fachlicher PDF-Quelltext zur historischen Entwicklung von Judo.  
+- https://www.ijf.org/history  
+  Offizielle Historie der International Judo Federation (IJF).  
+- https://blackbelttrek.com/judo-vs-jiu-jitsu-the-ultimate-comparison/  
+  Vergleich mit Jiu-Jitsu, um Abgrenzungen und historische Zusammenhänge zu verdeutlichen.
+
+== Prototypen und Experimente
+
+1. *Baseline-Abfrage*  
+   - Der gesamte Korpus wurde für jede Frage abgefragt.  
+   - Beobachtung: Sehr lange Laufzeit.
+
+2. *Chunk-Reduktion mithilfe von Embeddings*  
+   - Korpus in 378 Chunks aufgeteilt.  
+   - Ähnlichkeits-Vergleich zwischen Frage-Embeddings und Chunk-Embeddings.  
+   - Auswahl der Top 50 Chunks ? deutlich schnellere Abfrage, jedoch reduzierte Accuracy.
+
+3. *Fine-Tuning mit LoRA*  
+   - Gesamter Textkorpus als Trainingsgrundlage.  
+   - Einsatz von Low-Rank Adaption (LoRA), um Parameter effizient anzupassen.  
+   - Ziel: Verbesserte Antwortgenauigkeit ohne großen Hardware-Aufwand.
+
+== Umstrukturierung der Fragen
+
+- Problem: Antworten sind nicht atomar; string-basierter Vergleich führt zu niedriger Übereinstimmung.  
+- Lösung 1: Neuer Fragensatz mit klar abgegrenzten, atomaren Antworten.  
+- Lösung 2: Semantische Evaluation mittels Cosine Similarity statt reinem Fuzzy String Matching.
+
+== Klassifikation nach Schwierigkeit
+
+Inspiriert von @head-to-tail wurden Fragen manuell in drei Stufen eingeteilt:
+
+=== Easy  
+Basic Facts, bekannt für Einsteiger:
+- What does judo mean?  
+- What color belt do novices wear?  
+
+=== Medium  
+Erweiterte Kenntnisse:
+- In what year was judo founded?  
+- What is the term for free practice in judo?  
+
+=== Hard  
+Spezialisierte Details:
+- Spezifische Jahreszahlen (z. B. EJU-Gründung)  
+- Namen seltener Techniken (kappo, sutemi-waza)  
+- Kodokan-Trivia (Emblem, erstes Dojo)  
+
+== Zentrale Erkenntnisse
+
+- *Easy*: Fokus auf grundlegende Begriffe und Farben.  
+- *Medium*: Datumsangaben, Terminologie, historischer Kontext.  
+- *Hard*: Nischenwissen, technische Klassifikationen, obscure Fakten.
+
+
+= Evaluierung
+notes: 
 == Performance‑Vergleich
 
 Unsere drei Pipeline‑Varianten erreichen folgende Accuracy auf dem Test‑Subset:
