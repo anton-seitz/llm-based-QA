@@ -30,12 +30,11 @@
 #set text(size: 12pt)
 
 = Kurzbeschreibung der Arbeit
-Diese Studienarbeit befasst sich mit der Evaluierung von #acrpl("LLM")‑basiertem #acr("QA"). Im Fokus steht, wie gut moderne vortrainierte #acr("QA")‑Modelle (z. B. *deepset/roberta-base-squad2*) Antworten liefern, wenn sie mit  
-- vollem Kontext  
-- semantisch reduziertem Kontext  
-- internem Wissen nach LoRA‑Fine‑Tuning  
-gefordert werden. Ein Test‑Environment erlaubt systematische Variation von Fragen, Metriken und Datenvolumen. Die Ergebnisse werden in Diagrammen visualisiert und diskutiert.
+In dieser Studienarbeit wird die Leistungsfähigkeit moderner Large Language Models (LLMs) im Bereich des Question Answering (QA) systematisch untersucht. Ausgangspunkt ist die Erkenntnis, dass selbst hochentwickelte Modelle wie GPT-4 nur rund 40 % der Fragen korrekt beantworten, obwohl ihnen häufig universelle Problemlöserfähigkeiten zugeschrieben werden @head-to-tail. Zunächst wird ein thematisch geeigneter Textkorpus ausgewählt und für die spätere Evaluierung aufbereitet. Darauf aufbauend werden Testfragen formuliert und Referenzantworten erstellt, um eine belastbare Vergleichsbasis zu schaffen.
 
+Anschließend wird ein ausgewähltes LLM in einer speziell eingerichteten Testumgebung eingesetzt. Hierbei werden sowohl quantitative Metriken wie Genauigkeit und Vollständigkeit als auch qualitative Kriterien zur Bewertung herangezogen. Die Experimentierphase umfasst Tests unter variierenden Modellparametern und Anpassungen der Pipeline, um deren Einfluss auf die Antwortqualität zu erfassen.
+
+Im letzten Schritt erfolgt die systematische Auswertung der gewonnenen Daten. Dabei werden Limitationen der Modelle aufgezeigt und mögliche Optimierungsansätze diskutiert. Die Dokumentation fasst sämtliche Ergebnisse zusammen und liefert Handlungsempfehlungen für den praktischen Einsatz von LLM-basierten QA-Systemen, insbesondere in ressourcenbeschränkten Umgebungen.
 = Einleitung
 == Motivation
 Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Korrektheitsraten im Fakten‑#acr("QA") @head-to-tail. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit, die Zuverlässigkeit und Limitationen solcher Systeme zu untersuchen.
@@ -43,17 +42,19 @@ Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Korrekt
 == Zielsetzungen
 - Aufbau eines wiederholbaren #acr("QA")‑Test‑Environments  
 - Evaluierung mit vollständigem vs. reduziertem Kontext  
-- LoRA‑basierte Feinabstimmung auf domänenspezifischen Text  
+- LoRA‑basiertes Fine-Tuning auf domänenspezifischen Text  
 - Systematischer Vergleich der Performance  
 - Ableitung von Empfehlungen für Praxis‑Deployments
 
-= Grundlagen und Definitionen
+Die Arbeit gliedert sich in drei Phasen: eine Vorbereitungs­phase mit Literaturrecherche, Korpuserstellung und Methodendefinition, eine Experimentier­phase mit Implementierung und Testdurchführung sowie eine abschließende Auswertungs- und Dokumentations­phase. Auf diese Weise sollen fundierte Erkenntnisse über die tatsächliche Leistungsfähigkeit von LLMs im Question Answering gewonnen werden.
 
+= Grundlagen und Definitionen
+Zunächst werden die nötigen Grundlagen für das Verständnis der Arbeit geschaffen.
 == Question‑Answering‑ Systeme
-Question‑Answering‑Systeme (#acr("QA")‑Systeme) sind Anwendungen, die automatisch auf natürlichsprachliche Fragen Text­antworten liefern. Sie kombinieren Information Retrieval (z. B. Dokumentensuche) und Natural Language Processing (z. B. Named Entity Recognition, Parsing), um in einem Korpus oder internem Modellwissen die richtige Antwort zu finden.
+Question‑Answering‑Systeme (#acr("QA")‑Systeme) sind Anwendungen, die automatisch auf natürlichsprachliche Fragen Text­antworten liefern. Sie kombinieren Information Retrieval (z. B. Dokumentensuche) und Natural Language Processing (z. B. Named Entity Recognition, Parsing), um in einem Korpus oder internem Modellwissen die richtige Antwort zu finden @qa-bert. 
 
 === Arten von Wissen  
-Knowledge lässt sich in verschiedene Kategorien unterteilen, die für #acr("QA")‑Systeme relevant sind. Basierend auf dem Dokument *Types and qualities of knowledge* lassen sich folgende Typen unterscheiden:
+Knowledge lässt sich in verschiedene Kategorien unterteilen, die für #acr("QA")‑Systeme relevant sind. Basierend auf  *Types and qualities of knowledge* @knowledge lassen sich folgende Typen unterscheiden:
 
 - *Factual Knowledge* (auch *Conceptual knowledge*):  
   Dieses Wissen umfasst statische Fakten und Konzepte, z. B. „Berlin ist die Hauptstadt Deutschlands“. #acr("QA")‑Systeme greifen hier häufig auf explizite Datenbanken oder Textpassagen zurück @knowledge.
@@ -70,17 +71,18 @@ Knowledge lässt sich in verschiedene Kategorien unterteilen, die für #acr("QA"
 - *Contextual Knowledge*:  
   Form von Wissen, das an einen bestimmten Kontext gebunden ist (z. B. aktuelle Nachrichten, persönliche Vorlieben). Open‑Domain‑#acr("QA")‑Systeme müssen dynamisch darauf zugreifen.
 
-Wir konzentrieren uns in dieser Arbeit auf *Factual Knowledge* („Conceptual knowledge“), da aktuelle LLMs hier erhebliche Defizite zeigen. Studien belegen, dass selbst GPT‑4 im Fakten‑#acr("QA") nur ca. 40,3 % korrekte Antworten liefert, obwohl diese Informationen während Pre‑Training oft mehrfach auftauchen (@head-to-tail).
+Wir konzentrieren uns in dieser Arbeit auf *Factual Knowledge* („Conceptual knowledge“), da aktuelle LLMs hier erhebliche Defizite zeigen. Studien belegen, dass selbst GPT‑4 im Fakten‑#acr("QA") nur ca. 40,3 % korrekte Antworten liefert, obwohl diese Informationen während Pre‑Training oft mehrfach auftauchen @head-to-tail.
 
 === Typen von #acr("QA")‑Systemen
 
 Im Folgenden werden die üblichen Typen des #acr("QA") beschrieben und erläutert, welcher davon sich am besten für den bestehenden Anwendungsfall eignet.
 - *Extractive #acr("QA")*: 
-  
+
   Bei dieser Methode erhält das Modell eine Frage und einen zusammenhängenden Textabschnitt (Kontext). Es identifiziert dann genau den oder die Wortgruppen (Spans), die die beste Antwort enthalten. Zum Beispiel sucht ein System in einem Wikipedia-Artikel nach der Textstelle, die erklärt, wofür Einstein den Nobelpreis erhielt @rajpurkar2016squad. Extractive #acr("QA") ist besonders zuverlässig, da die Antwort wortwörtlich aus dem vorgegebenen Text stammt und so keine inhaltliche Erfindung (Halluzination) erfolgt.
   - *Arbeitsweise:* Das Modell nutzt einen Token-basierten Klassifikator, um Start- und End-Position der Antwort im Kontext vorherzusagen.
   - *Vorteile:* Hohe Präzision und Nachvollziehbarkeit; geringe Gefahr von Halluzinationen.
   - *Nachteile:* Antworten müssen wortwörtlich im Kontext stehen; keine freie Formulierung.
+@qa-bert
 
 - *Generative #acr("QA")*  
   Hier erzeugt das Modell die Antwort eigenständig aus Frage und Kontext, statt sie wortwörtlich zu übernehmen. Moderne LLMs wie GPT‑Modelle erstellen frei formulierte Fließtext-Antworten @wolf2020transformers.
@@ -171,7 +173,7 @@ $ min_(bold(W)) sum_(i=1)^N cal(L)(f(bold(x)_i; bold(W)), y_i) $
 
 === LoRA‑Fine‑Tuning
 
-*Low-Rank Adaptation (LoRA)* ist eine Methode aus dem Bereich *Parameter Efficient Fine-Tuning* PEFT, ei der nur wenige zusätzliche Gewichte trainiert werden.
+*Low-Rank Adaptation (LoRA)* ist eine Methode aus dem Bereich *Parameter Efficient Fine-Tuning* PEFT, bei der nur wenige zusätzliche Gewichte trainiert werden.
 
 Anstatt $bold(W)$ direkt zu aktualisieren, wird eine Veränderung $ Delta bold(W) $ als Produkt zweier kleiner Matrizen eingeführt:
 
@@ -181,8 +183,11 @@ Dabei sind:
 - $bold(A) in RR^(d times r)$
 - $bold(B) in RR^(r times k)$
 - $r "ll" min(d, k)$
-
-Das bedeutet, anstelle von $d dot k$ Parametern werden nur $(d + k) dot r$ Parameter trainiert:
+#figure(
+    image("fine-tuning.png"),
+    caption: [Full‑Parameter‑Fine‑Tuning vs #acr("LoRA") @intel-ft]
+)
+@intel-ft zeigt, dass beim Full-Parameter-Tuning alle Gewichte (inklusive Bias) eines vortrainierten Layers direkt angepasst werden, während #acr("LoRA") die ursprünglichen Parameter einfriert und ausschließlich zwei low-rank, bzw. Matrizen A und B trainiert, deren skaliertes Produkt als Residual zum ursprünglichen Layer-Output addiert wird. Dadurch reduziert #acr("LoRA") den Speicher- und Rechenaufwand beim Fine-Tuning erheblich, da nur ein Bruchteil der Parameter trainiert werden.Das bedeutet, anstelle von $d dot k$ Parametern werden nur $(d + k) dot r$ Parameter trainiert:
 
 $ frac((d + k) dot r, d dot k) "ll" 1 $
 
@@ -196,12 +201,6 @@ Beispiel: Für $d = k = 768$, $r = 8$ ergibt sich eine Reduktion auf nur ca. 2% 
   - Potenziell geringere Performanz bei zu kleinem $r$
   - Mehr Aufwand beim Deployment verschiedener Adapter
 
-=== Visualisierungen (empfohlen)
-
-- *Abbildung 1:* Full‑Fine‑Tuning: gesamte Gewichtsmatrix wird angepasst
-- *Abbildung 2:* LoRA: nur low‑rank Matrizen $bold(A)$ und $bold(B)$ werden trainiert
-- *Abbildung 3:* Vergleich der trainierbaren Parameter (LoRA vs. Full-Tuning) in Abhängigkeit von $r$
-
 === Mathematischer Vergleich
 
 #table(
@@ -211,16 +210,17 @@ Beispiel: Für $d = k = 768$, $r = 8$ ergibt sich eine Reduktion auf nur ca. 2% 
   [Full‑Tuning], [$d dot k$], [$O(d dot k)$],
   [LoRA (rank $r$)], [$(d + k) dot r$], [$O((d + k) dot r)$]
 )
-== #acr("QA")-Benchmarks
+Da $r$ typischerweise deutlich kleiner ist als $d$ und $k$, fällt der Parameter- und Speicheraufwand bei LoRA im Vergleich zum Full-Tuning erheblich geringer aus. Dadurch eignet sich LoRA besonders für ressourcenoptimiere Umgebungen oder große Modelle.
+== #acr("SQuAD")
 
 Ein beliebter Datensatz für #acr("QA")-Systeme ist #acr("SQuAD"). Dort wurden in einem strukturierten Format über 100000 Fragen zu Wikipedia-Artikeln aufbereitet @rajpurkar2016squad.
 SQuAD 2.0 ergänzt unanswerable Fragen @rajpurkar2018squad2.
-
+/*
 - Exact Match EM berechnet den Anteil exakter Übereinstimmungen
 - F1-Score misst den Token-Overlap zwischen prognostiziertem und Gold-Span
 
 $ "F1" = 2 |P ∩ G| / (|P| + |G|) $
-
+*/
 == Weitere Benchmarks
 - Natural Questions dokumentiert reale Suchanfragen und ist offen für Closed-Book #acr("QA") @kwiatkowski2019nq
 - Hotpot#acr("QA") fordert Multi-Hop-Reasoning
@@ -228,7 +228,7 @@ $ "F1" = 2 |P ∩ G| / (|P| + |G|) $
 
 == Metriken zur #acr("QA")-Bewertung
 
-In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die Qualität von Question‑Answering-Systemen messen. Jede Metrik beleuchtet einen spezifischen Aspekt: von der reinen Worttreue bis zur semantischen Tiefe der Antwort. Für unseren Use Case sind besonders robuste Metriken wie F1‑Score und Semantic Answer Similarity (SAS) entscheidend, da sie auch bei variierenden Formulierungen zuverlässige Bewertungen ermöglichen.
+In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die Qualität von Question‑Answering-Systemen messen. Jede Metrik beleuchtet einen spezifischen Aspekt: von der reinen Worttreue bis zur semantischen Tiefe der Antwort. Für unseren Use Case sind besonders robuste Metriken wie F1‑Score und Semantic Answer Similarity (SAS) entscheidend, da sie auch bei variierenden Formulierungen zuverlässige Bewertungen ermöglichen @metrics, @sas-qa.
 
 - *Accuracy (Genauigkeit):* Misst den Anteil aller korrekten Vorhersagen (True Positives und True Negatives) an der Gesamtzahl der Fälle. Sie beantwortet die Frage „Wie oft liegt das Modell richtig?“ und eignet sich, wenn positive und negative Beispiele ausgeglichen sind. Bei #acr("QA"), wo oft nur positive Beispiele (Antworten) zählen, ist Accuracy nur eingeschränkt aussagekräftig.
 
@@ -254,9 +254,7 @@ In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die 
 
   $ "MRR" = frac(1, |Q|) sum_{i=1}^{|Q|} frac(1, "rank"_i) $
 
-- *Semantic Answer Similarity (SAS):* Ein lernbarer semantischer Metrik‑Score im Bereich $[0,1]$. SAS bewertet, wie inhaltlich ähnlich eine generierte Antwort zur Gold‑Antwort ist, selbst wenn sie anders formuliert ist. Diese Metrik ergänzt string‑basierte Maße und ist in unserem Use Case wichtig, weil sie semantisch korrekte Paraphrasen erkennt.
-
----
+- *Semantic Answer Similarity (SAS):* Ein lernbarer semantischer Metrik‑Score im Bereich $[0,1]$. SAS bewertet, wie inhaltlich ähnlich eine generierte Antwort zur Gold‑Antwort ist, selbst wenn sie anders formuliert ist. Diese Metrik ergänzt string‑basierte Maße und ist in unserem Use Case wichtig, weil sie semantisch korrekte Paraphrasen erkennt @mrr.
 
 Diese Metriken kombiniert erlauben eine umfassende Beurteilung:  
 - *Accuracy, Precision, Recall, F1* bewerten Token‑ und Span‑Ebene direkt.  

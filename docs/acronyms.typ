@@ -7,5 +7,6 @@
   NLP: "Natural Language Processing",
   GPU: "Graphics Processing Unit",
   KI: "Künstliche Intelligenz",
-  SQuAD: "Stanford Question Answering Dataset"
+  SQuAD: "Stanford Question Answering Dataset",
+  LoRA: "Low-Rank Adaption"
 )
