@@ -301,45 +301,75 @@ Für die Reproduzierbarkeit und Skalierbarkeit unseres QA‑Testframeworks setze
 
 = Realisierung
 
-Zunächst wurde ein umfangreicher Textkorpus zusammengestellt. Als Thema wurde *Judo* gewählt, da sich der Entwickler gut damit auskennt und Judo sich besonders für Faktenwissen-Tests eignet. Es gibt zahlreiche Details – von Technikklassifizierungen über historische Daten bis hin zu Wettkampfergebnissen –, die sich gut abfragen lassen.
+Zunächst wurde ein umfangreicher Textkorpus zusammengestellt. Als Thema wurde *Judo* gewählt, da sich der Entwickler gut damit auskennt und Judo sich für Faktenwissen-Tests eignet. Es gibt zahlreiche Details – von Technikklassifizierungen über historische Daten bis hin zu Wettkampfergebnissen, die sich gut abfragen lassen.
 
-Quellen und ihre Begründung:
-- https://en.wikipedia.org/wiki/Judo  
-  Wikipedia liefert eine umfassende Übersicht über Geschichte, Regeln und Begriffe.  
-- https://en.wikipedia.org/wiki/List_of_judo_techniques  
-  Detaillierte Auflistung aller Techniken, ideal für technische Beispiele.  
-- https://en.wikipedia.org/wiki/List_of_judoka  
-  Informationen zu bedeutenden Judoka, nützlich für biografische Fragen.  
-- https://martialarts.fandom.com/wiki/Judo  
-  Populärkulturelle Perspektive und weiterführende Details.  
-- https://chas-ma.com/JudoManual/Chapter_2%28HistoryofJudo%29.pdf  
-  Fachlicher PDF-Quelltext zur historischen Entwicklung von Judo.  
-- https://www.ijf.org/history  
-  Offizielle Historie der International Judo Federation (IJF).  
-- https://blackbelttrek.com/judo-vs-jiu-jitsu-the-ultimate-comparison/  
-  Vergleich mit Jiu-Jitsu, um Abgrenzungen und historische Zusammenhänge zu verdeutlichen.
+
+#set table(
+  stroke: 0.5pt,
+  gutter: 0.1em,
+  fill: (x, y) => if y == 0 { gray.lighten(40%) },
+  inset: (left: 0.5em, right: 0.5em),
+)
+
+#show table.cell.where(y: 0): set text(weight: "bold")
+
+#table(
+  columns: (2fr, 2.2fr),
+  [Quelle], [Begründung],
+  [https://en.wikipedia.org/wiki/Judo], [Wikipedia liefert eine umfassende Übersicht über Geschichte, Regeln und Begriffe.],
+  [https://en.wikipedia.org/wiki/List_of_judo_techniques], [Detaillierte Auflistung aller Techniken, ideal für technische Beispiele.],
+  [https://en.wikipedia.org/wiki/List_of_judoka], [Informationen zu bedeutenden Judoka, nützlich für biografische Fragen.],
+  [https://martialarts.fandom.com/wiki/Judo], [Populärkulturelle Perspektive und weiterführende Details.],
+  [https://chas-ma.com/JudoManual/Chapter_2%28HistoryofJudo%29.pdf], [Fachlicher PDF-Quelltext zur historischen Entwicklung von Judo.],
+  [https://www.ijf.org/history], [Offizielle Historie der International Judo Federation (IJF).],
+  [https://blackbelttrek.com/judo-vs-jiu-jitsu-the-ultimate-comparison/], [Vergleich mit Jiu-Jitsu, um Abgrenzungen und historische Zusammenhänge zu verdeutlichen.],
+)
+
 
 == Prototypen und Experimente
 
-1. *Baseline-Abfrage*  
-   - Der gesamte Korpus wurde für jede Frage abgefragt.  
-   - Beobachtung: Sehr lange Laufzeit.
+Dieser Abschnitt dokumentiert die iterative Entwicklung und Evaluierung verschiedener Ansätze zur Beantwortung von Fragen im Kontext eines umfangreichen Judo-Korpus. Ziel war es, die Antwortgenauigkeit zu maximieren und gleichzeitig die Effizienz des Systems zu verbessern.
 
-2. *Chunk-Reduktion mithilfe von Embeddings*  
-   - Korpus in 378 Chunks aufgeteilt.  
-   - Ähnlichkeits-Vergleich zwischen Frage-Embeddings und Chunk-Embeddings.  
-   - Auswahl der Top 50 Chunks ? deutlich schnellere Abfrage, jedoch reduzierte Accuracy.
+=== Baseline: Vollständiger Korpus
 
-3. *Fine-Tuning mit LoRA*  
-   - Gesamter Textkorpus als Trainingsgrundlage.  
-   - Einsatz von Low-Rank Adaption (LoRA), um Parameter effizient anzupassen.  
-   - Ziel: Verbesserte Antwortgenauigkeit ohne großen Hardware-Aufwand.
+*Vorgehen*:  
+Für jede Frage wurde der gesamte Textkorpus (bestehend aus mehreren Quellen) als Kontext an das Frage-Antwort-Modell übergeben.
 
-== Umstrukturierung der Fragen
+*Beobachtungen*:
+- *Laufzeit*: Sehr hohe Antwortzeiten aufgrund des umfangreichen Kontextes.
+- *Genauigkeit*: Solide, jedoch nicht optimal, da irrelevante Informationen den Kontext verwässern konnten.
+- *Token-Limit*: Gefahr des Überschreitens des maximalen Token-Limits des Modells, was zu abgeschnittenen Kontexten führte.
 
-- Problem: Antworten sind nicht atomar; string-basierter Vergleich führt zu niedriger Übereinstimmung.  
-- Lösung 1: Neuer Fragensatz mit klar abgegrenzten, atomaren Antworten.  
-- Lösung 2: Semantische Evaluation mittels Cosine Similarity statt reinem Fuzzy String Matching.
+=== Kontextreduktion mittels semantischer Chunking
+
+*Vorgehen*:
+- Der Korpus wurde in 378 Chunks unterteilt, basierend auf Absätzen oder thematischen Einheiten.
+- Für jede Frage wurde die semantische Ähnlichkeit zu jedem Chunk mittels Sentence-BERT berechnet.
+- Die Top 50 Chunks mit der höchsten Ähnlichkeit wurden ausgewählt und als reduzierter Kontext verwendet.
+
+*Beobachtungen*:
+- *Laufzeit*: Signifikante Reduktion der Antwortzeiten durch kleineren Kontext.
+- *Genauigkeit*: Leichter Rückgang der Genauigkeit, da relevante Informationen eventuell in nicht ausgewählten Chunks lagen.
+- *Effizienz*: Deutliche Verbesserung der Systemeffizienz bei minimalem Genauigkeitsverlust.
+
+=== Fine-Tuning mit Low-Rank Adaption (LoRA)
+
+*Vorgehen*:
+- Das vortrainierte Modell wurde mittels LoRA auf den spezifischen Judo-Korpus feinjustiert.
+- LoRA ermöglichte effizientes Fine-Tuning durch Anpassung einer kleinen Anzahl von Parametern, wodurch der Speicherbedarf reduziert wurde.
+
+*Beobachtungen*:
+- *Genauigkeit*: Verbesserte Antwortgenauigkeit, insbesondere bei komplexen oder spezifischen Fragen.
+- *Ressourcenverbrauch*: Geringer zusätzlicher Speicherbedarf durch den Einsatz von LoRA.
+- *Anpassungsfähigkeit*: Das Modell zeigte eine bessere Anpassung an den spezifischen Sprachgebrauch und die Terminologie des Judo-Korpus.
+
+=== Evaluation der Modelle
+
+Zur Bewertung der verschiedenen Ansätze wurden folgende Metriken herangezogen:
+
+- *Antwortgenauigkeit*: Gemessen durch semantische Ähnlichkeit zwischen erwarteter und gegebener Antwort mittels Cosine Similarity.
+- *Laufzeit*: Durchschnittliche Zeit zur Beantwortung einer Frage.
+- *Ressourcennutzung*: Speicher- und Rechenzeitbedarf während der Inferenz.
 
 == Klassifikation nach Schwierigkeit
 
