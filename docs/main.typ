@@ -301,7 +301,7 @@ Für die Reproduzierbarkeit und Skalierbarkeit unseres QA‑Testframeworks setze
 
 = Realisierung
 
-Zunächst wurde ein umfangreicher Textkorpus zusammengestellt. Als Thema wurde *Judo* gewählt, da sich der Entwickler gut damit auskennt und Judo sich für Faktenwissen-Tests eignet. Es gibt zahlreiche Details – von Technikklassifizierungen über historische Daten bis hin zu Wettkampfergebnissen, die sich gut abfragen lassen.
+Zunächst wurde ein umfangreicher Textkorpus zusammengestellt. Als Thema wurde *Judo* gewählt, da sich der Entwickler gut damit auskennt und Judo sich für Faktenwissen-Tests eignet. Es gibt zahlreiche Details – von Technikklassifizierungen über historische Daten bis hin zu Wettkampfergebnissen, die sich gut abfragen lassen. Dabei wurden für den Textkorpus folgende Quellen gewählt:
 
 
 #set table(
@@ -333,12 +333,13 @@ Dieser Abschnitt dokumentiert die iterative Entwicklung und Evaluierung verschie
 === Baseline: Vollständiger Korpus
 
 *Vorgehen*:  
-Für jede Frage wurde der gesamte Textkorpus (bestehend aus mehreren Quellen) als Kontext an das Frage-Antwort-Modell übergeben.
+Für jede Frage wurde der gesamte Textkorpus (bestehend aus mehreren Quellen) als Kontext an das Frage-Antwort-Modell übergeben. Dieser Kontext wurde in einer Text-Datei abgelegt und beinhaltet die o.g. Webseitinhalte, die einfach aneinander konkateniert wurden. Dabei erreicht er eine Länge von ca. 140 000 Zeichen.
 
 *Beobachtungen*:
-- *Laufzeit*: Sehr hohe Antwortzeiten aufgrund des umfangreichen Kontextes.
-- *Genauigkeit*: Solide, jedoch nicht optimal, da irrelevante Informationen den Kontext verwässern konnten.
-- *Token-Limit*: Gefahr des Überschreitens des maximalen Token-Limits des Modells, was zu abgeschnittenen Kontexten führte.
+- *Laufzeit*: Sehr hohe Antwortzeiten aufgrund des umfangreichen Kontextes: Jede Frage benötigt etwa 2 Minuten Rechenzeit.
+- *Genauigkeit*: Solide, jedoch nicht optimal, da irrelevante Informationen den Kontext evtl. verwässern.
+- *Token-Limit*: Gefahr des Überschreitens des maximalen Token-Limits des Modells, was zu abgeschnittenen Kontexten führen kann. Das verwendete Modell deepset-roberta-squad2
+
 
 === Kontextreduktion mittels semantischer Chunking
 
