@@ -1,7 +1,7 @@
 #import "@preview/clean-dhbw:0.2.1": *
 #import "acronyms.typ": acronyms
 #import "glossary.typ": glossary
-
+#import "@preview/dashy-todo:0.0.3": todo
 
 #show: clean-dhbw.with(
   title: "Evaluierung von LLM‑basiertem QA",
@@ -453,7 +453,41 @@ Aufgrund der überschaubaren Fragenanzahl war die Klassifikation hier manuell m�
 
 
 = Evaluierung
-notes: 
+
+#todo[Methodik erklären mit cosine sim etc. welche kennzahlen von den definierten überhaupt anwendbar/releavant sind]
+
+== Analyse der Fehler
+
+In diesem Abschnitt betrachten wir die Fragen, die das QA-System nicht korrekt beantwortet hat. Wir untersuchen, ob die erhaltenen Antworten wirklich falsch sind, analysieren die zugrundeliegenden Ursachen und schlagen Verbesserungsmaßnahmen vor. Wir beschränken uns dabei auf inhaltlich sinnvolle Fehlermuster und lassen offensichtlichen Nonsense außen vor.
+
+- Falsche Definition: _What does judo mean?_
+
+Obwohl das Wort _judo_ mehrfach definiert und als _gentle way_ erklärt wird, lieferte das Modell fälschlicherweise _kappo_. Dies liegt daran, dass im Korpus unmittelbar nach der Einleitung ein Abschnitt über verschiedene Techniken folgt, in dem _kappo_ prominent vorkommt. Die semantische Chunk-Auswahl hatte offenbar nicht genügend Gewicht auf Einleitungspassagen gelegt, in denen die Definition steht. Um diesem Problem zu begegnen, empfiehlt es sich, Definitionsabschnitte bei der Chunk-Bewertung höher zu priorisieren. Darüber hinaus kann ein gezieltes Prompt Engineering helfen, indem man klarstellt, dass die _literal meaning_ des Begriffs gesucht wird.
+
+- Verwechslung von Wettkampfziel und Übung: _What is the objective of judo?_
+
+Hier erwarteten wir die Wettkampfbedingungen (_throw, pin, or submit opponent_), während das Modell _free practice_ (randori) ausgab. Offenbar weist der Textabschnitt, der die Übung beschreibt, eine höhere semantische Ähnlichkeit zur Formulierung _objective_ auf. Dieser Befund zeigt, dass das System den Kontext nicht ausreichend disambiguieren kann. Eine Lösung besteht darin, die Frage präziser zu formulieren, zum Beispiel: _What are the winning conditions in a judo match?_ Zusätzlich könnte man beim Chunk-Ranking Wettkampfkontexte stärker gewichten und während des Fine-Tunings Beispiele einbringen, die klar zwischen Übungs- und Wettkampfzielen unterscheiden.
+
+- Rollenbezeichnungen: Wer wirft, wer fällt?
+
+Die Fragen _Who is the person performing the throw?_ und _Who is the person receiving the throw?_ führten zu den Antworten _judoka_ bzw. _philosophy_. Im ersten Fall wurde ein häufiger vorkommender Oberbegriff ausgegeben, im zweiten Fall gar ein thematisch irrelevanter Term. Der Grund dafür liegt einerseits in der Häufigkeit und Platzierung dieser Wörter im Text, andererseits in der unzureichenden Fokussierung auf technische Rollenterminologie. Hier sollten wir das Modell so einschränken, dass es bei Rollenfragen nur aus einer definierten Liste von Begriffen wie _tori_ und _uke_ auswählt. Ein einfacher Post-Processing-Filter, der beispielsweise nur japanische Rollentermini akzeptiert, kann schon einen großen Unterschied machen.
+
+- Technikabfragen statt Kategorien
+
+Bei Imperativfragen wie _Name a shime-waza technique_ bevorzugte das System die Oberkategorie _throwing techniques_ statt eines konkreten Namens wie _Nami-juji-jime_. Die Ursache ist naheliegend: Kategorien kommen häufiger im Korpus vor, und ohne spezifische Vorgaben greift das Modell zu allgemeineren Antworten. _throwing techniques_ war in diesem Fall nicht die korrekte Kategorie, da es sich bei _shime-waza_ um Würgetechniken handelt. Abhilfe schafft hier ein klarerer Prompt: _Provide a specific technique name, not a category._
+
+- Kontrast fehlgeleiteter Übersetzungen
+
+Bei der Frage _What does judogi translate to?_ wurde lediglich das Wort _uniform_ extrahiert. Zwar trifft dies semantisch, ist aber nicht präzise genug. Eine strengere Bewertung über semantische Ähnlichkeit würde _uniform_ als korrekt bewerten, doch für unsere Zwecke ist _judo attire_ exakter. Hier empfiehlt sich eine Kombination aus Prompt-Hinweis (_Translate judogi as a compound noun…_) und Erweiterung der Bewertungslogik um eine Liste zulässiger Formulierungen.
+
+- Materialfragen und Mehrdeutigkeit
+
+Schließlich wurde bei _What is the traditional judo attire made of?_ aus dem Kontext fälschlicherweise _kimono_ statt _strong white cloth_ gewählt. _kimono_ bezeichnet nicht das Material des Judoanzus sondern ist die japanische Übersetzung. Da beide Begriffe nahe beieinander stehen, muss das Modell lernen, die exakte Materialbeschreibung zu priorisieren. Eine Möglichkeit ist, das Span-Ranking so zu justieren, dass textnahe, wörtlich übereinstimmende Phrasen eine höhere Priorität erhalten. Ergänzend kann man beim Post-Processing generische Kleidungsbegriffe automatisch als unzureichend markieren und nachschärfende Rückfragen generieren.
+
+Durch diese detaillierte Analyse wird deutlich, dass viele Fehler im Zusammenspiel von semantischer Chunk-Auswahl, Prompt-Formulierung und Post-Processing entstehen. Zukünftige Verbesserungen sollten daher alle drei Ebenen adressieren: gezielte Gewichtung relevanter Textabschnitte, präzise Frageformulierungen und regelgestützte Nachbearbeitung, um die Antwortqualität nachhaltig zu steigern.
+
+
+
 == Performance‑Vergleich
 
 Unsere drei Pipeline‑Varianten erreichen folgende Accuracy auf dem Test‑Subset:
