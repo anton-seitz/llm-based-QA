@@ -264,7 +264,11 @@ Diese Metriken kombiniert erlauben eine umfassende Beurteilung:
 
 Für unseren Use Case sind insbesondere F1 und SAS zentral, da sie sowohl Teil‑ als auch semantische Übereinstimmung messen und somit robust gegen kleine Formulierungsunterschiede sind.
 
-= Umsetzung eines #acr("QA")-Testframeworks
+
+= Realisierung
+
+/*
+== Umsetzung eines #acr("QA")-Testframeworks
 
 Für die Reproduzierbarkeit und Skalierbarkeit unseres QA‑Testframeworks setzen wir auf folgende technische Infrastruktur:
 
@@ -297,9 +301,7 @@ Für die Reproduzierbarkeit und Skalierbarkeit unseres QA‑Testframeworks setze
      EM, F1, MRR berechnen mit `evaluate`  
   6. *Visualisierung:*  
      Barplots, Heatmaps, Trainingskurven  
-
-
-= Realisierung
+*/
 
 == Textkorpus
 
@@ -405,11 +407,9 @@ Zur ganzheitlichen Beurteilung der Prototypen wurden folgende Metriken definiert
 - *Ressourcennutzung*:  
   Speicher- und Rechenzeit­aufwand während der Inferenz, um Effizienz und Skalierbarkeit abzuschätzen.
 
-= Klassifikation nach Schwierigkeit
+== Klassifikation nach Schwierigkeit
 
 In Anlehnung an das *head-to-tail*-Paper wurde ein mehrstufiges Schema entwickelt, um die Fragen systematisch in *Easy*, *Medium* und *Hard* zu unterteilen. Ziel war es, eine nachvollziehbare Balance zwischen *häufig vorkommendem Basiswissen* und *tiefgehenden Spezialfragen* herzustellen. Die Einteilung erfolgte in einem iterativen Prozess, bei dem quantitative Heuristiken mit qualitativen Einschätzungen kombiniert wurden.
-
-== Heuristische Einteilung
 
 Die Klassifikation basiert auf vier zentralen Heuristiken:
 
@@ -419,10 +419,10 @@ Zunächst wurde die Verteilung von Schlüsselbegriffen im Korpus analysiert. Hä
 - *Informationsdichte und Antwortkomplexität*  
 Der Umfang und die Struktur der erwarteten Antworten wurden berücksichtigt: Sehr kurze, prägnante Antworten (z. B. ein oder zwei Wörter) kennzeichnen Fragen der Stufe *Easy*. Im Gegensatz dazu erfordern mittellange Antworten in zusammengesetzten Fachbegriffen (*Medium*), während lange oder mehrteilige Antworten—etwa diejenigen, die Kombinationen von Datum, Ort und Person enthalten—typischerweise als *Hard* eingestuft wurden. In der Praxis zeigte sich, dass übermäßig komplexe Frageformate die QA-Performance deutlich verschlechtern und daher eher vermieden wurden.
 
-*Kognitive Anforderungen und Kontextverknüpfung*  
+- *Kognitive Anforderungen und Kontextverknüpfung*  
 Nicht nur die Länge, sondern auch der Grad der gedanklichen Verknüpfung spielt eine Rolle: *Easy*-Fragen fordern reines Faktenwissen (*Was bedeutet „judo“?*), *Medium*-Fragen setzen eine Einordnung ins historische oder terminologische Umfeld voraus (z.B. _In welchem Jahr wurde der Kōdōkan gegründet?_). *Hard*-Fragen verlangen die Verknüpfung mehrerer Aspekte, etwa wenn es gilt, eine Person direkt mit einem historischen Ereignis zu verbinden.
 
-*Semantische Ambiguität*  
+- *Semantische Ambiguität*  
 Schließlich wurde geprüft, wie eindeutig eine Antwort im Text lokalisiert ist. Antworten, die mehrfach in identischer Form auftauchen, neigen zu moderater Schwierigkeit (*Medium*), da die korrekte Stelle nicht immer sofort ersichtlich ist. Einzigartige oder sehr verstreut gelagerte Antwortpassagen erhöhen die Schwierigkeit auf *Hard*, weil das Modell den relevanten Span präzise identifizieren muss.
 
 Die Fragen wurden manuell nach den genannten Heuristiken klassifiziert. Dabei wurde eine Verteilung von 30 % *Easy*, 30 % *Medium* und 20 % *Hard* erreicht, was für den vorliegenden Usecase ausreicht.
@@ -432,19 +432,22 @@ Die Fragen wurden manuell nach den genannten Heuristiken klassifiziert. Dabei wu
 Um das Schema anschaulich zu machen, hier exemplarische Fragestellungen je Kategorie:
 
 *Easy*  
+
 Fragen aus dem Bereich der grundlegenden Terminologie und Farben, die in Einsteigerliteratur und Zusammenfassungen häufig erwähnt werden:  
-– *What does judo mean?*  
-– *What color belt do novices wear?*  
+– _What does judo mean?_  
+– _What color belt do novices wear?_  
 
 *Medium*  
-Fragen, die den historischen oder organisatorischen Kontext erfordern und moderat komplexe Antworten liefern:  
-– *In what year was judo founded?*  
-– *What is the term for free practice in judo?*  
 
-*Hard*  
+Fragen, die den historischen oder organisatorischen Kontext erfordern und moderat komplexe Antworten liefern:  
+– _In what year was judo founded?_  
+– _What is the term for free practice in judo?_  
+
+*Hard*
+
 Tiefgehende Detailfragen zu speziellen Techniken, historischen Figuren oder seltenen Regelaspekten, die nur in Fachtexten oder speziellen Quellen zu finden sind:  
-– *Which method added colored belts to denote grades in Europe?*  
-– *Who succeeded Aldo Torti as IJF president?*  
+– _Which method added colored belts to denote grades in Europe?_  
+– _Who succeeded Aldo Torti as IJF president?_  
 
 Aufgrund der überschaubaren Fragenanzahl war die Klassifikation hier manuell möglich. In zukünftigen Tests von QA-Systemen wäre es sinnvoll diese Einordnung durch ein LLM durchzuführen. Dies wurde hier ebenfalls probiert, allerdings hatte das dabei verwendete LLM Schwierigkeiten die Fragen konsistent nach den definierten Heuristiken zu klassifizieren.
 
