@@ -301,6 +301,8 @@ Für die Reproduzierbarkeit und Skalierbarkeit unseres QA‑Testframeworks setze
 
 = Realisierung
 
+== Textkorpus
+
 Zunächst wurde ein umfangreicher Textkorpus zusammengestellt. Als Thema wurde *Judo* gewählt, da sich der Entwickler gut damit auskennt und Judo sich für Faktenwissen-Tests eignet. Es gibt zahlreiche Details – von Technikklassifizierungen über historische Daten bis hin zu Wettkampfergebnissen, die sich gut abfragen lassen. Dabei wurden für den Textkorpus folgende Quellen gewählt:
 
 
@@ -325,6 +327,26 @@ Zunächst wurde ein umfangreicher Textkorpus zusammengestellt. Als Thema wurde *
   [https://blackbelttrek.com/judo-vs-jiu-jitsu-the-ultimate-comparison/], [Vergleich mit Jiu-Jitsu, um Abgrenzungen und historische Zusammenhänge zu verdeutlichen.],
 )
 
+== Fragesätze
+
+Die Fragesätze liegen in einem flachen JSON-Format vor, bei dem jedes Objekt genau die Felder  
+`question` und `answer` enthält. Im Laufe der Arbeit wurden drei Prototypen entwickelt und evaluiert:
+
+*Prototyp 1 – verbos und unstrukturiert*  
+Im ersten Ansatz enthielten die Antworten oft vollständige Sätze oder sogar ganze Absätze.  
+Diese verbosen Rückgaben führten zu schlechter Performance, da das QA-Modell auf kurze, prägnante Antworten optimiert ist.  
+Zudem waren manche Fragen nicht rein auf Faktenwissen ausgelegt, sondern erforderten etwas längere Erklärungen, was die Auswertung zusätzlich erschwerte.
+
+*Prototyp 2 – atomare Antworten*  
+Um die Performance deutlich zu steigern, wurden die Fragen so angepasst, dass jede Antwort *atomar* ist – also nur das absolut Notwendige enthält, _ground truth_.  
+Beispiel: Anstelle „Judo bedeutet ‚der sanfte Weg‘ und wurde 1882 von Kanō Jigorō gegründet“ steht nur noch „der sanfte Weg“.  
+Durch diese Reduktion auf einfache Stichwortantworten verringerte sich der Fehleranteil spürbar.
+
+*Prototyp 3 – Erweiterung und Strukturierung*  
+Im dritten Schritt wurde nicht nur die Atomizität beibehalten, sondern auch das Volumen der Fragen erhöht und eine zusätzliche Kategorisierung eingeführt.  
+Alle Fragesätze wurden anhand definierter Heuristiken in die drei Schwierigkeitsstufen *Easy*, *Medium* und *Hard* sortiert.  
+Die Kriterien hierfür – wie Termfrequenz, Antwortlänge oder semantische Komplexität – werden im Abschnitt „Klassifikation nach Schwierigkeit“ ausführlich erläutert.  
+Diese strukturierte Vorgehensweise erlaubt eine gezieltere Analyse des Modellverhaltens je nach Fragenprofil.
 
 == Prototypen und Experimente
 
@@ -366,37 +388,65 @@ Für jede Frage wurde der gesamte Textkorpus (bestehend aus mehreren Quellen) al
 
 === Evaluation der Modelle
 
-Zur Bewertung der verschiedenen Ansätze wurden folgende Metriken herangezogen:
+In der ersten Evaluierungsphase kam eine *rein stringbasierte* Methodik zum Einsatz, bei der Antworten als korrekt galten, wenn sie exakt mit den Musterantworten übereinstimmten oder eine hohe Zeichen­übereinstimmung (z. B. ≥ 80 %) aufwiesen. Dieses Verfahren zeigte allerdings deutliche Schwächen:
 
-- *Antwortgenauigkeit*: Gemessen durch semantische Ähnlichkeit zwischen erwarteter und gegebener Antwort mittels Cosine Similarity.
-- *Laufzeit*: Durchschnittliche Zeit zur Beantwortung einer Frage.
-- *Ressourcennutzung*: Speicher- und Rechenzeitbedarf während der Inferenz.
+- *Synonyme und Namensvarianten* werden nicht erkannt, z. B. „Jigoro Kano“ vs. „Kanō Jigorō“ oder „International Judo Federation“ vs. „IJF“.
+- *Unterschiedliche Formulierungen und Satzstellungen* gelten als falsch, z. B. „sanfter Weg“ vs. „der sanfte Weg“ oder „1882 gründete Kanō Jigorō den Kōdōkan“ vs. „Der Kōdōkan wurde 1882 von Kanō Jigorō gegründet“.
+- *Mehrdeutigkeit bei offenen Fragen*, etwa „Nenne einen Hüftwurf“, erlaubt mehrere gültige Antworten, die stringbasiert schwer zu erfassen sind.
 
-== Klassifikation nach Schwierigkeit
+Aus diesen Gründen wurde die Evaluierung auf eine *semantische* Methodik umgestellt. Anstelle des Fuzzy Matching wird die *Cosine Similarity* zwischen der Einbettung der Modell­antwort und der Einbettung der Referenz­antwort herangezogen. So können inhaltlich identische, aber unterschiedlich formulierte Antworten zuverlässig als korrekt bewertet werden.
 
-Inspiriert von @head-to-tail wurden Fragen manuell in drei Stufen eingeteilt:
+Zur ganzheitlichen Beurteilung der Prototypen wurden folgende Metriken definiert:
 
-=== Easy  
-Basic Facts, bekannt für Einsteiger:
-- What does judo mean?  
-- What color belt do novices wear?  
+- *Antwortgenauigkeit*:  
+  Semantische Ähnlichkeit zwischen erwarteter und generierter Antwort, gemessen via Cosine Similarity (Schwellenwert z. B. 0.60).  
+- *Laufzeit*:  
+  Durchschnittliche Zeit, die das Modell zur Beantwortung einer einzelnen Frage benötigt.  
+- *Ressourcennutzung*:  
+  Speicher- und Rechenzeit­aufwand während der Inferenz, um Effizienz und Skalierbarkeit abzuschätzen.
 
-=== Medium  
-Erweiterte Kenntnisse:
-- In what year was judo founded?  
-- What is the term for free practice in judo?  
+= Klassifikation nach Schwierigkeit
 
-=== Hard  
-Spezialisierte Details:
-- Spezifische Jahreszahlen (z. B. EJU-Gründung)  
-- Namen seltener Techniken (kappo, sutemi-waza)  
-- Kodokan-Trivia (Emblem, erstes Dojo)  
+In Anlehnung an das *head-to-tail*-Paper wurde ein mehrstufiges Schema entwickelt, um die Fragen systematisch in *Easy*, *Medium* und *Hard* zu unterteilen. Ziel war es, eine nachvollziehbare Balance zwischen *häufig vorkommendem Basiswissen* und *tiefgehenden Spezialfragen* herzustellen. Die Einteilung erfolgte in einem iterativen Prozess, bei dem quantitative Heuristiken mit qualitativen Einschätzungen kombiniert wurden.
 
-== Zentrale Erkenntnisse
+== Heuristische Einteilung
 
-- *Easy*: Fokus auf grundlegende Begriffe und Farben.  
-- *Medium*: Datumsangaben, Terminologie, historischer Kontext.  
-- *Hard*: Nischenwissen, technische Klassifikationen, obscure Fakten.
+Die Klassifikation basiert auf vier zentralen Heuristiken:
+
+- *Frequenz und Prominenz* 
+Zunächst wurde die Verteilung von Schlüsselbegriffen im Korpus analysiert. Häufig zitierte Begriffe wie *judo*, *Kanō Jigorō* oder *Kōdōkan* markieren grundlegende Konzepte und bilden damit das Fundament für *Easy*-Fragen. Selten auftretende oder nur in Fachabschnitten erwähnte Terme weisen dagegen auf eine höhere Schwierigkeit hin.
+
+- *Informationsdichte und Antwortkomplexität*  
+Der Umfang und die Struktur der erwarteten Antworten wurden berücksichtigt: Sehr kurze, prägnante Antworten (z. B. ein oder zwei Wörter) kennzeichnen Fragen der Stufe *Easy*. Im Gegensatz dazu erfordern mittellange Antworten in zusammengesetzten Fachbegriffen (*Medium*), während lange oder mehrteilige Antworten—etwa diejenigen, die Kombinationen von Datum, Ort und Person enthalten—typischerweise als *Hard* eingestuft wurden. In der Praxis zeigte sich, dass übermäßig komplexe Frageformate die QA-Performance deutlich verschlechtern und daher eher vermieden wurden.
+
+*Kognitive Anforderungen und Kontextverknüpfung*  
+Nicht nur die Länge, sondern auch der Grad der gedanklichen Verknüpfung spielt eine Rolle: *Easy*-Fragen fordern reines Faktenwissen (*Was bedeutet „judo“?*), *Medium*-Fragen setzen eine Einordnung ins historische oder terminologische Umfeld voraus (z.B. _In welchem Jahr wurde der Kōdōkan gegründet?_). *Hard*-Fragen verlangen die Verknüpfung mehrerer Aspekte, etwa wenn es gilt, eine Person direkt mit einem historischen Ereignis zu verbinden.
+
+*Semantische Ambiguität*  
+Schließlich wurde geprüft, wie eindeutig eine Antwort im Text lokalisiert ist. Antworten, die mehrfach in identischer Form auftauchen, neigen zu moderater Schwierigkeit (*Medium*), da die korrekte Stelle nicht immer sofort ersichtlich ist. Einzigartige oder sehr verstreut gelagerte Antwortpassagen erhöhen die Schwierigkeit auf *Hard*, weil das Modell den relevanten Span präzise identifizieren muss.
+
+Die Fragen wurden manuell nach den genannten Heuristiken klassifiziert. Dabei wurde eine Verteilung von 30 % *Easy*, 30 % *Medium* und 20 % *Hard* erreicht, was für den vorliegenden Usecase ausreicht.
+
+== Beispiele der Einordnung
+
+Um das Schema anschaulich zu machen, hier exemplarische Fragestellungen je Kategorie:
+
+*Easy*  
+Fragen aus dem Bereich der grundlegenden Terminologie und Farben, die in Einsteigerliteratur und Zusammenfassungen häufig erwähnt werden:  
+– *What does judo mean?*  
+– *What color belt do novices wear?*  
+
+*Medium*  
+Fragen, die den historischen oder organisatorischen Kontext erfordern und moderat komplexe Antworten liefern:  
+– *In what year was judo founded?*  
+– *What is the term for free practice in judo?*  
+
+*Hard*  
+Tiefgehende Detailfragen zu speziellen Techniken, historischen Figuren oder seltenen Regelaspekten, die nur in Fachtexten oder speziellen Quellen zu finden sind:  
+– *Which method added colored belts to denote grades in Europe?*  
+– *Who succeeded Aldo Torti as IJF president?*  
+
+Aufgrund der überschaubaren Fragenanzahl war die Klassifikation hier manuell möglich. In zukünftigen Tests von QA-Systemen wäre es sinnvoll diese Einordnung durch ein LLM durchzuführen. Dies wurde hier ebenfalls probiert, allerdings hatte das dabei verwendete LLM Schwierigkeiten die Fragen konsistent nach den definierten Heuristiken zu klassifizieren.
 
 
 = Evaluierung
