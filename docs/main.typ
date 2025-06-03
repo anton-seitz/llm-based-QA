@@ -420,7 +420,13 @@ Zunächst wurde die Verteilung von Schlüsselbegriffen im Korpus analysiert. Hä
 Der Umfang und die Struktur der erwarteten Antworten wurden berücksichtigt: Sehr kurze, prägnante Antworten (z. B. ein oder zwei Wörter) kennzeichnen Fragen der Stufe *Easy*. Im Gegensatz dazu erfordern mittellange Antworten in zusammengesetzten Fachbegriffen (*Medium*), während lange oder mehrteilige Antworten—etwa diejenigen, die Kombinationen von Datum, Ort und Person enthalten—typischerweise als *Hard* eingestuft wurden. In der Praxis zeigte sich, dass übermäßig komplexe Frageformate die QA-Performance deutlich verschlechtern und daher eher vermieden wurden.
 
 - *Kognitive Anforderungen und Kontextverknüpfung*  
-Nicht nur die Länge, sondern auch der Grad der gedanklichen Verknüpfung spielt eine Rolle: *Easy*-Fragen fordern reines Faktenwissen (*Was bedeutet „judo“?*), *Medium*-Fragen setzen eine Einordnung ins historische oder terminologische Umfeld voraus (z.B. _In welchem Jahr wurde der Kōdōkan gegründet?_). *Hard*-Fragen verlangen die Verknüpfung mehrerer Aspekte, etwa wenn es gilt, eine Person direkt mit einem historischen Ereignis zu verbinden.
+Nicht nur die Länge, sondern auch der Grad der gedanklichen Verknüpfung spielt eine Rolle: 
+
+*Easy*-Fragen fordern reines Faktenwissen (*Was bedeutet „judo“?*), 
+
+*Medium*-Fragen setzen eine Einordnung ins historische oder terminologische Umfeld voraus (z.B. _In welchem Jahr wurde der Kōdōkan gegründet?_). 
+
+*Hard*-Fragen verlangen die Verknüpfung mehrerer Aspekte, etwa wenn es gilt, eine Person direkt mit einem historischen Ereignis zu verbinden.
 
 - *Semantische Ambiguität*  
 Schließlich wurde geprüft, wie eindeutig eine Antwort im Text lokalisiert ist. Antworten, die mehrfach in identischer Form auftauchen, neigen zu moderater Schwierigkeit (*Medium*), da die korrekte Stelle nicht immer sofort ersichtlich ist. Einzigartige oder sehr verstreut gelagerte Antwortpassagen erhöhen die Schwierigkeit auf *Hard*, weil das Modell den relevanten Span präzise identifizieren muss.
@@ -440,25 +446,24 @@ Fragen aus dem Bereich der grundlegenden Terminologie und Farben, die in Einstei
 *Medium*  
 
 Fragen, die den historischen oder organisatorischen Kontext erfordern und moderat komplexe Antworten liefern:  
-– _In what year was judo founded?_  
-– _What is the term for free practice in judo?_  
+– _From which martial art did judo originate?_  
+– _What influenced European and Russian judoka?_  
 
 *Hard*
 
 Tiefgehende Detailfragen zu speziellen Techniken, historischen Figuren oder seltenen Regelaspekten, die nur in Fachtexten oder speziellen Quellen zu finden sind:  
-– _Which method added colored belts to denote grades in Europe?_  
+– _Name a forbidden sacrifice throw in competition._  
 – _Who succeeded Aldo Torti as IJF president?_  
 
 Aufgrund der überschaubaren Fragenanzahl war die Klassifikation hier manuell möglich. In zukünftigen Tests von QA-Systemen wäre es sinnvoll diese Einordnung durch ein LLM durchzuführen. Dies wurde hier ebenfalls probiert, allerdings hatte das dabei verwendete LLM Schwierigkeiten die Fragen konsistent nach den definierten Heuristiken zu klassifizieren.
 
 
 = Evaluierung
-
+<cos>
 #todo[Methodik erklären mit cosine sim etc. welche kennzahlen von den definierten überhaupt anwendbar/releavant sind]
 
 == Analyse der Fehler
 
-In diesem Abschnitt betrachten wir die Fragen, die das QA-System nicht korrekt beantwortet hat. Wir untersuchen, ob die erhaltenen Antworten wirklich falsch sind, analysieren die zugrundeliegenden Ursachen und schlagen Verbesserungsmaßnahmen vor. Wir beschränken uns dabei auf inhaltlich sinnvolle Fehlermuster.
 
 /*
 - Falsche Definition: _What does judo mean?_
@@ -492,102 +497,236 @@ Durch diese detaillierte Analyse wird deutlich, dass viele Fehler im Zusammenspi
 
 In den folgenden Abschnitten untersuchen wir exemplarisch die falsch beantworteten Fragen in den drei Schwierigkeitskategorien _Easy_, _Medium_ und _Hard_. Für jede Frage analysieren wir zunächst, warum das Modell zu einer fehlerhaften Antwort gekommen ist, und schlagen anschließend konkrete Maßnahmen vor, um das QA-System zu verbessern.
 
+
+= Fehleranalyse der falsch beantworteten Fragen
+
+In diesem Kapitel werden systematisch alle Fragen analysiert, die das QA-System nicht korrekt beantwortet hat. Ziel ist es, zu prüfen, ob die erhaltenen Antworten tatsächlich falsch sind, an welcher Stelle im Kontext das Modell sie gefunden hat und welche Ursachen dafür verantwortlich sein könnten. Anschließend werden mögliche Verbesserungen diskutiert. Dabei liegt der Fokus auf Antworten die zwar inkorrekt, aber plausibel sind. Das hilft dabei die _Gedanken_ und Muster zu verstehen nach denen das verwendete Modell agiert, bzw. wo es Schwierigkeiten hat.
+
+Dabei orientieren wir uns an der zuvor vorgenommenen Einteilung in easy, medium und hard fragen, insperiert von @head-to-tail.
 == Easy-Fragen
 
-=== _What does judo mean?_  
-Ursache:  
-Die Definition _gentle way_ befindet sich im einleitenden Abschnitt des Korpus, wird aber im gleichen Absatz direkt von einer Übersicht technischer Begriffe gefolgt, in der _kappo_ mehrfach auftaucht. Die semantische Chunk-Auswahl hat hier offenbar den erklärenden Einleitungstext nicht ausreichend gewichtet, sodass das Modell den prägnanten, mehrfach vorkommenden Technik-Namen als Antwort bevorzugt.  
+Die folgenden Easy-Fragen wurden vom Modell fehlerhaft oder ungenau beantwortet. Da Easy-Fragen grundlegendes Faktenwissen abfragen, bzw. oft mehrmals im Textkorpus vorkommen, ist hier das Erwartungsniveau hoch.
 
-Verbes­serung:  
-Um dieses Fehlverhalten zu korrigieren, empfehlen wir zunächst, den Definitionsteil des Textes gezielt als hochpriorisiertes Chunk-Element zu markieren – etwa indem man Absätze mit Schlagwörtern wie _meaning_ oder _is called_ bei der Chunk-Bewertung stärker gewichtet. Zusätzlich kann man das Prompt so anpassen, dass es explizit nach der _literal meaning_ oder _English translation of the Japanese term_ fragt. Im Fine-Tuning ließen sich darüber hinaus Beispiele integrieren, in denen das Modell bei Definitionsfragen erlernt, Sätze mit Wendungen wie _X means ..._ besonders zu beachten.
+=== _What is the objective of judo?_
 
-=== _What is the objective of judo?_  
-Ursache:  
-Der englische Begriff _objective_ wird im Korpus sowohl im Zusammenhang mit Zielen der freien Übung (_randori_) als auch mit Wettkampfbedingungen verwendet. Da _randori_ im Text öfter und in klar formulierter Weise beschrieben wird, interpretiert das Modell _objective_ fälschlicherweise als _purpose of training_. Die enge Nachbarschaft von _randori_ zum Begriff _objective_ in einem häufig zitierten Abschnitt führt zu dieser Fehlbelegung.  
+- Expected: throw, pin, or submit opponent  
+- Span: _free practice_ (Start: 17829, End: 17842)
 
-Verbes­serung:  
-Hier ist eine gesteigerte Prompt-Präzision hilfreich, zum Beispiel _What are the winning conditions in a judo match?_ , um eindeutig auf Wettkampfziele zu verweisen. Parallel dazu sollte das Chunk-Ranking so angepasst werden, dass Abschnitte mit Begriffen wie _match_, _score_ oder _ippon_ in der Gewichtung aufsteigen. Zusätzlich kann man Trainingsexemplare im Fine-Tuning so aufbereiten, dass das Modell lernt, zwischen Übungs- und Wettkampfkonteksten zu unterscheiden.
+Prüfung der Antwort  
+_Free practice_ (randori) ist nicht das Ziel eines Kampfes, sondern eher das Ziel einer Trainingseinheit bzw. deren Hauptfokus. Die Frage richtet sich jedoch auf das Ziel eines Wettkampfes. Die Antwort wurde aus der Passage _Kano's emphasis on randori (free practice) in Judo_ extrahiert.
 
-=== _Who is the person performing the throw?_  
-Ursache:  
-Im gesamten Korpus ist _judoka_ sowohl als Oberbegriff als auch als Einleitung zu verschiedenen Abschnitten omnipräsent, während das technische Schlagwort _tori_ nur selten vorkommt und meist in tieferen Absätzen erscheint. Die Embedding-Ähnlichkeit favorisiert daher die häufiger verwendete Bezeichnung.  
+Mögliche Ursachen: Verwechslungsgefahr ähnlicher Phrasen: In der Nähe der Definition des Wettkampf-Ziels steht die Erwähnung vom Fokus einer Trainingseinheit.
 
-Verbes­serung:  
-Ein zielgerichteter _Rollenfilter_ im Post-Processing, der nur Werte aus einem vorab definierten Set (_tori_, _uke_) zulässt, würde dieses Problem beheben. Bei der Chunk-Auswahl könnte man zudem technische Glossar-Abschnitte mit höherer Priorität ausstatten, sodass _tori_ in der Semantik vorgezogen wird. Schließlich kann man das Prompt umformulieren: _In judo terminology, what is the Japanese word for the person executing a throw?_ – dies lenkt die Modellaufmerksamkeit zurück auf die Terminologie.
+Verbesserungsmöglichkeit: Präzisierung durch zusätzliche Schlagworte: Frage eventuell als _What is the objective in a judo competition?_ oder _How to win a judo match?_ formulieren, um klar auf Wettkampfaspekte hinzuweisen.  
 
-=== _Who is the person receiving the throw?_  
-Ursache:  
-Hier führt die diffuse Frageformulierung in Kombination mit der Dominanz philosophischer Passagen dazu, dass das Modell einen irrelevanten Abschnitt auswählt. Die Rolle _uke_ wird nicht explizit genug hervorgehoben, sodass _philosophy_ als semantisch naheliegender Term interpretiert wird.  
+=== _Who is the person performing the throw?_
 
-Verbes­serung:  
-Zur Präzisierung sollten wir das Prompt so erweitern: _In technical judo terminology, who is the person receiving the throw?_ und damit klare Hinweise auf den Glossar-Kontext geben. Ebenso wie beim vorherigen Punkt empfiehlt sich ein Rollenfilter im Post-Processing, der ausschließlich das japanische Vokabular _tori_/_uke_ akzeptiert. Im Training können wir Beispiele einbetten, in denen vermeintlich irrelevante Termini als falsch markiert und korrigiert werden.
+- Expected: tori  
+- Span: _judoka_ (Start: 4912, End: 4918)
+
+Prüfung der Antwort  
+_Judoka_ ist ein allgemeiner Begriff für Personen, die Judo machen und funktioniert als Oberbegriff. Die exakte Bezeichnung, die in der Frage gewünscht ist, lautet _tori_. Die Antwort ist daher zwar prinzipiell korrekt, aber nicht präzise.
+
+Mögliche Ursachen: Generalisierung durch das Modell:  Häufig spricht man von _Judoka_ und seltener von dem speziellieren Begriff _tori_, also de Judoka der die Technik ausführt.
+
+Verbesserungsvorschläge  
+- Einführung eines Fachbegriffs-Lexikons: Eine Nachschlage-Liste bereitstellen, die das Modell bei Antworten zwingt, zwischen generischen und spezifischen Termini zu unterscheiden (z. B. _tori_ vs. _judoka_).  
+- Frage umformulieren: Mit _What is the specific Japanese term for the person performing the throw?_ das Modell noch stärker auf Fachtermini lenken.
+
+
+Verbesserungsvorschläge  
+- Kontextgewinnung verfeinern: Eine semantische Nachbearbeitung einführen, die prüft, ob der gefundene Span überhaupt eine Person bezeichnet. Wörter wie _philosophy_ können so automatisch ausgeschlossen werden.  
+- Regex-Pattern für Personennamen: Antworten, die keine Personennamen oder spezifische Fachbegriffe (hier _uke_) darstellen, sollten verworfen und nach einer neuen Top-Span-Auswahl gesucht werden.
+
+=== _Name a shime-waza technique._ / _Name a kansetsu-waza technique._ / _Name an osaekomi-waza technique._ 
+
+Bei diesen drei Fragen kam es zu einem ähnlichen Fehler:
+- Korrekte Antworten wären z.B. Juji-jime, Ude-garami, Kesa-gatame
+- Erhalten wurden die Antworten _throwing_ bzw. _throwing techniques_
+
+Prüfung der Antworten  
+Alle drei Fragen verlangen spezifische Techniken aus unterschiedlichen Kategorien: Würgegriffe (shime-waza), Hebelgriffe (kansetsu-waza) und Haltegriffe (osaekomi-waza). Die erhaltene Antwort _throwing_ (bzw. _throwing techniques_) bezieht sich jedoch auf _nage-waza_ (Wurftechniken) und ist damit falsch.
+
+Mögliche Ursachen  
+1. Falsche Kategoriereferenz: Im Korpus gibt es Überschneidungen bei den Domain-Begriffen (_throwing techniques_, _grappling techniques_, _waza_), und das Modell scheint kurzfristig die nächstbeste Technik-Kategorie (_throwing_) ausgewählt zu haben, anstatt die korrekte Unterkategorie abzufragen.  
+2. Nicht spezifizierte Frageformulierung: Weil die Frage nur _Name a shime-waza technique_ lautet, besteht keine implizite Beschränkung auf eine konkrete Liste, und das Modell weicht auf die nächstliegende Kategorie aus, die im Kontext häufiger vorkommt.
+
+Verbesserungsvorschläge
+- Das Hauptproblem bei der Auswertung, ist dass es viele mögliche korrekte Antworten gibt, und selbst eine semantische Evaluierungsmethode wie Cosine Similarity @cos wahrscheinlich falsch evaluiert. Es wäre daher sinnvoll für zukünftige Iterationen solche fragen entweder völlig wegzulassen oder eine komplette Liste der möglichen Antworten in dem _answer_-Feld der JSON-Datei abzulegen. 
+
+=== _Is judo mixed-sex?_
+
+- Expected: no  
+- Span: _Mixed-sex_ (Start: 59806, End: 59815)
+
+Prüfung der Antwort  
+Die Frage verlangt eine Ja-/Nein-Antwort: Im modernen Wettkampf ist Judo getrennt nach Geschlechtern (Männer- und Frauenwettbewerbe), also _no_. Die Antwort _Mixed-sex_ deutet darauf hin, dass das Modell eine generische Aussage über gemischte Trainingsgruppen zurückgegeben hat, aber nicht erkannte dass es sich um eine Ja-/Nein-Antwort handelt.
+
+Mögliche Ursachen: Question-Answering-Modelle wie Roberta-Bert sind auf Extractive-QA optimiert. Eine Ja-/Nein-Antwort ist daher oft nicht direkt aus dem Textkorpus extrahierbar.
+
+Verbesserungsvorschläge: Frage offen umformulieren, bzw. geschlossene Fragen weglassen/vermeiden.
+=== _What does judogi translate to?_  
+
+- Expected: judo attire  
+- Span: _uniform_ (Start: 58252, End: 58259)
+
+Prüfung der Antwort  
+_Uniform_ ist im weitesten Sinne korrekt, aber nicht exakt: _judogi_ bezeichnet wörtlich _Judo-Bekleidung_ bzw. _Judo-Anzug_. Die Antwort _uniform_ ist also nicht genau genug, wenn die Begriffsspezifikation gefordert ist.
+
+Mögliche Ursachen  
+1. Generalisierung durch das Modell: Bei Übersetzungen wählt das Modell häufig einen allgemeineren Begriff, ähnlich wie bei der Unterscheidung in Frage
+2. Kontextdominanz synonym verwendeter Wörter: _Judo uniform_ wird oft synonym eingesetzt, sodass das Modell _uniform_ extrahiert und _judo_ weglässt.
+
+Verbesserung: Ergänzte Frage: _What is the literal translation of ‘judogi’?_ zielt auf eine wortgetreue Übersetzung ab.  
+
+=== _What is the traditional judo attire made of?_  
+
+- Expected: strong white cloth  
+- Span: _kimono_ (Start: 100679, End: 100685)
+
+Prüfung der Antwort  
+Ein _kimono_ ist ein traditionelles japanisches Gewand, wird aber auch für Judoanzüge verwendet. Die Frage bezieht sich auf das Material, nicht auf ein Synonym oder den Oberbegriff. Die Antwort _kimono_ ist naheliegend aber unpräzise, bzw. leicht fehlgeleitet.
+
+Mögliche Ursachen: Frage nicht ausreichend präzise formuliert. _Stattdessen wäre z.B. What type of fabric is judo attire made of?_ Da _traditional_ oft mit _kimono_ in Verbindung gebracht wird würde es Sinn ergeben dies nicht extra zu erwähnen um das Modell nicht fehlzuleiten.
 
 == Medium-Fragen
 
-=== _From which martial art did judo originate?_  
-Ursache:  
-Das Modell antwortet mit _jiu-jitsu_, verwendet jedoch eine Schreibvariante mit Bindestrich, die in der Referenzantwort nicht enthalten ist. Obwohl semantisch korrekt, führt die String-Abgleich-Bewertung dazu, dass die Antwort als falsch gilt.  
+Die Medium-Fragen stellen ein moderates Anspruchsniveau dar und verlangen oft zusätzliche Einordnung. Nachfolgend die falsch beantworteten Beispiele und ihre Analyse.
 
-Verbes­serung:  
-Durch Einführung eines Synonym- und Normalisierungsmoduls im Post-Processing können Schreibvarianten automatisch vereinheitlicht werden (_jujitsu_ vs. _jiu-jitsu_). Alternativ lässt sich die Bewertung ganz auf semantische Ähnlichkeit umstellen, sodass solche Varianten als korrekt erkannt werden.
 
-=== _What is the category for sacrifice throws?_  
-Ursache:  
-Die Kategorie _sutemi-waza_ wird oft in Unterabschnitten genannt, doch oberhalb steht der Oberbegriff _nage-waza_ dominanter. Die Chunk-Auswahl favorisiert daher den häufigeren Term.  
+=== _What is the category for sacrifice throws?_
 
-Verbes­serung:  
-Wir sollten beim Chunk-Ranking technische Kategorien spezifisch hervorheben, indem wir Schlagwörter wie _sacrifice throw_ oder das japanische Pendant _sutemi_ als Trigger definieren. Zudem kann ein Prompt helfen: _What is the Japanese name for sacrifice throws?_ – so wird die Modellantwort eindeutig auf _sutemi-waza_ gelenkt.
+- Expected: sutemi-waza  
+- Span: _nage waza_ (Start: 9353, End: 9362)  
+- Similarity Score: 57.74
 
-=== _What is the maximum dan rank in judo?_  
-Ursache:  
-Die Antwort _10th_ wurde extrahiert, das Suffix _dan_ fehlt. Das Modell identifiziert zwar die richtige Zahl, trennt jedoch die Einheit ab.  
+Prüfung der Antwort  
+_nage waza_ (Wurftechniken im Allgemeinen) ist eine Oberkategorie, die _sutemi-waza_ (Würfe bei denen man auch selbst fällt) unter sich fasst, aber nicht identisch damit ist. Die Antwort ist deswegen unpräzise.
 
-Verbes­serung:  
-Ein post-process-orientierter Ansatz, der bekannte Rangsuffixe automatisch ergänzt, löst dieses Problem. Im Prompt könnten wir explizit nach _the full rank, including 'dan'_ fragen. Im Fine-Tuning können Beispiele mit Zahlen + Einheit das Modell dahingehend sensibilisieren.
+Mögliche Ursachen  
+1. Hierarchie-Verwechslung/ Generalisierung: Das Modell erkennt _waza_ im Kontext, wählt jedoch die bekanntere Oberkategorie _nage waza_. 
+2. Verschiedene Häufigkeit im Text: Im Korpus taucht _sutemi waza_ 9 mal auf, _nage waza_ hingegen 22 mal, wodurch _nage waza_ als statistisch relevanter gilt.
 
-=== _Name a Kodokan kata._  
-Ursache:  
-Anstelle von _Ju-no-kata_ wird _Koshi-jime_ ausgegeben, da letzterer Begriff häufiger in Illustrationsdiskussionen auftritt.  
+Verbesserungsvorschläge  
+- Gezielte Fine-Tuning-Beispiele: QA-Paare, in denen zweimal hintereinander Unterkategorien abgefragt werden, damit das Modell den Unterschied lernt.  
+- Semantische Constraints: Regeln implementieren, die verhindern, dass eine Oberkategorie akzeptiert wird, wenn eine spezifischere Unterkategorie gesucht ist.
 
-Verbes­serung:  
-Eine Regex-basiertes Filtermodul lässt nur Strings zu, die dem Muster japanischer Kata-Namen folgen (Bindestrich, Endung _-kata_). Zudem kann ein Few-Shot-Prompt Beispiele für Kata-Namen enthalten, um die gewünschte Antwortstruktur vorzuleiten.
+=== _What influenced European and Russian judoka?_
+
+- Expected: their strong wrestling traditions  
+- Span: _traditional forms of combat_ (Start: 7039, End: 7066)  
+- Similarity Score: 28.51
+
+Prüfung der Antwort  
+_Traditional forms of combat_ eine etwas weniger präzise, aber durchaus plausible Antwort. Hier zeigt sich demnach nicht die Schwäche des QA-Modells sondern die der Evaluierungsmethodik mit Cosine-Similariy.
+
+=== _Which American judoka is also an MMA fighter?_
+
+- Expected: Ronda Rousey  
+- Span: _Hidehiko Yoshida_ (Start: 133357, End: 133373)  
+- Similarity Score: 29.70
+
+Prüfung der Antwort  
+Hidehiko Yoshida ist ein japanischer Judoka, der auch MMA-Kämpfe bestritt, aber die Frage verlangt explizit nach einem US-Judoka. Ronda Rousey ist korrekt und kommt in Textkorpus 7 mal vor, Hidehiko Yoshida nur 2 mal. Daher ist die falsche Antwort wohl der nicht-deterministischen Natur von LLMs geschuldet.
+
+
+=== _Name a forbidden sacrifice throw in competition._
+
+- Expected: Kani basami  
+- Span: _Finger, toe and ankle locks_ (Start: 77790, End: 77817)  
+- Similarity Score: 5.55
+
+Prüfung der Antwort  
+_Finger, toe and ankle locks_ sind verboten im Judo, stimmen also thematisch, aber die Frage verlangt einen verbotenen *sacrifice throw*. Die Antwortmethode ist deswegen nicht vollständig falsch, aber inkonsequent zur Kategorie.
+
+Mögliche Ursachen  
+- Kategorienverschachtelung: Das Modell hat erkannt, dass _locks_ verboten sind, aber nicht unterschieden, ob es sich um Hebel-, Würge- oder Wurftechniken handelt. Bei dieser Frage wird ähnlich wie bei der vorherigen eine Einschränkung ignoriert (z.B. dass es sich hier um sacrifice throws handeln soll).
+
+Verbesserungsvorschläge    
+- Spezifische Schlüsselwörter: Frage um _sacrifice throw (sutemi waza)_ erweitern, damit das Modell sich auf Wurftechniken fokussiert.
+
+Verbesserungsvorschläge  
+- Konsistente Quellenaufbereitung: Vor dem Training oder der Chunk-Selektion sicherstellen, dass jede Technik klar ihrer richtigen Unterkategorie zugeordnet ist.  
+- Keyword-Verstärkung: Bei Fragen nach _prohibited katame-waza_ sollte das Modell speziell nach _Do-jime_ Ausschau halten, z. B. durch Hervorhebung von Schlüsselwörtern im Kontext (_Do-jime_ + _prohibited_).
+
+=== _Which Olympic Games marked judo’s competitive transformation?_
+
+- Expected: 1964 Tokyo Olympics  
+- Span: _Summer Olympic Games_ (Start: 230, End: 250)  
+- Similarity Score: 50.80
+
+Prüfung der Antwort  
+_Summer Olympic Games_ ist zu allgemein – Judo wurde erstmals 1964 in Tokio zum Medaillenwettbewerb. Die korrekte Antwort muss die spezielle Ausgabe _1964 Tokyo Olympics_ nennen.
+
+Mögliche Ursachen  
+1. Unklare Abgrenzung der Editionsangabe: Das Modell hat zwar den Olympischen Kontext erfasst, aber nicht die genaue Jahreszahl.  
+2. Generalisierung: Bei Fragen nach _which Olympics_ tendiert das Modell dazu, auf den Oberbegriff _Summer Olympic Games_ zurückzugreifen, anstatt die Jahreszahl/Austragungsort auszuwählen.
+
+Verbesserungsvorschläge  
+- Konkretere Frage: _At which Olympic Games did judo become an official medal sport?_  
 
 == Hard-Fragen
 
-=== _How many throws are in the Kodokan Gokyo-no-waza?_  
-Ursache:  
-Statt der Zahl _67_ wurde ein philosophischer Satz ausgewählt. Die Frage nach einer numerischen Antwort wurde nicht ausreichend erkannt, da das Modell stärker auf semantische Bedeutung als auf Zahlenfokus trainiert ist.  
+Hard-Fragen erfordern oft sehr spezifisches Fachwissen oder historische Details:
 
-Verbes­serung:  
-Wir können das Prompt so gestalten, dass es ausdrücklich eine Zahl verlangt: _Provide the exact number of throws …_. Zusätzlich hilft ein Pre-Filter, der in den Top-K-Chunks numerische Muster identifiziert und bevorzugt.
+=== _What are the two guiding principles of judo?_
 
-=== _What are the two guiding principles of judo?_  
-Ursache:  
-Der philosophische Abschnitt _life, art and science_ wurde bevorzugt, da er in Überschriften hervorsticht. Die eigentlichen Prinzipien _Seiryoku-Zen’yō_ und _Jita-Kyōei_ werden tiefer im Text behandelt und seltener synonym erwähnt.  
+- Expected: Seiryoku-Zen’yō and Jita-Kyōei  
+- Span: _life, art and science_ (Start: 79065, End: 79086)  
+- Similarity Score: 15.01
 
-Verbes­serung:  
-Ein Glossar-Fokus im Chunk-Ranking kann diese Schlüsselbegriffe höher priorisieren. Im Prompt hilft eine Formulierung wie: _Name the two core Japanese principles ..._. Auch hier unterstützt Few-Shot-Training, um das Modell auf die spezifischen Termini einzustimmen.
+Prüfung der Antwort  
+_Life, art and science_ beschreibt die Philosophie von Judo, aber nicht die beiden Kodokan-Leitsätze. Die Antwort ist daher nicht präzise.
 
-=== _Which American judoka is also an MMA fighter?_  
-Ursache:  
-Obwohl _Ronda Rousey_ die korrekte Antwort ist, erkennt das Modell _Hidehiko Yoshida_ als bekannteren Namen und wählt diesen. In einem überwiegend japanisch geprägten Korpus überwiegt diese Nennung.  
+Mögliche Ursachen  
+1. Konflikt philosophischer Passagen: Das Modell extrahiert allgemeine Philosophiebeschreibungen, wenn nach Prinzipien gefragt wird.  
+2. Ungenaue Formulierung der Frage: _Guiding principles_ kann auch breit interpretiert werden, aber hier sind spezifische japanische Leitsätze gefordert.
 
-Verbes­serung:  
-Ein Beispiel-Prompt, der das Wort _also_ betont (_which American judoka, who is also an MMA fighter?_) sowie Few-Shot-Exemplare mit _Ronda Rousey_ erhöhen die Wahrscheinlichkeit der korrekten Extraktion. Zudem kann ein Länder-Filter implementiert werden, der nur US-amerikanische Namen zulässt.
+Verbesserungsvorschläge  
+- Explizite Begriffsvorgabe: Frage als _What are the two Japanese guiding principles of the Kodokan?_ stellen.  
 
-=== _Name a prohibited katame-waza technique._  
-Ursache:  
-Anstelle von _Do-jime_ wurde _Daki age_ ausgegeben, da beide im Abschnitt zu verbotenen Techniken genannt werden.  
+=== _What was the initial dojo site in Tokyo founded by Kano?_
 
-Verbes­serung:  
-Ein explizites Prompt _Name one prohibited katame-waza technique, not just any katame-waza_ schafft Klarheit. Außerdem kann man im Post-Processing einen Quercheck gegen eine vordefinierte Technikliste durchführen.
+- Expected: Eisho-ji  
+- Span: _Kōdōkan Judo Institute_ (Start: 5176, End: 5198)  
+- Similarity Score: 23.00
 
-== Fazit und Mustererkennung
+Prüfung der Antwort  
+_Kōdōkan Judo Institute_ ist nicht der ursprüngliche Dojo-Name in Tokio, sondern die gesamte Institution, die später an anderen Standorten errichtet wurde. _Eisho-ji_ war der allererste Standort. Die Antwort ist daher ungenau.
 
-Bei der Analyse der falsch beantworteten Fragen zeigen sich wiederkehrende Muster. Erstens mangelt es an einer geeigneten Gewichtung von Definitions- und Numerikpassagen, sodass das Modell häufig irrelevante oder philosophische Abschnitte auswählt. Zweitens führt unpräzises Prompt-Design zu Mehrdeutigkeiten, die besonders in den Kategorien *Medium* und *Hard* zu Fehlern beitragen. Drittens fehlt es an wirkungsvollen Post-Processing-Filtern für Rollenbegriffe, numerische Einheiten und japanische Terminologiemuster.  
+Mögliche Ursache: 
+- Semantische Ähnlichkeit von _Kōdōkan_: Das Modell greift auf den deutlich bekannteren Begriff _Kōdōkan Judo Institute_ zurück, weil _Eisho-ji_ viel seltener im Text vorkommt. _Kodokan/Kōdōkan_ kommen insgesamt 150 mal vor, _Eisho-ji_ nur 9 mal.
 
-Zukünftige Verbesserungen sollten daher auf drei Hebeln ansetzen: _Chunk-Priorisierung_, _Prompt Engineering_ und _Post-Processing_. Durch gezielte Anpassungen in diesen Bereichen lässt sich die QA-Performance in allen drei Kategorien nachhaltig steigern und die verbleibenden Fehlerraten deutlich reduzieren.  
+Verbesserungsvorschläge  
+- Historische Timeline präzisieren: Passagen, in denen _first dojo_ oder _initial site_ vorkommen mehr priorsieren.
+- Frage stärker historisch kontextualisieren: _What was the very first dojo site in Tokyo founded by Kano in 1882?_ 
 
+== Zusammenfassung der Verbesserungsansätze
+
+1. Präzisere Frage-Formulierungen  
+   - Zusätzliche Schlüsselwörter (z. B. _literal translation_, _in competition_, _in Europe_) helfen dem Modell, die Antwortspan-Auswahl zu fokussieren.
+
+2. Semantische und regelbasierte Nachbearbeitung  
+   - Filtersysteme für technische Begriffe, Personen-NER und numerische Werte.  
+   - Post-Processing: Auswertung des Antwortspans, um Vollständigkeit und Kategoriezugehörigkeit zu prüfen.
+
+3. Optimiertes Chunk-Ranking  
+   - Gewichtung von Passagen anhand von Schlagworten (_demonstration sport_, _sutemi waza_, _randori_).  
+   - Sicherstellen, dass seltene Fachabschnitte (z. B. technikspezifische Listen) in der Top-K-Auswahl verbleiben.
+
+4. Data Augmentation und Fine-Tuning  
+   - Hinzufügen von QA-Beispielen, die häufige Fehlerfälle adressieren (z. B. orthografische Varianten, synonymische Übersetzungen).  
+   - Nutzung von kontrastiven Beispielen: Positiv- und Negativ-Beispiele einbinden, um das Modell für Fallen (_philosophy_ statt _sutemi waza_) zu sensibilisieren.
+
+5. Glossarerweiterung  
+   - Aufbau eines Judo-Wörterbuchs mit Verweisen auf offizielle Begriffe (Techniken, Prinzipien, historische Daten).  
+   - Nutzung eines externen Knowledge Graphs, um die semantische Validität der extrahierten Antworten zu prüfen.
+
+Durch diese umfassende Analyse der falsch beantworteten Fragen und die systematischen Verbesserungsvorschläge kann das QA-System deutlich robuster und präziser werden. Die iterative Verfeinerung von Frageformulierung, Kontextauswahl und Modell-Post-Processing bildet die Grundlage für eine nachhaltige Steigerung der Antwortqualität.  	
+
+
+
+Bei den falsch beantworteten Fragen wiederholen sich drei Hauptmuster: Erstens verdrängen philosophische Passagen oft die korrekte technische oder historische Antwort. Zweitens wählen Modelle häufig Oberkategorien anstelle spezifischer Begriffe, wenn Prompt unpräzise sind. Drittens führen mehrdeutige oder unklare Fragestellungen zu Kontextverwechslungen. Orthografische Varianten und fehlende Einheiten runden die Fehlerbilder ab. Durch gezieltes Prompt Engineering, domänenspezifische Chunk-Priorisierung und strukturiertes Post-Processing lassen sich die Genauigkeit und Präzision im QA-System nachhaltig verbessern.  
 
 
 == Performance‑Vergleich
