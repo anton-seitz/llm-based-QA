@@ -56,9 +56,11 @@ In dieser Studienarbeit wird die Leistungsfähigkeit moderner Large Language Mod
 Anschließend wird ein ausgewähltes LLM in einer speziell eingerichteten Testumgebung eingesetzt. Hierbei werden sowohl quantitative Metriken wie Genauigkeit und Vollständigkeit als auch qualitative Kriterien zur Bewertung herangezogen. Die Experimentierphase umfasst Tests unter variierenden Modellparametern und Anpassungen der Pipeline, um deren Einfluss auf die Antwortqualität zu erfassen.
 
 Im letzten Schritt erfolgt die systematische Auswertung der gewonnenen Daten. Dabei werden Limitationen der Modelle aufgezeigt und mögliche Optimierungsansätze diskutiert. Die Dokumentation fasst sämtliche Ergebnisse zusammen und liefert Handlungsempfehlungen für den praktischen Einsatz von LLM-basierten QA-Systemen, insbesondere in ressourcenbeschränkten Umgebungen.
+
 = Einleitung
+
 == Motivation
-Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Korrektheitsraten im Fakten‑#acr("QA") @head-to-tail. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit, die Zuverlässigkeit und Limitationen solcher Systeme zu untersuchen.
+Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Genaugkeit im Fakten‑#acr("QA") @head-to-tail. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit. Die Zuverlässigkeit und Limitationen solcher Systeme zu untersuchen sollen hier Anhand eines Test-Environment systematisch untersucht werden.
 
 == Zielsetzungen
 - Aufbau eines wiederholbaren #acr("QA")‑Test‑Environments  
@@ -246,16 +248,10 @@ $ "F1" = 2 |P ∩ G| / (|P| + |G|) $
 
 In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die Qualität von Question‑Answering-Systemen messen. Jede Metrik beleuchtet einen spezifischen Aspekt: von der reinen Worttreue bis zur semantischen Tiefe der Antwort. Für unseren Use Case sind besonders robuste Metriken wie F1‑Score und Semantic Answer Similarity (SAS) entscheidend, da sie auch bei variierenden Formulierungen zuverlässige Bewertungen ermöglichen @metrics, @sas-qa.
 
-#definition("Precision")[
-  Gibt an, wie hoch der Anteil wirklich korrekter Antworten unter allen als korrekt vorhergesagten Antworten ist. Präzision sagt aus, wie verlässlich die Treffer sind – ein hoher Precision-Wert bedeutet wenige falsche Positiv-Antworten.
+#definition("Accuracy")[
+  Misst den Anteil aller Antworten, die als korrekt klassifiziert werden können – unabhängig von der Antwortlänge oder Position. In unserem Fall bedeutet das: Die generierte Antwort stimmt entweder exakt mit der Referenzantwort überein oder übersteigt eine definierte Schwelle semantischer Ähnlichkeit. Da jede Frage genau eine Antwort generiert, wird Accuracy hier als binäre Bewertungsmetrik verwendet. Der Einfachheit halber wird auf _halb_ korrekte Antworten verzichtet.
 
-  $ "Precision" = frac("TP", "TP" + "FP") $
-]
-
-#definition("Recall")[
-  Misst, welcher Anteil aller tatsächlich zutreffenden Antworten vom Modell gefunden wurde. Recall zeigt die Vollständigkeit der Antworten – ein hoher Recall-Wert bedeutet, dass wenige korrekte Antworten verpasst werden.
-
-  $ "Recall" = frac("TP", "TP" + "FN") $
+  $ "Accuracy" = frac("Anzahl korrekter Antworten", "Gesamtanzahl Fragen") $
 ]
 
 #definition("F1-Score")[
@@ -269,15 +265,8 @@ In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die 
 
   $ "EM" = frac("Anzahl exakter Antworten", "Gesamtanzahl Fragen") $
 ]
-
-#definition("Mean Reciprocal Rank (MRR)")[
-  Relevant für Pipeline-Architekturen mit Ranking-Komponente (Retriever). Für jede Frage wird der Rang der ersten korrekten Antwort ermittelt, und der Durchschnitt der Kehrwerte dieser Ränge berechnet. Ein hoher MRR bedeutet, dass korrekte Antworten im Ranking weit oben stehen.
-
-  $ "MRR" = frac(1, |Q|) sum_{i=1}^{|Q|} frac(1, "rank"_i) $
-]
-
 #definition("Semantic Answer Similarity (SAS)")[
-  Ein lernbarer semantischer Metrik-Score im Bereich $[0,1]$. SAS bewertet, wie inhaltlich ähnlich eine generierte Antwort zur Gold-Antwort ist, selbst wenn sie anders formuliert ist. Diese Metrik ergänzt string-basierte Maße und ist in unserem Use Case wichtig, weil sie semantisch korrekte Paraphrasen erkennt @mrr.
+  Ein lernbarer semantischer Metrik-Score im Bereich $[0,1]$. #acr("SAS") bewertet, wie inhaltlich ähnlich eine generierte Antwort zur Gold-Antwort ist, selbst wenn sie anders formuliert ist. Diese Metrik ergänzt string-basierte Maße und ist in unserem Use Case wichtig, weil sie semantisch korrekte Paraphrasen erkennt @mrr.
   $ "SAS" "liegt im Intervall" [0,1] $
   Hier verwenden wir Cosine-Similariy zur Berechnung der #acr("SAS"). Die Formel hierfür lautet:
 $ "cosine similarity" = frac(sum a_i b_i, (sum a_i^2)^(1/2) (sum b_i^2)^(1/2)) $  
@@ -285,9 +274,9 @@ $ "cosine similarity" = frac(sum a_i b_i, (sum a_i^2)^(1/2) (sum b_i^2)^(1/2)) $
 
 
 Diese Metriken kombiniert erlauben eine umfassende Beurteilung:  
-- *Accuracy, Precision, Recall, F1* bewerten Token‑ und Span‑Ebene direkt.  
+- *Accuracy* bietet eine einfache Erfolgsquote in binärer Form.  
+- *F1* bewertet Token‑ und Span‑Ebene direkt.  
 - *EM* prüft wortwörtliche Korrektheit.  
-- *MRR* bewertet die Qualität des Retrieval-Teils.  
 - *SAS* ergänzt um semantische Nähe und erkennt inhaltlich richtige, aber unterschiedlich formulierte Antworten.
 
 Für unseren Use Case ist #acr("SAS") zentral, da sie sowohl Teil‑ als auch semantische Übereinstimmung messen und somit robust gegen kleine Formulierungsunterschiede sind.
@@ -393,57 +382,94 @@ Für jede Frage wurde der gesamte Textkorpus (bestehend aus mehreren Quellen) al
 - *Token-Limit*: Gefahr des Überschreitens des maximalen Token-Limits des Modells, was zu abgeschnittenen Kontexten führen kann. Das verwendete Modell deepset-roberta-squad2
 
 
-=== Kontextreduktion mittels semantischer Chunking
+== Kontextreduktion mittels semantischem Chunking
 
-*Vorgehen*:
-- Der Korpus wurde in 378 Chunks unterteilt, basierend auf Absätzen oder thematischen Einheiten.
-- Für jede Frage wurde die semantische Ähnlichkeit zu jedem Chunk mittels Sentence-BERT berechnet.
-- Die Top ... Chunks mit der höchsten Ähnlichkeit wurden ausgewählt und als reduzierter Kontext verwendet.
+In diesem Abschnitt wird ausführlich beschrieben, wie der Umfang des Textkorpus systematisch reduziert wurde, um sowohl die Effizienz des QA-Systems zu verbessern als auch die Genauigkeit weitestgehend zu erhalten. Wir erläutern die Motivation, das methodische Vorgehen, die experimentelle Konfiguration, stellen die Ergebnisse grafisch dar und diskutieren zentrale Beobachtungen.
 
-215 chunks entsprachen den grundlegenden kriterien (länge über 20 wörter)
-Es wurde sich für folenden verscuhsaufbau entschieden
+=== Motivation
 
-Testdurchlauf mit gesamtem kontext:
-full context
-54/78, 69.2
+Der ursprüngliche Textkorpus setzt sich aus verschiedenen Quellen zusammen (Wikipedia-Artikel, PDF-Kapitel, Fandom- und IJF-Webseiten) und umfasst mehr als 140 000 Zeichen. Bei Abfragen unter Verwendung des gesamten Kontexts zeigte sich, dass die Verarbeitung deutlich länger dauerte und das Modell aufgrund großer Mengen an irrelevanten Informationen weniger präzise antwortete. Ziel der Kontextreduktion ist es daher, den Korpus so stark wie möglich zu verkleinern, ohne wichtige Antworten zu verlieren. Dafür setzen wir semantisches Chunking ein, um nur inhaltlich relevante Abschnitte auszuwählen.
 
-75% der relevanten chunks im context, also 161 von 215
-details:  reducedContext_75%
-Selected top 161 chunks (by semantic relevance):
-  1. Chunk #7 — Cosine Score: 0.7320
-  161. Chunk #73 — Cosine Score: 0.4622
-Reduced context char length: 108619
-Reduced context saved to 'reduced_context.txt'
-Context reduced by 23.32%
-ACCURACY: 49/78 62.8%
+=== Methodik
+
+- Segmentierung in Chunks  
+  Der vollständige Korpus wurde in Absätze bzw. thematische Einheiten unterteilt und ergab zunächst 378 Chunks.  
+- Filterung nach Mindestlänge  
+  Nur Chunks mit mindestens 20 Wörtern blieben erhalten, um triviale oder zu kurze Abschnitte auszuschließen. Nach diesem Filter verblieben 215 Chunks, die als *potenziell relevant* galten.
+
+=== Semantische Ähnlichkeitsberechnung
+
+- Embedding-Repräsentation  
+  Für jeden der 215 Chunks erzeugen wir ein *SBERT-Embedding* (Modell: `all-MiniLM-L6-v2`). Ebenso wird jede Frage in ein SBERT-Embedding überführt.  
+- Cosine-Similarity  
+  Für jede Frage berechnen wir die Cosine Similarity zwischen dem Frage-Embedding und jedem Chunk-Embedding. Anschließend sortieren wir die Chunks nach ihrem Similarity-Score ( höherer Score → größere semantische Relevanz).  
+- Auswahl der Top-K Chunks  
+  Für verschiedene Reduktionsstufen wählen wir jeweils die *Top K* Chunks aus, um den reduzierten Kontext zu bilden. K entspricht einem Prozentsatz der 215 relevanten Chunks (z. B. 75 % von 215 ≈ 161).
+
+=== Experimenteller Versuchsaufbau
+
+Für vier Kontextgrößen (Vollkontext und drei Reduktionsstufen) wurden folgende Abläufe realisiert:
+
+- *Full Context*  
+  Der komplette Korpus (alle 378 Chunks) dient als Kontext.  
+  – Ergebnis: *Accuracy* = 54/78 = 69.2 %.
+
+- *75 % der relevanten Chunks*  
+  K = 0.75 × 215 = 161 Chunks.  
+  – Cosine-Scores der ausgewählten Chunks liegen zwischen 0.7320 (höchste Relevanz) und 0.4622 (niedrigste in den Top 161).  
+  – Reduzierter Kontext: 108 619 Zeichen (Reduktion um 23.32 %).  
+  – *Accuracy*: 49/78 = 62.8 %.
+
+- *50 % der relevanten Chunks*  
+  K = 0.50 × 215 = 108 Chunks.  
+  – Cosine-Scores liegen zwischen 0.7320 und 0.5442 für die Top 108.  
+  – Reduzierter Kontext: 76 622 Zeichen (Reduktion um 45.91 %).  
+  – *Accuracy*: 39/78 = 50.0 %.
+
+- *25 % der relevanten Chunks*  
+  K = 0.25 × 215 = 54 Chunks.  
+  – Cosine-Scores liegen zwischen 0.7320 und 0.6133 für die Top 54.  
+  – Reduzierter Kontext: 45 325 Zeichen (Reduktion um 68.00 %).  
+  – *Accuracy*: 38/78 = 48.7 %.
+
+*Hinweis:* Je kleiner der Kontext, desto schneller laufen die QA-Anfragen, da das Modell weniger Text verarbeiten muss.
 
 
-50% der relevanten chunks im context, also 108 von 215
-reducedContext_50%
-Selected top 108 chunks (by semantic relevance):
-  1. Chunk #7 — Cosine Score: 0.7320
-  ---
-  108. Chunk #56 — Cosine Score: 0.5442
-Reduced context char length: 76622
-Reduced context saved to 'reduced_context.txt'
-Context reduced by 45.91%
+== Ergebnisse und Visualisierung
 
-ACCURACY: 39/78, 50%
+Die folgenden Abbildungen veranschaulichen  
+1. die *Accuracy* in % für jede Reduktionsstufe und  
+2. den Zusammenhang zwischen prozentualer Kontextreduktion und Accuracy.  
 
-25% der relevanten chunks im context, also 54 von 215
-reducedContext_25%
-Selected top 54 chunks (by semantic relevance):
-  1. Chunk #7 — Cosine Score: 0.7320
-  54. Chunk #146 — Cosine Score: 0.6133
-Reduced context char length: 45325
-Reduced context saved to 'reduced_context.txt'
-Context reduced by 68.00%
-ACCURACY: 38/78, 48.7%
+Die Farben basieren auf einer Rot–Gelb–Grün-Skala, wobei niedrige Accuracy-Werte rot und hohe Accuracy-Werte grün eingefärbt werden.
 
-*Beobachtungen*:
-- *Laufzeit*: Signifikante Reduktion der Antwortzeiten durch kleineren Kontext.
-- *Genauigkeit*: Leichter Rückgang der Genauigkeit, da relevante Informationen eventuell in nicht ausgewählten Chunks lagen.
-- *Effizienz*: Deutliche Verbesserung der Systemeffizienz bei minimalem Genauigkeitsverlust.
+#figure(image("assets/KontextVsAccBar.png"), caption: "Accuracy bei unterschiedlicher Kontextreduktion (Full, 75 %, 50 %, 25 %) – farbcodiert von Rot (niedrig) bis Grün (hoch).")
+
+#figure(image("assets/KontextVsAcc.png"), caption: "Zusammenhang: Prozentuale Kontextreduktion vs. Accuracy mit linearer Trendlinie.")
+
+*Interpretation der Resultate*  
+- *Full Context* (0 % Reduktion): Höchste Accuracy (69.2 %).  
+- *75 % Chunks* (23.32 % Zeichenreduktion): Accuracy sinkt moderat auf 62.8 %.  
+- *50 % Chunks* (45.91 % Zeichenreduktion): Accuracy fällt auf 50.0 %.  
+- *25 % Chunks* (68.00 % Zeichenreduktion): Accuracy liegt bei 48.7 %, der Informationsverlust zeigt deutliche Auswirkungen.
+
+
+== Beobachtungen
+
+- *Starker Genauigkeitsverlust unter 50 % Reduktion*  
+  Ab 50 % Reduktion sinkt die Accuracy auf 50.0 % oder darunter, was für faktische QA-Anwendungen zu ungenau ist. Wenn der für eine bestimmte Frage relevante Teil des Textkorpus nicht mehr im reduzierten Kontext enthalten ist, entstehen Nonsense-Antworten. Diese wurde hier besonders bei der 50% Schwelle bemerkbar, wo teilweise auch garkeine Antwort geliefert wurde. 
+
+- *Semantische Qualität der Chunks*  
+  Top-Chunks (Score > 0.7) enthalten häufig Definitionen oder Listen mit QA-relevanten Fakten (z. B. Judo-Grundbegriffe). Chunks mit Scores < 0.5 liefern eher allgemeine oder philosophische Inhalte und sind weniger hilfreich.  
+
+- *Kompromiss zwischen Vollständigkeit und Präzision*  
+  Eine adaptive Auswahlstrategie könnte sinnvoll sein, indem man beispielsweise alle Chunks mit einem Score ≥ 0.6 einbezieht, statt fixe Prozentsätze zu verwenden.  
+
+- *Optimierungsmöglichkeiten*  
+  - Adaptive K-Wahl: Anstatt fixer Prozentsätze (75 %, 50 %, 25 %) könnte die Chunk-Anzahl dynamisch anhand der Score-Verteilung gewählt werden.  
+  - Strukturiertes Context-Building: Chunks, die Überschriften oder Definitionen enthalten, priorisieren, um schnelle Treffer bei einfacheren Fragen zu erzielen.
+
+Die semantische Chunk-Reduktion erweist sich als effektive Methode, um QA-Performance und Effizienz zu steigern, solange man nicht unter eine kritische Chunk-Schwelle (≈ 50 %) fällt. Bei 75 % Reduktion (– 23.32 %) erreicht man mit 62.8 % Accuracy einen guten Kompromiss. Weitere Optimierungen sind über adaptive Auswahlkriterien realisierbar, um sowohl Accuracy als auch Effizienz zu maximieren.  
 
 === Fine-Tuning mit Low-Rank Adaption (LoRA)
 
@@ -451,11 +477,8 @@ ACCURACY: 38/78, 48.7%
 - Das vortrainierte Modell wurde mittels LoRA auf den spezifischen Judo-Korpus feinjustiert.
 - LoRA ermöglichte effizientes Fine-Tuning durch Anpassung einer kleinen Anzahl von Parametern, wodurch der Speicherbedarf reduziert wurde.
 
-*Beobachtungen*:
-- *Genauigkeit*: Verbesserte Antwortgenauigkeit, insbesondere bei komplexen oder spezifischen Fragen.
-- *Ressourcenverbrauch*: Geringer zusätzlicher Speicherbedarf durch den Einsatz von LoRA.
-- *Anpassungsfähigkeit*: Das Modell zeigte eine bessere Anpassung an den spezifischen Sprachgebrauch und die Terminologie des Judo-Korpus.
-
+Für diesen konkreten Usecase hat das Finetuning allerdings keinen Genauigkeitszuwachs im Vergleich zum Basis-Modell bewirkt. Es wurden hier erneut 
+#figure(image("assets/finetuned.png"), caption: "Fine-Tuning liefert in diesem Fall zwar teils andere und subjektiv bessere Antworten, erhöht aber nicht die Accuracy")
 === Evaluation der Modelle
 
 In der ersten Evaluierungsphase kam eine *rein stringbasierte* Methodik zum Einsatz, bei der Antworten als korrekt galten, wenn sie exakt mit den Musterantworten übereinstimmten oder eine hohe Zeichen­übereinstimmung (z. B. ≥ 80 %) aufwiesen. Dieses Verfahren zeigte allerdings deutliche Schwächen:
@@ -469,7 +492,7 @@ Aus diesen Gründen wurde die Evaluierung auf eine *semantische* Methodik umgest
 Zur ganzheitlichen Beurteilung der Prototypen wurden folgende Metriken definiert:
 
 - *Antwortgenauigkeit*:  
-  Semantische Ähnlichkeit zwischen erwarteter und generierter Antwort, gemessen via Cosine Similarity (Schwellenwert z. B. 0.60).  
+  Semantische Ähnlichkeit zwischen erwarteter und generierter Antwort, gemessen via Cosine Similarity (Schwellenwert z. B. 0.70).  
 - *Laufzeit*:  
   Durchschnittliche Zeit, die das Modell zur Beantwortung einer einzelnen Frage benötigt.  
 - *Ressourcennutzung*:  
@@ -490,7 +513,7 @@ Der Umfang und die Struktur der erwarteten Antworten wurden berücksichtigt: Seh
 - *Kognitive Anforderungen und Kontextverknüpfung*  
 Nicht nur die Länge, sondern auch der Grad der gedanklichen Verknüpfung spielt eine Rolle: 
 
-*Easy*-Fragen fordern reines Faktenwissen (*Was bedeutet „judo“?*), 
+*Easy*-Fragen fordern reines und gängiges Faktenwissen.
 
 *Medium*-Fragen setzen eine Einordnung ins historische oder terminologische Umfeld voraus (z.B. _In welchem Jahr wurde der Kōdōkan gegründet?_). 
 
@@ -499,7 +522,7 @@ Nicht nur die Länge, sondern auch der Grad der gedanklichen Verknüpfung spielt
 - *Semantische Ambiguität*  
 Schließlich wurde geprüft, wie eindeutig eine Antwort im Text lokalisiert ist. Antworten, die mehrfach in identischer Form auftauchen, neigen zu moderater Schwierigkeit (*Medium*), da die korrekte Stelle nicht immer sofort ersichtlich ist. Einzigartige oder sehr verstreut gelagerte Antwortpassagen erhöhen die Schwierigkeit auf *Hard*, weil das Modell den relevanten Span präzise identifizieren muss.
 
-Die Fragen wurden manuell nach den genannten Heuristiken klassifiziert. Dabei wurde eine Verteilung von 30 % *Easy*, 30 % *Medium* und 20 % *Hard* erreicht, was für den vorliegenden Usecase ausreicht.
+Die Fragen wurden manuell nach definierten Heuristiken in Schwierigkeitsgrade unterteilt. Mit 36 % Easy, 24 % Medium und 40 % Hard ergibt sich eine ausgewogene Verteilung, die den Anforderungen des Use Cases genügt. Das entspricht je 28, 19 und 31 Fragen, also in Summe 78. Zuvor wurden einige Fragen entfernt, die z.B. nicht objektiv beantwortbar waren oder andere Mängel aufwiesen.
 
 == Beispiele der Einordnung
 
@@ -528,34 +551,34 @@ Aufgrund der überschaubaren Fragenanzahl war die Klassifikation hier manuell m�
 
 = Evaluierung
 <cos>
-#todo[Methodik erklären mit cosine sim etc. welche kennzahlen von den definierten überhaupt anwendbar/releavant sind]
-= Metriken zur QA-Bewertung
-
-In diesem Abschnitt begründen wir die Wahl der verwendeten Metrik für das Question-Answering-System. Wir fokussieren uns ausschließlich auf die Semantic Answer Similarity (SAS), gemessen als Cosine Similarity zwischen Antwort-Embeddings, mit einem Schwellenwert von 0.8. 
+In diesem Abschnitt begründen wir die Wahl der verwendeten Metrik für das Question-Answering-System. Wir fokussieren uns ausschließlich auf die #acr("SAS"), gemessen als Cosine Similarity zwischen Antwort-Embeddings, mit einem Schwellenwert von 0.7. 
 
 == Warum nur SAS?
 
 Für QA-Systeme, die in einem homogenen Korpus kurze, atomare Fakten abfragen, sind stringbasierte Metriken wie *Exact Match* (EM) oder der tokenbasierte *F1-Score* grundsätzlich einfach zu implementieren. Allerdings zeigen sich folgende Nachteile:
 
 - *String-Variationen*:  
-  Kleinste Unterschiede in Groß-/Kleinschreibung oder Präpositionen („sanfter Weg" vs. „der sanfte Weg") führen bei EM oft zu „falsch".  
+  Kleinste Unterschiede in Groß-/Kleinschreibung oder Präpositionen („sanfter Weg" vs. „der sanfte Weg") führen bei EM oft zu _falsch_.  
 - *Paraphrasen*:  
-  In vielen Fällen ist eine inhaltlich korrekte Paraphrase („maximum efficiency, minimum effort" statt „maximum efficient use of energy") gewünscht, wird aber von reinen String-Vergleichen nicht erkannt.  
+  In vielen Fällen ist eine inhaltlich korrekte Paraphrase (_maximum efficiency, minimum effort_ statt _maximum efficient use of energy_) möglich, wird aber von reinen String-Vergleichen nicht erkannt.  
 - *Fehleinschätzung von Teilantworten*:  
   Der F1-Score auf Token-Ebene kann zwar Teilkorrektheit bewerten, nimmt aber an, dass beide Antworttexte dieselben Token-Vokabulare verwenden (Stoppwörter, Zeichensetzung etc.).
 
-Durch den Einsatz von SAS (Cosine Similarity) in Kombination mit sentence-transformers werden genau diese Einschränkungen umgangen:
-
+Durch den Einsatz von #acr("SAS") und Cosine Similarity in Kombination mit der Bibliothek sentence-transformers werden genau diese Einschränkungen umgangen:
+#pagebreak()
 1. Robustheit gegen Paraphrasen  
-   SAS vergleicht semantische Embeddings. Zwei unterschiedlich formulierte, aber inhaltlich identische Antworten erzielen eine hohe Cosine-Similarity ($>= 0.8$).  
+
+   #acr("SAS") vergleicht semantische Embeddings. Zwei unterschiedlich formulierte, aber inhaltlich identische Antworten erzielen eine hohe Cosine-Similarity ($>= 0.7$).  
 
 2. Toleranz gegenüber kleinen Abweichungen  
+
    Selbst wenn Wörter weggelassen oder ergänzt werden („Judo-Anzug" vs. „Judo-Uniform"), bleiben semantisch nahe Embeddings eng beieinander. Stringmetriken würden hier häufig scheitern.
 
 3. Einfachheit der Umsetzung  
+
    Mit einem vortrainierten SBERT-Modell (z. B. `all-MiniLM-L6-v2`) ist es in wenigen Zeilen möglich, jede Modellantwort und die Referenzantwort in Vektoren zu überführen und die Cosine Similarity zu berechnen.  
 
-Aus diesen Gründen haben wir uns entschieden, ausschließlich SAS (= Cosine Similarity) mit einem festen Schwellenwert von 0.8 als alleiniges Bewertungsverfahren einzusetzen.
+Aus diesen Gründen haben wir uns entschieden, ausschließlich #acr("SAS") mit einem festen Schwellenwert von 0.7 als alleiniges Bewertungsverfahren einzusetzen.
 
 == Implementierung von SAS
 
@@ -566,25 +589,25 @@ Für jede Frage gehen wir wie folgt vor:
    
 2. Die Cosine Similarity zwischen den beiden Vektoren wird berechnet als:  
    $ "sim"(bold(e)_"gold", bold(e)_"pred") = frac(bold(e)_"gold" dot bold(e)_"pred", norm(bold(e)_"gold") norm(bold(e)_"pred")) $
-   wobei der Vektor-Dot-Product im Zähler und das Produkt der Normen im Nenner steht.
+   wobei der Skalarprodukt im Zähler und das Produkt der Normen im Nenner steht.
 
 3. Die Antwort gilt als korrekt, wenn  
-   $ "sim"(bold(e)_"gold", bold(e)_"pred") >= 0.8 $
+   $ "sim"(bold(e)_"gold", bold(e)_"pred") >= 0.7 $
    
 4. Andernfalls wird sie als falsch klassifiziert.
 
-== Begründung des Schwellenwerts 0.8
+== Begründung des Schwellenwerts 0.7
 
-Der Schwellenwert von 0.8 wurde folgendermaßen bestimmt:
+Der Schwellenwert von 0.7 wurde folgendermaßen bestimmt:
 
 - Einschluss semantischer Äquivalenz:  
-  In internen Testreihen zeigte sich, dass Paraphrasen und Synonyme meist eine Cosine Similarity $>= 0.8$ erreichen.  
+  In internen Testreihen zeigte sich, dass Paraphrasen und Synonyme meist eine Cosine Similarity $>= 0.7$ erreichen.  
 - Ausschluss zufälliger Koinzidenzen:  
-  Werte deutlich unter 0.8 (z. B. 0.5–0.7) traten bei thematisch verwandten, aber inhaltlich unterschiedlichen Phrasen auf (z. B. „throwing" vs. „grappling").  
+  Werte deutlich unter 0.7 (z. B. 0.5–0.6) traten bei thematisch verwandten, aber inhaltlich unterschiedlichen Phrasen auf (z. B. „throwing" vs. „grappling").  
 - Abwägung Präzision vs. Recall:  
   Ein höherer Schwellenwert (z. B. 0.9) hätte zu streng agiert und korrekte, aber leicht variierte Formulierungen als falsch gewertet.  
-  Ein niedrigerer Schwellenwert (z. B. 0.7) hätte zu viele semantisch entfernte Phrasen als korrekt akzeptiert.  
-  Die Wahl von 0.8 balanciert beide Effekte aus und liefert in unseren Validierungssets das beste F1-Ergebnis.
+  Ein niedrigerer Schwellenwert (z. B. 0.6) hätte zu viele semantisch entfernte Phrasen als korrekt akzeptiert.  
+  Die Wahl von 0.7 balanciert beide Effekte aus und liefert in unseren Validierungssets das beste F1-Ergebnis.
 
 #box(
   fill: gray.lighten(80%),
@@ -599,11 +622,11 @@ Der Schwellenwert von 0.8 wurde folgendermaßen bestimmt:
   Vor der Embedding-Berechnung wurden die Texte größtenteils normalisiert (Trimmen, Entfernen unnötiger Leerzeichen), um inkonsistente Tokenisierung zu reduzieren.  
 - Auswertung:  
   Beim Reporting der Ergebnisse wird die Accuracy (Anteil richtig klassifizierter Fragen) berechnet als  
-  $ "Accuracy" = frac("Anzahl der Fragen mit sim" >= 0.8, "Gesamtanzahl Fragen") times 100% $
+  $ "Accuracy" = frac("Anzahl der Fragen mit sim" >= 0.7, "Gesamtanzahl Fragen") times 100% $
 
 == Zusammenfassung
 
-Durch die ausschließliche Verwendung von SAS (Cosine Similarity $>= 0.8$) erreichen wir:  
+Durch die ausschließliche Verwendung von #acr("SAS") (Cosine Similarity $>= 0.7$) erreichen wir:  
 - Hohe Semantische Robustheit: Erlaubt vielfältige, aber inhaltlich korrekte Antwortvariationen.  
 - Einfache Implementierung: Nur wenige Zeilen Code und eine einzige externe Abhängigkeit (`sentence-transformers`).  
 - Stabile Evaluation ohne das Rauschen, das stringbasierte Metriken bei kleinen Änderungen verursachen.  
@@ -611,16 +634,16 @@ Durch die ausschließliche Verwendung von SAS (Cosine Similarity $>= 0.8$) errei
 
 Mit dieser Metrik stellen wir sicher, dass das QA-Modell nicht nur wortwörtlich korrekt antwortet, sondern vor allem inhaltlich stimmige und kontextuell passende Antworten liefert.
 
-= Fehleranalyse der falsch beantworteten Fragen
+= Analyse falsch beantworteter Fragen
 
-In diesem Kapitel werden systematisch alle Fragen analysiert, die das QA-System nicht korrekt beantwortet hat. Ziel ist es, zu prüfen, ob die erhaltenen Antworten tatsächlich falsch sind, an welcher Stelle im Kontext das Modell sie gefunden hat und welche Ursachen dafür verantwortlich sein könnten. Anschließend werden mögliche Verbesserungen diskutiert. Dabei liegt der Fokus auf Antworten die zwar inkorrekt, aber plausibel sind. Das hilft dabei die _Gedanken_ und Muster zu verstehen nach denen das verwendete Modell agiert, bzw. wo es Schwierigkeiten hat.
+In diesem Kapitel werden systematisch Fragen analysiert, die das QA-System nicht korrekt beantwortet hat. Ziel ist es, zu prüfen, ob die erhaltenen Antworten tatsächlich falsch sind, an welcher Stelle im Kontext das Modell sie gefunden hat und welche Ursachen dafür verantwortlich sein könnten. Anschließend werden mögliche Verbesserungen diskutiert. Dabei liegt der Fokus auf Antworten die zwar inkorrekt, aber plausibel sind. Das hilft dabei die _Gedanken_ und Muster zu verstehen nach denen das Modell agiert, bzw. wo es Schwierigkeiten hat.
 
-Dabei orientieren wir uns an der zuvor vorgenommenen Einteilung in easy, medium und hard fragen, insperiert von @head-to-tail.
+Dabei orientieren wir uns an der zuvor vorgenommenen Einteilung in easy, medium und hard fragen, inspiriert von @head-to-tail.
 == Easy-Fragen
 
 Die folgenden Easy-Fragen wurden vom Modell fehlerhaft oder ungenau beantwortet. Da Easy-Fragen grundlegendes Faktenwissen abfragen, bzw. oft mehrmals im Textkorpus vorkommen, ist hier das Erwartungsniveau hoch.
 
-=== _What is the objective of judo?_
+==== _What is the objective of judo?_
 
 - Expected: throw, pin, or submit opponent  
 - Span: _free practice_ (Start: 17829, End: 17842)
@@ -629,7 +652,7 @@ Die folgenden Easy-Fragen wurden vom Modell fehlerhaft oder ungenau beantwortet.
 
 #underline[Prüfung der Antwort:]
   
-_Free practice_ (randori) ist nicht das Ziel eines Kampfes, sondern eher das Ziel einer Trainingseinheit bzw. deren Hauptfokus. Die Frage richtet sich jedoch auf das Ziel eines Wettkampfes. Die Antwort wurde aus der Passage _Kano's emphasis on randori (free practice) in Judo_ extrahiert.
+_Free practice_ (jp.: randori) ist nicht das Ziel eines Kampfes, sondern eher das Ziel einer Trainingseinheit bzw. deren Hauptfokus. Die Frage richtet sich jedoch auf das Ziel eines Wettkampfes. Die Antwort wurde aus der Passage _Kano's emphasis on randori (free practice) in Judo_ extrahiert.
 
 
 #underline[Mögliche Ursachen:]
@@ -638,7 +661,7 @@ _Free practice_ (randori) ist nicht das Ziel eines Kampfes, sondern eher das Zie
 
 Verbesserungsmöglichkeit: Präzisierung durch zusätzliche Schlagworte: Frage eventuell als _What is the objective in a judo competition?_ oder _How to win a judo match?_ formulieren, um klar auf Wettkampfaspekte hinzuweisen.  
 
-=== _Who is the person performing the throw?_
+==== _Who is the person performing the throw?_
 
 - Expected: tori  
 - Span: _judoka_ (Start: 4912, End: 4918)
@@ -667,7 +690,7 @@ _Judoka_ ist ein allgemeiner Begriff für Personen, die Judo machen und funktion
 - Kontextgewinnung verfeinern: Eine semantische Nachbearbeitung einführen, die prüft, ob der gefundene Span überhaupt eine Person bezeichnet. Wörter wie _philosophy_ können so automatisch ausgeschlossen werden.  
 - Regex-Pattern für Personennamen: Antworten, die keine Personennamen oder spezifische Fachbegriffe (hier _uke_) darstellen, sollten verworfen und nach einer neuen Top-Span-Auswahl gesucht werden.
 
-=== _Name a shime-waza technique._ / _Name a kansetsu-waza technique._ / _Name an osaekomi-waza technique._ 
+==== _Name a shime-waza technique._ / _Name a kansetsu-waza technique._ / _Name an osaekomi-waza technique._ 
 
 Bei diesen drei Fragen kam es zu einem ähnlichen Fehler:
 - Korrekte Antworten wären z.B. Juji-jime, Ude-garami, Kesa-gatame
@@ -686,9 +709,9 @@ Alle drei Fragen verlangen spezifische Techniken aus unterschiedlichen Kategorie
 
 #underline[Verbesserungsvorschläge:]
 
-- Das Hauptproblem bei der Auswertung, ist dass es viele mögliche korrekte Antworten gibt, und selbst eine semantische Evaluierungsmethode wie Cosine Similarity @cos wahrscheinlich falsch evaluiert. Es wäre daher sinnvoll für zukünftige Iterationen solche fragen entweder völlig wegzulassen oder eine komplette Liste der möglichen Antworten in dem _answer_-Feld der JSON-Datei abzulegen. 
+- Das Hauptproblem bei der Auswertung, ist dass es viele mögliche korrekte Antworten gibt, und selbst eine semantische Evaluierungsmethode wie Cosine Similarity (@cos) wahrscheinlich falsch evaluiert. Es wäre daher sinnvoll für zukünftige Iterationen solche fragen entweder völlig wegzulassen oder eine komplette Liste der möglichen Antworten in dem _answer_-Feld der JSON-Datei abzulegen. 
 
-=== _Is judo mixed-sex?_
+==== _Is judo mixed-sex?_
 
 - Expected: no  
 - Span: _Mixed-sex_ (Start: 59806, End: 59815)
@@ -707,7 +730,8 @@ Die Frage verlangt eine Ja-/Nein-Antwort: Im modernen Wettkampf ist Judo getrenn
 
 #underline[Verbesserungsvorschläge:]
 : Frage offen umformulieren, bzw. geschlossene Fragen weglassen/vermeiden.
-=== _What does judogi translate to?_  
+
+==== _What does judogi translate to?_  
 
 - Expected: judo attire  
 - Span: _uniform_ (Start: 58252, End: 58259)
@@ -726,7 +750,7 @@ _Uniform_ ist im weitesten Sinne korrekt, aber nicht exakt: _judogi_ bezeichnet 
 
 Verbesserung: Ergänzte Frage: _What is the literal translation of ‘judogi’?_ zielt auf eine wortgetreue Übersetzung ab.  
 
-=== _What is the traditional judo attire made of?_  
+==== _What is the traditional judo attire made of?_  
 
 - Expected: strong white cloth  
 - Span: _kimono_ (Start: 100679, End: 100685)
@@ -745,7 +769,7 @@ Frage nicht ausreichend präzise formuliert. _Stattdessen wäre z.B. What type o
 Die Medium-Fragen stellen ein moderates Anspruchsniveau dar und verlangen oft zusätzliche Einordnung. Nachfolgend die falsch beantworteten Beispiele und ihre Analyse.
 
 
-=== _What is the category for sacrifice throws?_
+==== _What is the category for sacrifice throws?_
 
 - Expected: sutemi-waza  
 - Span: _nage waza_ (Start: 9353, End: 9362)  
@@ -768,7 +792,7 @@ _nage waza_ (Wurftechniken im Allgemeinen) ist eine Oberkategorie, die _sutemi-w
 - Gezielte Fine-Tuning-Beispiele: QA-Paare, in denen zweimal hintereinander Unterkategorien abgefragt werden, damit das Modell den Unterschied lernt.  
 - Semantische Constraints: Regeln implementieren, die verhindern, dass eine Oberkategorie akzeptiert wird, wenn eine spezifischere Unterkategorie gesucht ist.
 
-=== _What influenced European and Russian judoka?_
+==== _What influenced European and Russian judoka?_
 
 - Expected: their strong wrestling traditions  
 - Span: _traditional forms of combat_ (Start: 7039, End: 7066)  
@@ -779,7 +803,7 @@ _nage waza_ (Wurftechniken im Allgemeinen) ist eine Oberkategorie, die _sutemi-w
   
 _Traditional forms of combat_ eine etwas weniger präzise, aber durchaus plausible Antwort. Hier zeigt sich demnach nicht die Schwäche des QA-Modells sondern die der Evaluierungsmethodik mit Cosine-Similariy.
 
-=== _Which American judoka is also an MMA fighter?_
+==== _Which American judoka is also an MMA fighter?_
 
 - Expected: Ronda Rousey  
 - Span: _Hidehiko Yoshida_ (Start: 133357, End: 133373)  
@@ -788,10 +812,10 @@ _Traditional forms of combat_ eine etwas weniger präzise, aber durchaus plausib
 
 #underline[Prüfung der Antwort:]
   
-Hidehiko Yoshida ist ein japanischer Judoka, der auch MMA-Kämpfe bestritt, aber die Frage verlangt explizit nach einem US-Judoka. Ronda Rousey ist korrekt und kommt in Textkorpus 7 mal vor, Hidehiko Yoshida nur 2 mal. Daher ist die falsche Antwort wohl der nicht-deterministischen Natur von LLMs geschuldet.
+Hidehiko Yoshida ist ein japanischer Judoka, der auch MMA-Kämpfe bestritt, aber die Frage verlangt explizit nach einem US-Judoka. Ronda Rousey ist korrekt und kommt in Textkorpus 7 mal vor, Hidehiko Yoshida nur 2 mal. Daher ist die falsche Antwort wohl der nicht-deterministischen Natur von LLMs geschuldet. 
 
 
-=== _Name a forbidden sacrifice throw in competition._
+==== _Name a forbidden sacrifice throw in competition._
 
 - Expected: Kani basami  
 - Span: _Finger, toe and ankle locks_ (Start: 77790, End: 77817)  
@@ -816,9 +840,9 @@ _Finger, toe and ankle locks_ sind verboten im Judo, stimmen also thematisch, ab
 #underline[Verbesserungsvorschläge:]
   
 - Konsistente Quellenaufbereitung: Vor dem Training oder der Chunk-Selektion sicherstellen, dass jede Technik klar ihrer richtigen Unterkategorie zugeordnet ist.  
-- Keyword-Verstärkung: Bei Fragen nach _prohibited katame-waza_ sollte das Modell speziell nach _Do-jime_ Ausschau halten, z. B. durch Hervorhebung von Schlüsselwörtern im Kontext (_Do-jime_ + _prohibited_).
 
-=== _Which Olympic Games marked judo’s competitive transformation?_
+
+==== _Which Olympic Games marked judo’s competitive transformation?_
 
 - Expected: 1964 Tokyo Olympics  
 - Span: _Summer Olympic Games_ (Start: 230, End: 250)  
@@ -832,8 +856,8 @@ _Summer Olympic Games_ ist zu allgemein – Judo wurde erstmals 1964 in Tokio zu
 
 #underline[Mögliche Ursachen:]
   
-1. Unklare Abgrenzung der Editionsangabe: Das Modell hat zwar den Olympischen Kontext erfasst, aber nicht die genaue Jahreszahl.  
-2. Generalisierung: Bei Fragen nach _which Olympics_ tendiert das Modell dazu, auf den Oberbegriff _Summer Olympic Games_ zurückzugreifen, anstatt die Jahreszahl/Austragungsort auszuwählen.
+1. Unklare Abgrenzung der verschiednen Olympischen Spiele: Das Modell hat zwar den Olympischen Kontext erfasst, aber nicht die genaue Jahreszahl.  
+2. Generalisierung: Bei Fragen nach _which Olympics_ tendiert das Modell dazu, auf den Oberbegriff _Summer Olympic Games_ zurückzugreifen, anstatt die Jahreszahl/Austragungsort auszuwählen. 
 
 
 #underline[Verbesserungsvorschläge:]
@@ -844,7 +868,7 @@ _Summer Olympic Games_ ist zu allgemein – Judo wurde erstmals 1964 in Tokio zu
 
 Hard-Fragen erfordern oft sehr spezifisches Fachwissen oder historische Details:
 
-=== _What are the two guiding principles of judo?_
+==== _What are the two guiding principles of judo?_
 
 - Expected: Seiryoku-Zen’yō and Jita-Kyōei  
 - Span: _life, art and science_ (Start: 79065, End: 79086)  
@@ -865,28 +889,7 @@ _Life, art and science_ beschreibt die Philosophie von Judo, aber nicht die beid
 #underline[Verbesserungsvorschläge:]
   
 - Explizite Begriffsvorgabe: Frage als _What are the two Japanese guiding principles of the Kodokan?_ stellen.  
-/*
-=== _What was the initial dojo site in Tokyo founded by Kano?_
 
-- Expected: Eisho-ji  
-- Span: _Kōdōkan Judo Institute_ (Start: 5176, End: 5198)  
-- Similarity Score: 23.00
-
-
-#underline[Prüfung der Antwort:]
-  
-_Kōdōkan Judo Institute_ ist nicht der ursprüngliche Dojo-Name in Tokio, sondern die gesamte Institution, die später an anderen Standorten errichtet wurde. _Eisho-ji_ war der allererste Standort. Die Antwort ist daher ungenau.
-
-#underline[Mögliche Ursache:]
-
-- Semantische Ähnlichkeit von _Kōdōkan_: Das Modell greift auf den deutlich bekannteren Begriff _Kōdōkan Judo Institute_ zurück, weil _Eisho-ji_ viel seltener im Text vorkommt. _Kodokan/Kōdōkan_ kommen insgesamt 150 mal vor, _Eisho-ji_ nur 9 mal.
-
-
-#underline[Verbesserungsvorschläge:]
-  
-- Historische Timeline präzisieren: Passagen, in denen _first dojo_ oder _initial site_ vorkommen mehr priorsieren.
-- Frage stärker historisch kontextualisieren: _What was the very first dojo site in Tokyo founded by Kano in 1882?_ 
-*/
 == Zusammenfassung der Verbesserungsansätze
 
 1. Präzisere Frage-Formulierungen  
@@ -897,72 +900,233 @@ _Kōdōkan Judo Institute_ ist nicht der ursprüngliche Dojo-Name in Tokio, sond
    - Post-Processing: Auswertung des Antwortspans, um Vollständigkeit und Kategoriezugehörigkeit zu prüfen.
 
 3. Data Augmentation und Fine-Tuning  
-   - Hinzufügen von QA-Beispielen, die häufige Fehlerfälle adressieren (z. B. orthografische Varianten, synonymische Übersetzungen).  
-   - Nutzung von kontrastiven Beispielen: Positiv- und Negativ-Beispiele einbinden, um das Modell für Fallen (_philosophy_ statt _sutemi waza_) zu sensibilisieren.
+   - Hinzufügen von QA-Beispielen, die häufige Fehlerfälle adressieren.  
+   - Nutzung von kontrastiven Beispielen: Positiv- und Negativ-Beispiele einbinden (Few-Shot Learning).
 
 4. Glossarerweiterung  
-   - Aufbau eines Judo-Wörterbuchs mit Verweisen auf offizielle Begriffe (Techniken, Prinzipien, historische Daten). Das wäre ein strukturierterer Einsatz als der jetzige, wo unterschiedliche Texte einfach konkateniert werden.
+   - Aufbau eines Judo-Wörterbuchs mit Verweisen auf offizielle Begriffe (Techniken, Prinzipien, historische Daten). Das wäre ein strukturierterer Ansatz als der jetzige, wo unterschiedliche Texte einfach konkateniert werden.
    - Nutzung eines externen Knowledge Graphs, um die semantische Validität der extrahierten Antworten zu prüfen. So könnten auch klare Hierarchien zwischen Techniken definiert werden.
 
-Durch diese umfassende Analyse der falsch beantworteten Fragen und die systematischen Verbesserungsvorschläge kann das QA-System deutlich robuster und präziser werden. Die iterative Verfeinerung von Frageformulierung, Kontextauswahl und Modell-Post-Processing bildet die Grundlage für eine nachhaltige Steigerung der Antwortqualität.  	
+Aus den erwähnten Punkten folgt, dass Textkorpus, Frageformulierung und Evaluierungsmethodik alle noch Optimierungspotentiale haben, die das Test-Environment robuster machen können.
 
+= Anwendungsfälle von QA-Systemen in der Praxis
 
-== Performance‑Vergleich
+In dieser Arbeit wurde der Fokus auf Extractive-Question-Answering-Systeme (QA) gelegt, die sowohl Faktenwissen als auch konzeptuelle Zusammenhänge extrahieren. Im Folgenden werden zentrale Einsatzfelder kurz skizziert.
 
-Unsere drei Pipeline‑Varianten erreichen folgende Accuracy auf dem Test‑Subset:
+QA-Systeme mit Fokus auf Fakten- und Konzeptwissen bieten in zahlreichen Domänen hohen Mehrwert. Sie beschleunigen Recherche, verbessern Informationszugang und unterstützen komplexe Entscheidungsprozesse. Zukünftige Fortschritte in semantischen Repräsentationen und multimodaler Integration werden die Einsatzmöglichkeiten weiter ausdehnen.
 
-- *FullContext:* 54/78, 69.2 %  
-  - easy: 17/28, 60.7%
-  - medium: 15/19, 78.9%
-  - hard: 22/31, 71.0%
-#figure(
-  image("assets/acc.png"),
-  caption: [Comparison of Accuracy while providing full context, seperated by question difficulty]
+#show table.cell.where(y: 0): set text(weight: "light")
+#table(
+  columns: 1,
+  stroke: (thickness: 0.25pt, paint: gray),
+  fill: (col, row) => if 
+    row == 0  or row == 2  or row == 4  or row == 6  or row == 8  or 
+    row == 10 or row == 12 or row == 14 or row == 16 or row == 18 or 
+    row == 20 { rgb("#f2f2f2") } else { none }, [
+    Bildung & E-Learning
+  ],
+  [
+    Interaktives Lernen liefert präzise Fakten und kontextuelle Erklärungen zu Lehrtexten. Lehrkraft-Unterstützung erstellt automatisch Quizfragen und erläutert komplexe Konzepte.
+  ],
+  [
+    Customer Support & Helpdesk
+  ],
+  [
+    Automatisierte FAQ-Bearbeitung extrahiert Produktfakten und Prozessabläufe aus Dokumentationen. Multimodale Fehlerdiagnose identifiziert Fehlermeldungen und erklärt dahinterstehende Konzepte.
+  ],
+  [
+    Enterprise Knowledge Management
+  ],
+  [
+    Dokumentenrecherche fördert schnelle Faktenfindung (z. B. Ansprechpartner, Fristen) und semantische Extraktion von Prozessabläufen. Compliance/Audit liefert zitierfähige Passagen und erklärt Risiken bei Nichteinhaltung.
+  ],
+  [
+    Medizinische Informationssysteme
+  ],
+  [
+    Patient:innen-Information beantwortet Dosierungsfragen und erklärt Krankheitszusammenhänge. Forschungsunterstützung extrahiert Studiendaten und konzeptuelle Hypothesen aus Publikationen.
+  ],
+  [
+    Recht & Compliance
+  ],
+  [
+    Juristische Recherche zitiert Gesetzesartikel und erläutert rechtliche Konzepte. Vertragsanalyse identifiziert wesentliche Klauseln und bewertet deren rechtliche Wirkung.
+  ],
+  [
+    Wissenschaftliche Forschung & Literaturübersicht
+  ],
+  [
+    Studienauswertung liefert Stichprobengrößen und konzeptuelle Limitationen aus Papers. Interdisziplinäre Recherchen erklären Methodenübertragungen und vergleichen Fachbegriffe.
+  ],
+  [
+    Öffentliche Dienste & Behörden
+  ],
+  [
+    Verwaltungsportale beantworten Unterlagenfragen und erläutern rechtliche Grundlagen. Krisenkommunikation liefert Notfallfakten und konzeptuelle Empfehlungen aus Leitfäden.
+  ],
+  [
+    Digitale Bibliotheken & Archive
+  ],
+  [
+    Historische Recherche findet Datumsfakten und bietet konzeptuelle Einordnungen zu Ereignissen. Multilinguale Dokumentenerschließung übersetzt Fragen und liefert Fakten sowie Konzepte aus fremdsprachigen Quellen.
+  ],
 )
 
-- *ReducedContext:* 78.6 %  
-- *FineTuned (LoRA):* 92.3 %
+= Fazit
 
-#figure(
-  image("assets/acc_all.png"),
-  caption: [Comparison of Accuracy, based on provided context and further finetuning]
-)
-Accuracy = korrekte Antworten/Anzahl Fragen dot 100\%
+Die Studienarbeit untersuchte systematisch die Leistungsfähigkeit von LLM-basierten Question-Answering-Systemen im Bereich faktischen Wissens. Basierend auf einem domänenspezifischen Korpus (Judo) und einem methodisch fundierten Test-Environment wurden folgende Kernaussagen validiert:
 
-== Diskussion
+- *Begrenzte Faktenzuverlässigkeit*:  
+  Selbst moderne LLMs zeigen signifikante Limitationen bei der Beantwortung faktischer Fragen. Die maximale Accuracy von 69,2 % (Voller Kontext) bestätigt frühere Studien wie @head-to-tail – LLMs sind keine universellen Wissensspeicher.
 
-- *Kontextreduktion:*  
-  −7 % Genauigkeit gegenüber FullContext, jedoch *+40 %* schnellere Inferenz, da nur 5 statt ~200 Abschnitte pro Frage geladen werden.
+- *Kontextreduktion als Double-Edged Sword*:  
+  Semantisches Chunking steigert die Effizienz (bis zu 68 % kürzere Kontexte), führt aber ab >50 % Reduktion zu drastischem Accuracy-Einbruch (≤50 %). Der Sweet Spot liegt bei ~75 % relevanter Chunks (23 % Zeichenreduktion, 62,8 % Accuracy).
 
-- *LoRA‑Fine‑Tuning:*  
-  +7,1 % Genauigkeit gegenüber FullContext bei moderatem zusätzlichem Trainingsaufwand (Adapter-Größe ≪ Modellgröße) und weiterhin schneller Inferenz als Full‑Parameter Fine‑Tuning.
+- *Evaluierungsmetrik entscheidend*:  
+  Herkömmliche String-Metriken (EM, F1) scheitern an semantischen Nuancen. SAS (Cosine Similarity ≥0.7) erwies sich als robuste Alternative zur Bewertung inhaltlicher Korrektheit.
 
-= Zusammenfassung und Ausblick
+- *Fehlerprofile zusammengefasst*:
+  - *Easy-Fragen*: Fehler durch Generalisierung
+  - *Medium/Hard-Fragen*: Kategorienverwechslungen und Kontextinkonsistenzen.
+  - *Geschlossene Fragen*: (Ja/Nein) bereiten LLMs besondere Schwierigkeiten.
 
-== Schlussfolgerungen
+- *LoRA-Fine-Tuning ohne Breakthrough*:  
+  In diesem Use Case brachte parameter-effizientes Fine-Tuning keinen Accuracy-Zuwachs – ein Hinweis auf inhärente Wissenslücken, nicht nur Domänenadaptionsbedarf.
 
-Unsere Ergebnisse zeigen deutlich, dass *LoRA‑basierte Adapter* dem Standard‑FullContext‑Ansatz in puncto Genauigkeit überlegen sind und gleichzeitig effizienter trainiert werden können. Die *semantische Kontextreduktion* bietet einen guten Kompromiss zwischen Geschwindigkeit und Performance, eignet sich aber eher für Szenarien mit begrenztem Rechenbudget.
+= Ausblick
 
-== Ausblick
+Basierend auf den Erkenntnissen ergeben sich folgende Forschungs- und Optimierungsperspektiven:
 
-Für zukünftige Arbeiten empfehlen sich:
+== Methodische Weiterentwicklungen
 
-- *Generative Hybridmodelle (RAG):*  
-  Kombination aus LoRA‑Fein‑Tuning und Retrieval‑Augmented Generation.
+- *Adaptives Chunking*:  
+  Dynamische Chunk-Auswahl basierend auf semantischer Score-Verteilung (z. B. Threshold ≥0.6) statt fixer Reduktionsraten.
 
-- *Multi‑Hop QA:*  
-  Erweiterung auf Datensätze wie HotpotQA für komplexere Fragestellungen.
+- *Hybride Evaluierung*:  
+  Kombination von SAS mit regelbasierten Filtern (z. B. Fachbegriffslexika) zur Reduktion von Fehlklassifikationen bei Synonymen. Dies ist auch durch die Angabe von mehreren Musterantworten pro Frage realisierbar.
 
-- *Live‑Evaluation:*  
-  Test mit echten Nutzeranfragen in Chatbot‑Prototypen und Feedback‑Schleifen.
-== Schlussfolgerungen
+- *Strukturierte Kontextanreicherung*:  
+  Integration von Knowledge Graphs zur expliziten Modellierung von Begriffs-Hierarchien (z. B. _sutemi-waza ⊂ nage-waza_).
 
-== Empfehlungen
+== Architekturinnovationen
 
-= Anhang
-- Vollständige Code-Listings im Notebook
-- Glossar & Abkürzungen
+- *Few-Shot Prompt Engineering*:  
+  Kontrastive Beispiele (positiv und negativ) in Prompts, um das Modell auf präzise Begriffe oder die erwartete Antwort-Art zu konditionieren. 
 
-#pagebreak()
+- *Multimodale Erweiterung*:  
+  Kombination von Text-QA mit visuellen Technik-Diagrammen würde weitere spannende Usecases ermöglichen.
+
+Die Arbeit unterstreicht: LLM-basiertes QA ist ein leistungsfähiges, aber begrenztes Werkzeug. Seine Zuverlässigkeit hängt maßgeblich von präziser Fragenformulierung und einem passend zugeschnittenen Kontext ab – besonders bei faktisch kritischen Anwendungen.
+
+
 = Bibliographie
 #bibliography("zotero.bib", style: "american-psychological-association", title: none)
+
+= Anhang
+
+== Easy-Fragen
+#table(
+  columns: (2fr, 1fr),
+  stroke: 0.5pt + gray.lighten(50%),
+  table.header(
+    [Frage], [Antwort],
+  ),
+  [What does judo mean?], [gentle way],
+  [Who founded judo?], [Kanō Jigorō],
+  [What is the name of the school Kanō Jigorō established?], [Kōdōkan],
+  [What is the judo uniform called?], [jūdōgi],
+  [What color belt do novices wear?], [white],
+  [What color belt do masters wear?], [black],
+  [What is the term for judo students?], [jūdōka],
+  [What is the term for free practice in judo?], [randori],
+  [What is the objective of judo?], [throw, pin, or submit opponent],
+  [What does ippon mean?], [one point],
+  [What does waza-ari mean?], [half point],
+  [What is a minor point called?], [yuko],
+  [What is the category for standing techniques?], [tachi-waza],
+  [What is the category for ground techniques?], [ne-waza],
+  [Who is the person performing the throw?], [tori],
+  [Who is the person receiving the throw?], [uke],
+  [Name a shime-waza technique.], [Nami-juji-jime],
+  [Name a kansetsu-waza technique.], [Ude-garami],
+  [Name an osaekomi-waza technique.], [Kesa-gatame],
+  [What type of contact is judo?], [full contact],
+  [Is judo mixed-sex?], [no],
+  [What is the focus of judo?], [throwing],
+  [What does judogi translate to?], [judo attire],
+  [What does judoka mean?], [judo performer],
+  [What does nage-waza include?], [throwing techniques],
+  [What is the governing body of international judo?], [International Judo Federation],
+  [What do judoka wear on their feet during practice?], [bare feet],
+  [What is the traditional judo attire made of?], [strong white cloth],
+)
+
+== Medium-Fragen
+
+#table(
+  columns: (2fr, 1fr),
+  stroke: 0.5pt + gray.lighten(50%),
+  table.header(
+    [Frage], [Antwort],
+  ),
+  [What is the term for pre-arranged forms in judo?], [kata],
+  [From which martial art did judo originate?], [jujitsu],
+  [What is the Japanese term for throwing techniques?], [nage-waza],
+  [What is the category for sacrifice throws?], [sutemi-waza],
+  [What is the category for hip throwing techniques?], [koshi-waza],
+  [What is the category for foot throwing techniques?], [ashi-waza],
+  [What is the maximum dan rank in judo?], [10th dan],
+  [What is the symbol at the center of the Kodokan emblem?], [red circle],
+  [What black belt rank is shodan?], [first rank],
+  [Name a Kodokan kata.], [Ju-no-kata],
+  [What does katame-waza include?], [grappling techniques],
+  [What did Kano eliminate from his art?], [the most dangerous techniques],
+  [What did Kano preserve in kata?], [classical techniques of jujitsu],
+  [What influenced European and Russian judoka?], [their strong wrestling traditions],
+  [What Russian art was based on judo?], [sambo],
+  [Which American judoka is also an MMA fighter?], [Ronda Rousey],
+  [How many national federations does the IJF bring together?], [more than 200],
+  [How many continental unions does the IJF have?], [5],
+  [Where is the International Judo Federation headquartered?], [Budapest, Hungary],
+)
+
+== Hard-Fragen
+
+#table(
+  columns: (2fr, 1fr),
+  stroke: 0.5pt + gray.lighten(50%),
+  table.header(
+    [Frage], [Antwort],
+  ),
+  [In what year was judo founded?], [1882],
+  [What is the Japanese term for grappling techniques?], [katame-waza],
+  [What is the Japanese term for body-striking techniques?], [atemi-waza],
+  [What is the Japanese term for blocks and parries?], [uke-waza],
+  [What is the Japanese term for resuscitation techniques?], [kappo],
+  [How many throws are in the Kodokan Gokyo-no-waza?], [67],
+  [When did men's judo first appear at the Olympics?], [1964],
+  [When did women's judo first appear at the Olympics?], [1992],
+  [In what year did the first women's World Judo Championships take place?], [1980],
+  [In what year did women's judo debut as a demonstration sport at the Olympics?], [1988],
+  [What are the two guiding principles of judo?], [Seiryoku‑Zen'yō and Jita‑Kyōei],
+  [What does Seiryoku‑Zen'yō mean?], [maximum efficient use of energy],
+  [What does Jita‑Kyōei mean?], [mutual welfare and benefit],
+  [In what year was the International Judo Federation founded?], [1951],
+  [Who was the first president of the International Judo Federation?], [Aldo Torti],
+  [Who succeeded Aldo Torti as IJF president?], [Risei Kano],
+  [What shape is the Kodokan emblem?], [octagonal mirror],
+  [Which two students received the first ever shodan ranks?], [Tsunejirō Tomita and Shiro Saigo],
+  [Name a forbidden sacrifice throw in competition.], [Kani basami],
+  [Name a prohibited katame-waza technique.], [Do-jime],
+  [Name a non-Kodokan Japanese kata.], [Go-no-sen-no-kata],
+  [In what year did Kano open a women's section at the Kodokan?], [1923],
+  [Who dedicated her life to spreading women's judo?], [Keiko Fukuda],
+  [In what year was the European Judo Union first created?], [1932],
+  [Where were the first European Judo Championships held?], [Dresden],
+  [What does uke-waza include?], [blocks and parries],
+  [What does atemi-waza include?], [body-striking techniques],
+  [What did Kano stress in practice?], [randori],
+  [What English phrase describes ju yoku go o seisu?], [softness controls hardness],
+  [What was judo’s inclusion status for the 1940 Tokyo Olympics?], [demonstration sport],
+  [Which Olympic Games marked judo’s competitive transformation?], [1964 Tokyo Olympics],
+)
