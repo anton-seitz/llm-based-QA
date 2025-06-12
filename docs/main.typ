@@ -60,7 +60,7 @@ Im letzten Schritt erfolgt die systematische Auswertung der gewonnenen Daten. Da
 = Einleitung
 
 == Motivation
-Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Genaugkeit im Fakten‑#acr("QA") @head-to-tail. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit. Die Zuverlässigkeit und Limitationen solcher Systeme zu untersuchen sollen hier Anhand eines Test-Environment systematisch untersucht werden.
+Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Genauigkeit im Fakten‑#acr("QA") @head-to-tail. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit. Die Zuverlässigkeit und Limitationen solcher Systeme zu untersuchen sollen hier Anhand eines Test-Environment systematisch untersucht werden.
 
 == Zielsetzungen
 - Aufbau eines wiederholbaren #acr("QA")‑Test‑Environments  
@@ -153,8 +153,7 @@ Generative AI bezeichnet KI-Ansätze, die neue Inhalte wie Texte, Bilder oder Vi
 Unternehmen nutzen Generative AI z.B. um in Echtzeit Produktbilder oder Werbeclips zu erzeugen, die exakt zu Nutzerpräferenzen passen. So kann z. B. eine Online-Modeplattform  automatisch Outfits in verschiedenen Stilen generieren @McKinsey2024_StateOfAI.
 /*
 === Transformer‑Architektur  
-Der Transformer ist die Standardarchitektur heutiger LLMs @vaswani2017attention. Er besteht aus gestapelten Encoder‑ und/oder Decoder‑Blöcken mit Self‑Attention und Feed‑Forward-Netzwerken, erlaubt paralleles Training und erfasst langreichweitige Abhängigkeiten.
-
+Der Transformer ist die Standardarchitektur heutiger LLMs @vaswani2017attention. Er besteht aus gestapelten Encoder‑ und/oder Decoder‑Blöcken mit Self‑Attention und Feed‑Forward-Netzwerken, erlaubt paralleles Training.
 $ "Attention"(Q, K, V) = "softmax"(frac(Q K^T, sqrt(d_k))) V $
 
 $ "MultiHead"(Q, K, V) = "concat"("head"_1, dots, "head"_h) W^O $
@@ -205,7 +204,7 @@ Dabei sind:
     image("fine-tuning.png"),
     caption: [Full‑Parameter‑Fine‑Tuning vs #acr("LoRA") @intel-ft]
 )
-@intel-ft zeigt, dass beim Full-Parameter-Tuning alle Gewichte (inklusive Bias) eines vortrainierten Layers direkt angepasst werden, während #acr("LoRA") die ursprünglichen Parameter einfriert und ausschließlich zwei low-rank, bzw. Matrizen A und B trainiert, deren skaliertes Produkt als Residual zum ursprünglichen Layer-Output addiert wird. Dadurch reduziert #acr("LoRA") den Speicher- und Rechenaufwand beim Fine-Tuning erheblich, da nur ein Bruchteil der Parameter trainiert werden.Das bedeutet, anstelle von $d dot k$ Parametern werden nur $(d + k) dot r$ Parameter trainiert:
+@intel-ft zeigt, dass beim Full-Parameter-Tuning alle Gewichte (inklusive Bias) eines vortrainierten Layers direkt angepasst werden, während #acr("LoRA") die ursprünglichen Parameter einfriert und ausschließlich zwei low-rank, bzw. Matrizen A und B trainiert, deren skaliertes Produkt als Residual zum ursprünglichen Layer-Output addiert wird. Dadurch reduziert #acr("LoRA") den Speicher- und Rechenaufwand beim Fine-Tuning erheblich, da nur ein Bruchteil der Parameter trainiert werden. Das bedeutet, anstelle von $d dot k$ Parametern werden nur $(d + k) dot r$ Parameter trainiert:
 
 $ frac((d + k) dot r, d dot k) "ll" 1 $
 
@@ -241,7 +240,7 @@ $ "F1" = 2 |P ∩ G| / (|P| + |G|) $
 */
 == Weitere Benchmarks
 - Natural Questions dokumentiert reale Suchanfragen und ist offen für Closed-Book #acr("QA") @kwiatkowski2019nq
-- Hotpot#acr("QA") fordert Multi-Hop-Reasoning
+- Hotpot#acr("QA") erfordert Multi-Hop-Reasoning
 - TyDi#acr("QA"), XQuAD und ML#acr("QA") testen multilinguale Fähigkeiten @rajpurkar2019tydiqa
 
 == Metriken zur #acr("QA")-Bewertung
@@ -377,7 +376,7 @@ Dieser Abschnitt dokumentiert die iterative Entwicklung und Evaluierung verschie
 Für jede Frage wurde der gesamte Textkorpus (bestehend aus mehreren Quellen) als Kontext an das Frage-Antwort-Modell übergeben. Dieser Kontext wurde in einer Text-Datei abgelegt und beinhaltet die o.g. Webseitinhalte, die einfach aneinander konkateniert wurden. Dabei erreicht er eine Länge von ca. 140 000 Zeichen.
 
 *Beobachtungen*:
-- *Laufzeit*: Sehr hohe Antwortzeiten aufgrund des umfangreichen Kontextes: Jede Frage benötigt etwa 2 Minuten Rechenzeit auf dem Laptop des Entwicklers. Später wurde das Jupyter-Notebook auf Google Collab ausgeführt, was eine deutlich schnellere Laufzeit ermöglichte (ca. 10-20x schneller).
+- *Laufzeit*: Sehr hohe Antwortzeiten aufgrund des umfangreichen Kontextes: Jede Frage benötigt etwa 2 Minuten Rechenzeit auf dem Laptop des Entwicklers. Später wurde das Jupyter-Notebook auf Google Colab ausgeführt, was eine deutlich schnellere Laufzeit ermöglichte (ca. 10-20x schneller).
 - *Genauigkeit*: Solide, jedoch nicht optimal, da irrelevante Informationen den Kontext evtl. verwässern. 
 - *Token-Limit*: Gefahr des Überschreitens des maximalen Token-Limits des Modells, was zu abgeschnittenen Kontexten führen kann. Das verwendete Modell deepset-roberta-squad2
 
@@ -457,7 +456,7 @@ Die Farben basieren auf einer Rot–Gelb–Grün-Skala, wobei niedrige Accuracy-
 == Beobachtungen
 
 - *Starker Genauigkeitsverlust unter 50 % Reduktion*  
-  Ab 50 % Reduktion sinkt die Accuracy auf 50.0 % oder darunter, was für faktische QA-Anwendungen zu ungenau ist. Wenn der für eine bestimmte Frage relevante Teil des Textkorpus nicht mehr im reduzierten Kontext enthalten ist, entstehen Nonsense-Antworten. Diese wurde hier besonders bei der 50% Schwelle bemerkbar, wo teilweise auch garkeine Antwort geliefert wurde. 
+  Ab 50 % Reduktion sinkt die Accuracy auf 50.0 % oder darunter, was für faktische QA-Anwendungen zu ungenau ist. Wenn der für eine bestimmte Frage relevante Teil des Textkorpus nicht mehr im reduzierten Kontext enthalten ist, entstehen Nonsense-Antworten. Diese wurde hier besonders bei der 50% Schwelle bemerkbar, wo teilweise auch gar keine Antwort geliefert wurde. 
 
 - *Semantische Qualität der Chunks*  
   Top-Chunks (Score > 0.7) enthalten häufig Definitionen oder Listen mit QA-relevanten Fakten (z. B. Judo-Grundbegriffe). Chunks mit Scores < 0.5 liefern eher allgemeine oder philosophische Inhalte und sind weniger hilfreich.  
@@ -944,7 +943,7 @@ QA-Systeme mit Fokus auf Fakten- und Konzeptwissen bieten in zahlreichen Domäne
     Medizinische Informationssysteme
   ],
   [
-    Patient:innen-Information beantwortet Dosierungsfragen und erklärt Krankheitszusammenhänge. Forschungsunterstützung extrahiert Studiendaten und konzeptuelle Hypothesen aus Publikationen.
+    Patienten-Information beantwortet Dosierungsfragen und erklärt Krankheitszusammenhänge. Forschungsunterstützung extrahiert Studiendaten und konzeptuelle Hypothesen aus Publikationen.
   ],
   [
     Recht & Compliance

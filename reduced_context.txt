@@ -1,7 +1,10 @@
 
 Judo (柔道, jūdō), meaning "gentle way", is a modern Japanese martial art and combat sport, that originated in Japan in the late nineteenth century. Its most prominent feature is its competitive element, where the object is to either throw one's opponent to the ground, pin the opponent to the ground, or force an opponent to submit by a joint lock or choke. Strikes as well as weapons defences are a part of Judo, but only in pre-arranged forms (kata) and are not allowed in Judo competition or free practice[1].
 
-Techniques are generally intended to turn an opponent’s force to one’s own advantage rather than to oppose it directly. A ritual of courtesy in practice is intended to promote an attitude of calm readiness and confidence. The usual costume, known as jūdōgi, is a loose jacket and trousers of strong white cloth. White belts are worn by novices and black by masters, with intermediate grades denoted by other colours. Jūdōka (students of judo) perform the sport with bare feet.
+A judo teacher is called sensei (先生).[110] Traditionally, that title was reserved for instructors of 4th dan and above.[111]
+Judogi (uniform)
+Main article: Judogi
+The judogi is made from a heavy weave to withstand the stress of throwing and grappling.
 
 From Wikipedia, the free encyclopedia
 This article is about the martial art and sport. For the computer programming environment, see JUDO (software).
@@ -15,10 +18,7 @@ Famous practitioners	See: List of judoka
 Parenthood	Various koryū Jujutsu schools, principally Tenjin Shin'yō-ryū, Kitō-ryū,
 Ancestor arts	
 
-A judo teacher is called sensei (先生).[110] Traditionally, that title was reserved for instructors of 4th dan and above.[111]
-Judogi (uniform)
-Main article: Judogi
-The judogi is made from a heavy weave to withstand the stress of throwing and grappling.
+Techniques are generally intended to turn an opponent’s force to one’s own advantage rather than to oppose it directly. A ritual of courtesy in practice is intended to promote an attitude of calm readiness and confidence. The usual costume, known as jūdōgi, is a loose jacket and trousers of strong white cloth. White belts are worn by novices and black by masters, with intermediate grades denoted by other colours. Jūdōka (students of judo) perform the sport with bare feet.
 
 Judo is a hierarchical art, where seniority of judoka is designated by what is known as the kyū (級, kyū) -dan (段, dan) ranking system. This system was developed by Jigoro Kano and was based on the ranking system in the board game Go.[118]
 
@@ -61,6 +61,10 @@ Judo (Japanese: 柔道, Hepburn: Jūdō, lit. 'gentle way') is an unarmed mode
 Judo was originally considered to be a form of Jujutsu and was known as Kano Jujutsu, though it came to be considered a separate martial art[2][3][4]. The practicers of this discipline are called "judoka" (柔道家, "judo performer")[5], and the judo uniform is called "judogi" (柔道着 or 柔道 衣 , "judo attire")[6].
 History
 
+Judo techniques were divided into three categories: throws or nage waza, controls or katame waza and kicks or atemi waza. In competition, atemi waza are not allowed.
+
+Judo practitioners traditionally wear white uniforms called keikogi (稽古着, keikogi, practice clothing) or jūdōgi (柔道着, judogi, judo clothing)[112] sometimes abbreviated in the west as "gi". It comprises a heavy cotton kimono-like jacket called an uwagi (上衣, jacket), similar to traditional hanten (半纏, workers' jackets) fastened by an obi (帯, obi, belt), coloured to indicate rank, and cotton draw-string zubon (ズボン, trousers).[113] Early examples of keikogi had short sleeves and trouser legs and the modern long-sleeved judogi was adopted in 1906.[114]
+
 This competitive spirit can be seen in the change in the attitude of many jūdōka in regard to scoring. Only clean throws demonstrating superior timing and a knowledge of body mechanics were rewarded with a score in the pre-Olympic period. Currently in judo, the scoring system awards an ippon (“one point”) for a conclusive technique that wins a match by its successful execution, a waza-ari (half point), and minor points (called yuko). In a major shift from traditional judo, in a modern match a jūdōka will often play conservatively and work for a win based only on partial scores from minor points, rather than risking all in the attempt for an ippon. This shift to competitive judo has been aided by the success of European and Russian jūdōka, influenced by their strong wrestling traditions and in particular the Russian development of sambo (which was itself based upon judo).
 Judo
 Japanese Martial Arts
@@ -69,8 +73,6 @@ Country of origin 	Japan
 Parent arts 	Jujutsu
 Descendant arts 	Brazilian Jiu-Jitsu, Sambo
 Focus 	Throwing
-
-Judo techniques were divided into three categories: throws or nage waza, controls or katame waza and kicks or atemi waza. In competition, atemi waza are not allowed.
 
 
 American Traditional Jujutsu Association Judo Student Manual
@@ -147,16 +149,10 @@ implies a method consisting of a collection of physical techniques. Accordingly,
 do, meaning way, road or path, which implies a more philosophical context than jutsu and has a common origin with
 the Chinese concept of tao. Thus Kano renamed it Judo.
 
-Judo practitioners traditionally wear white uniforms called keikogi (稽古着, keikogi, practice clothing) or jūdōgi (柔道着, judogi, judo clothing)[112] sometimes abbreviated in the west as "gi". It comprises a heavy cotton kimono-like jacket called an uwagi (上衣, jacket), similar to traditional hanten (半纏, workers' jackets) fastened by an obi (帯, obi, belt), coloured to indicate rank, and cotton draw-string zubon (ズボン, trousers).[113] Early examples of keikogi had short sleeves and trouser legs and the modern long-sleeved judogi was adopted in 1906.[114]
-
-Judo’s direction has changed since its inception. Kanō designed judo to be a safe, cooperative method of physical education. Jūdōka spend a great amount of time learning to fall safely. Even in randori, the person performing the throw (the tori) helps the person receiving (the uke) to the ground by holding onto his arm and guiding him to a safe fall. By contrast, in Western wrestling one does not help an opponent to fall, and coaches spend little if any time teaching their wrestlers how to fall safely. As judo competitions became more popular, however, jūdōka began to exhibit the competitive spirit more usually found in Western wrestlers; they began concentrating on judo as a sport rather than as a drill or a way of life. The inclusion of judo in the Olympic Games marked the turning point in this transformation.
-
 This is a list of judo techniques. They are categorized into throwing techniques (nage-waza), grappling techniques (katame-waza), body-striking techniques (atemi-waza), blocks and parries (uke-waza), receiving/breakfall techniques (ukemi), and resuscitation techniques (kappo).
 
-Kano's vision for judo was one of a martial way that could be practiced realistically. Randori (free practice) was a central part of judo pedagogy and shiai (competition) a crucial test of a judoka's understanding of judo.[107] Safety necessitated some basic innovations that shaped judo's development. Atemi waza (striking techniques) were entirely limited to kata (prearranged forms) early in judo's history. Kansetsu waza (joint manipulation techniques) were limited to techniques that focused on the elbow joint. Various throwing techniques that were judged to be too dangerous to practice safely at full force, such as all joint-locking throws from Jujutsu, were also prohibited in shiai. To maximise safety in nage waza (throwing techniques), judoka trained in ukemi (break falls) and practiced on tatami (rice straw mats).[citation needed]
-Kansetsu and shime waza
-
-Initially considered as a self-defence system, judo is step by step recognized for its educational value, its benefits for the development of the body and the character.
+Descendant arts	Kosen judo, Bartitsu, Yoseikan Budō, Brazilian jiu-jitsu, Sambo, ARB, CQC, Krav Maga, Kapap, Kūdō, MMA, modern Arnis, Luta Livre, shoot wrestling, submission grappling, Vale Tudo
+Olympic sport	
 
     Male – Kōdōkan 10th dan
     Male – International Judo Federation 10th dan
@@ -164,15 +160,12 @@ Initially considered as a self-defence system, judo is step by step recognized f
     Independent Bodies, 10th dan
     Female – 10th dan, National Governing Body
 
-Descendant arts	Kosen judo, Bartitsu, Yoseikan Budō, Brazilian jiu-jitsu, Sambo, ARB, CQC, Krav Maga, Kapap, Kūdō, MMA, modern Arnis, Luta Livre, shoot wrestling, submission grappling, Vale Tudo
-Olympic sport	
+Kano's vision for judo was one of a martial way that could be practiced realistically. Randori (free practice) was a central part of judo pedagogy and shiai (competition) a crucial test of a judoka's understanding of judo.[107] Safety necessitated some basic innovations that shaped judo's development. Atemi waza (striking techniques) were entirely limited to kata (prearranged forms) early in judo's history. Kansetsu waza (joint manipulation techniques) were limited to techniques that focused on the elbow joint. Various throwing techniques that were judged to be too dangerous to practice safely at full force, such as all joint-locking throws from Jujutsu, were also prohibited in shiai. To maximise safety in nage waza (throwing techniques), judoka trained in ukemi (break falls) and practiced on tatami (rice straw mats).[citation needed]
+Kansetsu and shime waza
 
-Judo's philosophy revolves around two primary principles: "Seiryoku-Zenyo" (精力善用, lit. 'good use of energy') and "Jita-Kyoei" (自他共栄, lit. 'mutual welfare and benefit').[4][7][8][9][10] The philosophy and subsequent pedagogy developed for judo became the model for other modern Japanese martial arts that developed from Ko-ryū. Judo has also spawned a number of derivative martial arts around the world, such as Brazilian jiu-jitsu, Krav Maga, sambo, and ARB. Judo also influenced the formation of other combat styles such as close-quarters combat (CQC), mixed martial arts (MMA), shoot wrestling and submission wrestling.
-History and philosophy
-Early life of its founder
-Jigoro Kano, founder of judo
+Judo’s direction has changed since its inception. Kanō designed judo to be a safe, cooperative method of physical education. Jūdōka spend a great amount of time learning to fall safely. Even in randori, the person performing the throw (the tori) helps the person receiving (the uke) to the ground by holding onto his arm and guiding him to a safe fall. By contrast, in Western wrestling one does not help an opponent to fall, and coaches spend little if any time teaching their wrestlers how to fall safely. As judo competitions became more popular, however, jūdōka began to exhibit the competitive spirit more usually found in Western wrestlers; they began concentrating on judo as a sport rather than as a drill or a way of life. The inclusion of judo in the Olympic Games marked the turning point in this transformation.
 
-judo, system of unarmed combat, now primarily a sport. The rules of the sport of judo are complex. The objective is to cleanly throw, to pin, or to master the opponent, the latter being done by applying pressure to arm joints or to the neck to cause the opponent to yield.
+Initially considered as a self-defence system, judo is step by step recognized for its educational value, its benefits for the development of the body and the character.
 
 "IJF Hall of Fame in Paris" (PDF). American Judo – A Journal of the United States Judo Association: 11–12. 2005. Archived (PDF) from the original on 2016-03-04. Retrieved 2016-02-24.
 "International Judo Federation". Intjudo.eu. Archived from the original on 2016-03-04. Retrieved 2016-02-24.
@@ -199,25 +192,17 @@ Mihoces, Gary (13 August 2008). "Rousey's bronze makes U.S. history in women's j
 [1] Archived 2019-04-02 at the Wayback Machine Putin awarded eighth dan by international body by Reuters
 "Legendary Karate Master Arrives to Moscow to Award Vladimir Putin Black Belt >> РИА "Восток-Медиа"". Archived from the original on 2014-03-01. Retrieved 2012-10-11. Legendary Karate Master Arrives to Moscow to Award Vladimir Putin Black Belt
 
+Judo's philosophy revolves around two primary principles: "Seiryoku-Zenyo" (精力善用, lit. 'good use of energy') and "Jita-Kyoei" (自他共栄, lit. 'mutual welfare and benefit').[4][7][8][9][10] The philosophy and subsequent pedagogy developed for judo became the model for other modern Japanese martial arts that developed from Ko-ryū. Judo has also spawned a number of derivative martial arts around the world, such as Brazilian jiu-jitsu, Krav Maga, sambo, and ARB. Judo also influenced the formation of other combat styles such as close-quarters combat (CQC), mixed martial arts (MMA), shoot wrestling and submission wrestling.
+History and philosophy
+Early life of its founder
+Jigoro Kano, founder of judo
+
+judo, system of unarmed combat, now primarily a sport. The rules of the sport of judo are complex. The objective is to cleanly throw, to pin, or to master the opponent, the latter being done by applying pressure to arm joints or to the neck to cause the opponent to yield.
+
 Thanks to the efforts of Kano and his disciples, Kodokan Judo, developed within the Japanese emigrant communities (USA, Brazil, Canada) as well as in Germany, Britain and the British-influenced countries.
 
 Commonly described as a separate style of Judo, Kosen judo is a competition rules set of Kodokan judo that was popularized in the early 20th century for use in Japanese Special High Schools Championships held at Kyoto Imperial University.[82] The word "Kosen" is an acronym of Koto Senmon Gakko (高等専門学校, literally "Higher Professional School"). Currently, competitions are organized between Japan's seven former Imperial Universities and referred to as Nanatei Judo (ja:七帝柔道, literally "Seven Emperors Judo"). Kosen judo's focus on newaza has drawn comparisons with Brazilian jiu-jitsu.
 Freestyle Judo
-
-The objective of competitive judo is to throw an opponent, immobilize them with a pin, or force an opponent to submit with a joint lock or a choke. While strikes and use of weapons are included in some pre-arranged forms (kata), they are not frequently trained and are illegal in judo competition or free practice.[4] Judo's international governing body is the International Judo Federation, and competitors compete in the international IJF professional circuit.
-
-Kata (形, kata, forms) are pre-arranged patterns of techniques and in judo, with the exception of elements of the Seiryoku-Zen'yō Kokumin-Taiiku, they are all practised with a partner. Their purposes include illustrating the basic principles of judo, demonstrating the correct execution of a technique, teaching the philosophical tenets upon which judo is based, allowing for the practice of techniques that are not allowed in randori, and to preserve ancient techniques that are historically important but are no longer used in contemporary judo.[46]
-
-"Katame Waza vs Newaza • What's the Difference?". Jukido Academy. Retrieved February 19, 2025.
-Kano, Jigoro (1986). Kodokan Judo. Kodansha International Ltd. p. 55.
-"Ne waza (Ground techniques)". Judo Channel. Retrieved February 19, 2025.
-Kano, Jigoro (1986). Kodokan Judo. Kodansha International Ltd. p. 59.
-The Kodokan Judo Institute. Kodokan.Org classification of techniques Archived 2012-04-15 at the Wayback Machine. www.kodokan.org. URL last accessed March 4, 2006.
-"柔道の技名称について". Kodokan. 2017-04-06. Retrieved 2019-03-03.
-International Judo Federation.IJF Referee Rules Archived 2012-04-15 at the Wayback Machine. www.ijf.org. URL last accessed March 5, 2006
-Wolfe, David. The David Brent Wolfe Dictionary of Japanese Martial Art Terms Archived 2005-02-11 at the Wayback Machine. pages.prodigy.net. URL last accessed February 11, 2006.
-Inokuma, Isao; Sato, Nobuyuki (1987). Best Judo. Kodansha America. ISBN 0-87011-786-6.
-United States Judo Association. Exam for all senior Judo ranks. www.uky.edu. URL last accessed February 5, 2006.
 
 Judo
 Takamasa Anai takes down his opponent during the Grand Slam Tokyo.
@@ -230,7 +215,20 @@ Presence
 Country or region	Worldwide
 Olympic	Debuted in 1964
 
-In May 1882 Jigoro Kano was inspired by traditional forms of combat to create a method of physical, intellectual and moral education, which he named judo.
+"Katame Waza vs Newaza • What's the Difference?". Jukido Academy. Retrieved February 19, 2025.
+Kano, Jigoro (1986). Kodokan Judo. Kodansha International Ltd. p. 55.
+"Ne waza (Ground techniques)". Judo Channel. Retrieved February 19, 2025.
+Kano, Jigoro (1986). Kodokan Judo. Kodansha International Ltd. p. 59.
+The Kodokan Judo Institute. Kodokan.Org classification of techniques Archived 2012-04-15 at the Wayback Machine. www.kodokan.org. URL last accessed March 4, 2006.
+"柔道の技名称について". Kodokan. 2017-04-06. Retrieved 2019-03-03.
+International Judo Federation.IJF Referee Rules Archived 2012-04-15 at the Wayback Machine. www.ijf.org. URL last accessed March 5, 2006
+Wolfe, David. The David Brent Wolfe Dictionary of Japanese Martial Art Terms Archived 2005-02-11 at the Wayback Machine. pages.prodigy.net. URL last accessed February 11, 2006.
+Inokuma, Isao; Sato, Nobuyuki (1987). Best Judo. Kodansha America. ISBN 0-87011-786-6.
+United States Judo Association. Exam for all senior Judo ranks. www.uky.edu. URL last accessed February 5, 2006.
+
+The objective of competitive judo is to throw an opponent, immobilize them with a pin, or force an opponent to submit with a joint lock or a choke. While strikes and use of weapons are included in some pre-arranged forms (kata), they are not frequently trained and are illegal in judo competition or free practice.[4] Judo's international governing body is the International Judo Federation, and competitors compete in the international IJF professional circuit.
+
+Kata (形, kata, forms) are pre-arranged patterns of techniques and in judo, with the exception of elements of the Seiryoku-Zen'yō Kokumin-Taiiku, they are all practised with a partner. Their purposes include illustrating the basic principles of judo, demonstrating the correct execution of a technique, teaching the philosophical tenets upon which judo is based, allowing for the practice of techniques that are not allowed in randori, and to preserve ancient techniques that are historically important but are no longer used in contemporary judo.[46]
 
 Judo has become a top sport in Israel only recently. Israeli Judo is characterized by a particular emphasis on hip throws, which are executed with a mix of technique and aggression, with the practitioner that has to adjust his sleeves before powerfully gripping and throwing the opponent away.[99][100]
 Sambo
@@ -239,6 +237,8 @@ The international governing body for judo is the International Judo Federation (
 Rank and grading
 Main article: Rank in Judo
 Two children training in judo techniques
+
+In May 1882 Jigoro Kano was inspired by traditional forms of combat to create a method of physical, intellectual and moral education, which he named judo.
 
 Inman (2005) p. 10
 The first Olympic competition to award medals to women judoka was in 1992; in 1988, women competed as a demonstration sport. Inman (2005) p. 11
@@ -369,29 +369,29 @@ Cowen, Thea (2021-10-28). "HAPPY WORLD JUDO DAY 2021!". European Judo Union. Ret
 "WJD 2019: Plant a Tree". www.ijf.org. Retrieved 2023-02-23.
 "WORLD JUDO DAY 2018: FRIENDSHIP". European Judo Union. 2018-10-22. Retrieved 2023-02-23.
 
-Judo pedagogy emphasizes randori (乱取り, literally "taking chaos", but meaning "free practice"). This term covers a variety of forms of practice, and the intensity at which it is carried out varies depending on intent and the level of expertise of the participants. At one extreme, is a compliant style of randori, known as Yakusoku geiko (約束稽古, prearranged practice), in which neither participant offers resistance to their partner's attempts to throw. A related concept is that of Sute geiko (捨稽古, throw-away practice), in which an experienced judoka allows himself to be thrown by his less-experienced partner.[44] At the opposite extreme from yakusoku geiko is the hard style of randori that seeks to emulate the style of judo seen in competition. While hard randori is the cornerstone of judo, over-emphasis of the competitive aspect is seen as undesirable by traditionalists if the intent of the randori is to "win" rather than to learn.[45]
-Kata (forms)
-See also: Kata
-Jigoro Kano and Yamashita Yoshitsugu performing Koshiki-no-kata
+This is a list of highly notable judoka (judo practitioners).
+This is a dynamic list and may never be able to satisfy particular standards for completeness. You can help by adding missing items with reliable sources.
+Founder
 
 A practitioner of judo is known as a judoka (柔道家). The modern meaning of "judoka" in English is a judo practitioner of any level of expertise,[110] but traditionally those below the rank of 4th dan were called kenkyu-sei (研究生, trainees); and only those of 4th dan or higher were called judoka. (The suffix -ka (家), when added to a noun, means a person with expertise or special knowledge on that subject).
 
 Cuban Judo is characterized by an explosive and high athletic style that puts an emphasis on body conditioning and calculated planning mixed with raw power. In terms of training the athletes use a particularly methodical and intellectual approach to the sport.[95][96]
 Azerbaijani Judo
 
-Gokyo-no-waza (五教の技, Five sets of techniques) is yet another subcategorization of nage-waza into 5 main groups, as well as groups of preserved techniques (habukareta-waza) and new techniques (shinmeisho-no-waza). This grouping has been made for pedagogical purposes ("Learning the throws in order is the key to mastery."[4]).
-Nage-waza (投げ技): throwing techniques
-Judo Nage-waza
-Tachi-waza (立技): standing techniques
-Te-waza (手技): hand throwing techniques
+Judo pedagogy emphasizes randori (乱取り, literally "taking chaos", but meaning "free practice"). This term covers a variety of forms of practice, and the intensity at which it is carried out varies depending on intent and the level of expertise of the participants. At one extreme, is a compliant style of randori, known as Yakusoku geiko (約束稽古, prearranged practice), in which neither participant offers resistance to their partner's attempts to throw. A related concept is that of Sute geiko (捨稽古, throw-away practice), in which an experienced judoka allows himself to be thrown by his less-experienced partner.[44] At the opposite extreme from yakusoku geiko is the hard style of randori that seeks to emulate the style of judo seen in competition. While hard randori is the cornerstone of judo, over-emphasis of the competitive aspect is seen as undesirable by traditionalists if the intent of the randori is to "win" rather than to learn.[45]
+Kata (forms)
+See also: Kata
+Jigoro Kano and Yamashita Yoshitsugu performing Koshiki-no-kata
 
 Kano believed that "jūjutsu" was insufficient to describe his art: although jutsu (術) means "art" or "means", it implies a method consisting of a collection of physical techniques. Accordingly, he changed the second character to dō (道), meaning "way", "road" or "path", which implies a more philosophical context than jutsu and has a common origin with the Chinese concept of tao. Thus Kano renamed it Jūdō (柔道, judo).[27]
 Judo waza (techniques)
 See also: List of judo techniques and List of Kodokan judo techniques
 
-This is a list of highly notable judoka (judo practitioners).
-This is a dynamic list and may never be able to satisfy particular standards for completeness. You can help by adding missing items with reliable sources.
-Founder
+Gokyo-no-waza (五教の技, Five sets of techniques) is yet another subcategorization of nage-waza into 5 main groups, as well as groups of preserved techniques (habukareta-waza) and new techniques (shinmeisho-no-waza). This grouping has been made for pedagogical purposes ("Learning the throws in order is the key to mastery."[4]).
+Nage-waza (投げ技): throwing techniques
+Judo Nage-waza
+Tachi-waza (立技): standing techniques
+Te-waza (手技): hand throwing techniques
 
     Mental training
     Judoka (practitioner)
@@ -410,35 +410,568 @@ See also: Judo at the Summer Olympics
 Judo (1935)
 Olympic Judo pictogram
 
+There are three basic categories of waza (技, techniques) in judo: nage-waza (投げ技, throwing techniques), katame-waza (固技, grappling techniques) and atemi-waza (当て身技, striking techniques).[28] Judo is mostly known for nage-waza and katame-waza.[29]
+
 Although taught within kata (型 or 形) and sometimes used within informal randori (乱取), striking techniques are forbidden in standard judo competitions rules.
 Ude-ate-waza (腕当て技): arm striking techniques
 Kobushi-ate-waza: fist techniques
 
-A judoka's position within the kyu-dan ranking system is displayed by the color of their belt. Beginning students typically wear a white belt, progressing through descending kyu ranks until they are deemed to have achieved a level of competence sufficient to be a dan grade, at which point they wear the kuro obi (黒帯, black belt). The kyu-dan ranking system has since been widely adopted by modern martial arts.[119]
+Freestyle Judo is a form of competitive judo practiced primarily in the United States that retains techniques that have been removed from mainstream IJF rules.[83] Freestyle Judo is currently backed by the International Freestyle Judo Alliance (IFJA). The Amateur Athletic Union (AAU) officially sanctions Freestyle Judo in the United States of America.[84]
+Georgian Judo
 
-There are three basic categories of waza (技, techniques) in judo: nage-waza (投げ技, throwing techniques), katame-waza (固技, grappling techniques) and atemi-waza (当て身技, striking techniques).[28] Judo is mostly known for nage-waza and katame-waza.[29]
+    Jigorō Kanō (Japan, 1860–1938) founded judo, and established the Kōdōkan in 1882. Judo was the first Japanese martial art to gain widespread international recognition, and the first to become an official Olympic sport. Kanō was also a pioneer of international sports. Accomplishments included being the first Asian member of the International Olympic Committee (IOC). His official honours and decorations included the First Order of Merit and Grand Order of the Rising Sun and the Third Imperial Degree. He was inducted to the IJF Hall of Fame on 14 May 1999.[1] The IJF Hall of Fame was established in 1999.[1][2]
 
 For events organized under the auspices of the International judo Federation (IJF), judogi have to bear the IJF Official Logo Mark Label. This label demonstrates that the judogi has passed a number of quality control tests to ensure it conforms to construction regulations ensuring it is not too stiff, flexible, rigid or slippery to allow the opponent to grip or to perform techniques.[116]
 Organizations
 Main article: List of judo organizations
 
-    Jigorō Kanō (Japan, 1860–1938) founded judo, and established the Kōdōkan in 1882. Judo was the first Japanese martial art to gain widespread international recognition, and the first to become an official Olympic sport. Kanō was also a pioneer of international sports. Accomplishments included being the first Asian member of the International Olympic Committee (IOC). His official honours and decorations included the First Order of Merit and Grand Order of the Rising Sun and the Third Imperial Degree. He was inducted to the IJF Hall of Fame on 14 May 1999.[1] The IJF Hall of Fame was established in 1999.[1][2]
-
-An adoption of Kano jiu jitsu (a common name for judo at the time) in Brazil attributed to Mitsuyo Maeda's students,[103] most notably the Gracie family.[104][105] 10th Planet Jiu Jitsu and other wrestling-influenced systems without the gi have also become popular.[106]
-Other styles
-
-Freestyle Judo is a form of competitive judo practiced primarily in the United States that retains techniques that have been removed from mainstream IJF rules.[83] Freestyle Judo is currently backed by the International Freestyle Judo Alliance (IFJA). The Amateur Athletic Union (AAU) officially sanctions Freestyle Judo in the United States of America.[84]
-Georgian Judo
-
-Both judo and jiu-jitsu originated on the island nation of Japan. However, jiu-jitsu is significantly older than judo and is the mother fighting style that judo evolved from. Jiu-jitsu, also known as jujutsu or “the gentle art”, was an unarmed fighting technique that was originally taught to the elite samurai warrior caste to use in case they were separated from their weapon.
-The Rise of Judo From Jiu-Jitsu
-
 Judo also influenced other combat styles such as close-quarters combat (CQC), mixed martial arts (MMA), shoot wrestling and submission wrestling.
 Safety
 
-In 1877, as a student at the University of Tokyo, Kano learned that many jujutsu teachers had been forced to pursue alternative careers, frequently opening Seikotsu-in (整骨院, traditional osteopathy practices).[14] After inquiring at a number of these, Kano was referred to Fukuda Hachinosuke (c. 1828–1880),[15] a teacher of the Tenjin Shin'yō-ryū of jujutsu, who had a small nine mat dōjō where he taught five students.[16] Fukuda is said to have emphasized technique over formal exercise, sowing the seeds of Kano's emphasis on randori (乱取り, randori, free practice) in judo.
+An adoption of Kano jiu jitsu (a common name for judo at the time) in Brazil attributed to Mitsuyo Maeda's students,[103] most notably the Gracie family.[104][105] 10th Planet Jiu Jitsu and other wrestling-influenced systems without the gi have also become popular.[106]
+Other styles
 
     Ohlenkamp, Neil (2006) Judo Unleashed basic reference on judo. ISBN 0-07-147534-6.
     Ohlenkamp, Neil. The 67 Throws of Kodokan Judo. JudoInfo.com. URL last accessed March 6, 2006.
     Sources of kanji: [1], [2], [3], [4]
     The Kodokan Judo Institute. Kodokan.Org classification of techniques. www.kodokan.org. URL last accessed March 4, 2006.
+
+Both judo and jiu-jitsu originated on the island nation of Japan. However, jiu-jitsu is significantly older than judo and is the mother fighting style that judo evolved from. Jiu-jitsu, also known as jujutsu or “the gentle art”, was an unarmed fighting technique that was originally taught to the elite samurai warrior caste to use in case they were separated from their weapon.
+The Rise of Judo From Jiu-Jitsu
+
+A judoka's position within the kyu-dan ranking system is displayed by the color of their belt. Beginning students typically wear a white belt, progressing through descending kyu ranks until they are deemed to have achieved a level of competence sufficient to be a dan grade, at which point they wear the kuro obi (黒帯, black belt). The kyu-dan ranking system has since been widely adopted by modern martial arts.[119]
+
+In 1877, as a student at the University of Tokyo, Kano learned that many jujutsu teachers had been forced to pursue alternative careers, frequently opening Seikotsu-in (整骨院, traditional osteopathy practices).[14] After inquiring at a number of these, Kano was referred to Fukuda Hachinosuke (c. 1828–1880),[15] a teacher of the Tenjin Shin'yō-ryū of jujutsu, who had a small nine mat dōjō where he taught five students.[16] Fukuda is said to have emphasized technique over formal exercise, sowing the seeds of Kano's emphasis on randori (乱取り, randori, free practice) in judo.
+
+    Akira Kurosawa, Sanshiro Sugata (姿三四郎, Sugata Sanshirō, a.k.a. Judo Saga), 1943.
+    Akira Kurosawa, Sanshiro Sugata Part II (續姿三四郎, Zoku Sugata Sanshirō, a.k.a. Judo Saga II), 1945.
+    Johnnie To, Throw Down (柔道龍虎榜, Yau doh lung fu bong), 2004.
+
+Kanō Jigorō (1860–1938) collected the knowledge of the old jujitsu schools of the Japanese samurai and in 1882 founded his Kōdōkan School of judo (from the Chinese jou-tao, or roudao, meaning “gentle way”), the beginning of the sport in its modern form. Kanō eliminated the most dangerous techniques and stressed the practice of randori (free practice), although he also preserved the classical techniques of jujitsu (jūjutsu) in the kata (forms) of judo. By the 1960s judo associations had been established in most countries and affiliated to the International Judo Federation, which is headquartered in Budapest, Hungary.
+Assorted sports balls including a basketball, football, soccer ball, tennis ball, baseball and others.
+Britannica Quiz
+American Sports Nicknames
+
+Kano Jigoro's Kodokan judo is the most popular and well-known style of judo, but is not the only one. The terms judo and jujutsu were quite interchangeable in the early years, so some of these forms of judo are still known as jujutsu or jiu-jitsu either for that reason, or simply to differentiate them from mainstream judo. From Kano's original style of judo, several related forms have evolved—some now widely considered to be
+Kosen judo
+
+Contest (試合, shiai) is a vitally important aspect of judo. In 1899, Kano was asked to chair a committee of the Dai Nippon Butoku Kai to draw up the first formal set of contest rules for jujutsu. These rules were intended to cover contests between different various traditional schools of jujutsu as well as practitioners of Kodokan judo. Contests were 15 minutes long and were judged on the basis of nage waza and katame waza, excluding atemi waza. Wins were by two ippons, awarded in every four-main different path of winning alternatives, by "Throwing", where the opponent's back strikes flat onto the mat with sufficient force, by "Pinning" them on their back for a "sufficient" amount of time, or by "Submission", which could be achieved via Shime-waza or Kansetsu-waza, in which the opponent was forced to give himself or herself up or summon a referee's or corner-judge's stoppage. Finger, toe and ankle locks were prohibited.[64] In 1900, these rules were adopted by the Kodokan with amendments made to prohibit all joint locks for kyu grades and added wrist locks to the prohibited kansetsu-waza for dan grades. It was also stated that the ratio of tachi-waza to ne-waza should be between 70% and 80% for kyu grades and between 60% and 70% for dan grades.[64]
+
+Judo was founded in 1882 by Kano Jigoro and it originates from jūjutsu, a traditional Japanese martial arts. In the same year, Kano enstablished Kōdōkan Judo Institute in Tokyo, marking judo's formal birth.[7]
+
+As a kid, Kano encountered bullying in school because of his small size, which motivated him seek training in jujutsu for self-defense purposes[8]. However, during the Meiji era (1868-1912) Japan was undergoing a significant Westernization[9], which made many Jujutsu instructors to find alternative careers, making it difficult to find Judo instructors[10]. After consulting former jujutsu teachers, Kano was referred to Fukuda Hachinosuke[8], a teacher of jujutsu who had a small dojo where he taught to only five students. Fukuda was said to be more focused on technique over formal training, sowing the seeds of Kano's emphasis on randori (乱取り, free practice)[10].
+
+French Judo is based on tactical Kumi Kata and focuses on breaking the posture of the opponent as well as preventing opponents from attaining a proper grip. This style does not use a huge amount of power, it prefer to use technique, tactics and timing.[93][94] Many French judo practitioners have become World and Olympic champions, like Clarisse Agbegnenou, Émilie Andéol, Marc Alexandre, Djamel Bouras, Amandine Buchard, Guillaume Chaine, Axel Clerget, Sarah-Léonie Cysique, Lucie Décosse, Romane Dicko, David Douillet, Catherine Fleury-Vachon, Alexandre Iddir and many others.
+Cuban Judo
+
+Judo became an Olympic sport in the Tokyo Games in 1964, and thus became universal. The International Judo Federation today brings together more than 200 national federations and 5 continental unions.
+
+Judo is taught through randori, free practice, kata, imposed forms, and mondo, exchanges based on the values, the philosophy or any subject related to judo, between the students and their teacher.
+
+The modern use of the blue judogi for high level competition was first suggested by Anton Geesink at the 1986 Maastricht IJF DC Meeting.[115] For competition, a blue judogi is worn by one of the two competitors for ease of distinction by judges, referees, and spectators. In Japan, both judoka use a white judogi and the traditional red obi (based on the colors of the Japanese flag) is affixed to the belt of one competitor. Outside Japan, a colored obi may also be used for convenience in minor competitions, the blue judogi only being mandatory at the regional or higher levels, depending on organization. Japanese practitioners and traditionalists tend to look down on the use of blue because judo is considered a pure sport, and replacing the pure white judogi with the impure blue is an offense.[115]
+
+    International Judo Federation (IJF)—The worldwide governing body for judo
+    All judoka profiles at Judoinside.com
+    Kodokan Judo Institute—Headquarters of judo (Kano Jigoro's school)
+
+Jigoro Kano for a long time wished to see judo as an Olympic discipline.[66] The first time judo was seen in the Olympic Games was in an informal demonstration hosted by Kano at the 1932 Games.[67] However, Kano was ambivalent about judo's potential inclusion as an Olympic sport:
+
+However, judo is an underrated fighting style when used in an MMA context. The explosive throws that a judo master is capable of can stun an opponent in the ring long enough to finish them off with any number of ground techniques, which are taught in judo as well as jiu-jitsu.
+Judo vs. Jiu-Jitsu in the Olympics
+
+Sambo is influenced by judo combined with wrestling techniques, and striking in case of combat sambo. Vasili Oshchepkov was one of the first European judo black belts under Kano. Oshchepkov went on to contribute his knowledge of judo as one of the three founders of Sambo, which also integrated various international and Soviet bloc wrestling styles and other combative techniques. Oshchepkov was executed during the political purges of 1937 and judo was banned for decades until its inclusion in the 1964 Olympics, where sambists won 4 bronze medals.[101] In their History of Sambo, Brett Jacques and Scott Anderson wrote that in Russia "judo and SOMBO were considered to be the same thing"—albeit with a different uniform and some differences in the rules.[102]
+Brazilian jiu-jitsu
+
+When the samurai class was eliminated during the Meiji Restoration of the late 1800s, the martial arts schools of the time period were also cast into disregard. At this time, many jiu-jitsu dojos ended up closing. But one martial artist who wanted to save the technique, Jigoro Kano Shihan, rebranded it as “Kodokan Judo” at the martial arts school he opened in 1882. (Source: Kodokan Judo Institute)
+
+A number of judo practitioners have made an impact in mixed martial arts.[77][78][79] Notable judo-trained MMA fighters include Olympic medalists Hidehiko Yoshida (Gold, 1992), Naoya Ogawa (Silver, 1992), Paweł Nastula (Gold, 1996), Makoto Takimoto (Gold, 2000), Satoshi Ishii (Gold, 2008), Ronda Rousey (Bronze, 2008), and Kayla Harrison (Gold, 2012 and 2016), former Russian national judo championship bronze medalist Fedor Emelianenko, Yoshihiro Akiyama, Don Frye, Rick Hawn, Daniel Kelly, Hector Lombard, Karo Parisyan, Ayaka Hamasaki, Antônio Silva, Oleg Taktarov, Rhadi Ferguson, Dong-Sik Yoon, and Khabib Nurmagomedov.[80][81]
+Alternative styles and derivative martial arts
+International judo camp in Artjärvi, Orimattila, Finland
+
+Both judo and jiu-jitsu are fighting styles that are incorporated into mixed martial arts (MMA). MMA uses a wide range of throws, strikes, kicks, and submission holds to beat your opponent in the ring.
+
+    I have been asked by people of various sections as to the wisdom and possibility of judo being introduced with other games and sports at the Olympic Games. My view on the matter, at present, is rather passive. If it be the desire of other member countries, I have no objection. But I do not feel inclined to take any initiative. For one thing, judo in reality is not a mere sport or game. I regard it as a principle of life, art and science. In fact, it is a means for personal cultural attainment. Only one of the forms of judo training, so-called randori or free practice can be classed as a form of sport. Certainly, to some extent, the same may be said of boxing and fencing, but today they are practiced and conducted as sports. Then the Olympic Games are so strongly flavored with nationalism that it is possible to be influenced by it and to develop "Contest Judo", a retrograde form as ju-jitsu was before the Kodokan was founded. Judo should be free as art and science from any external influences, political, national, racial, and financial or any other organized interest. And all things connected with it should be directed to its ultimate object, the "Benefit of Humanity". Human sacrifice is a matter of ancient history.[68]
+
+    Randori-no-kata (乱取りの形, Free practice forms), comprising two kata:
+        Nage-no-kata (投の形, Forms of throwing) Fifteen throws, practiced both left- and right-handed, three each from the five categories of nage waza: te waza, koshi waza, ashi waza, ma sutemi waza and yoko sutemi waza.[48]
+        Katame-no-kata (固の形, Forms of grappling or holding). Fifteen techniques in three sets of five, illustrating the three categories of katame waza: osaekomi waza, shime waza and kansetsu waza.[49]
+    Kime-no-kata (極の形, Forms of decisiveness). Twenty techniques, illustrating the principles of defence in a combat situation, performed from kneeling and standing positions. Attacks are made unarmed and armed with a dagger and a sword. This kata utilises atemi waza, striking techniques, that are forbidden in randori.[50]
+    Kōdōkan goshinjutsu (講道館護身術, Kodokan skills of self-defence). The most recent recognised kata, comprising twenty-one techniques of defence against attack from an unarmed assailant and one armed with a knife, stick and pistol. This kata incorporates various jujutsu techniques such as wrist locks and atemi waza.[51]
+    Jū-no-kata (柔の形, Forms of gentleness & flexibility). Fifteen techniques, arranged in three sets of five, demonstrating the principle of Jū and its correct use in offence and defence.[52]
+    Gō-no-kata (剛の形, Forms of force). One of the oldest kata, comprising ten forms that illustrate the efficient use of force and resistance. Now rarely practiced.[53]
+    Itsutsu-no-kata (五の形, The five forms). An advanced kata, illustrating the principle of seiryoku zen'yō and the movements of the universe.[54] The kata predates the creation of Kodokan and originated in Tenjin Shinyō-ryū.[55]
+    Koshiki-no-kata (古式の形, Traditional forms). Derived from Kitō-ryū Jujutsu, this kata was originally intended to be performed wearing armour. Kano chose to preserve it as it embodied the principles of judo.[56]
+    Seiryoku Zen'yō Kokumin Taiiku (精力善用国家体育, Maximum-efficiency national physical education). A series of exercises designed to develop the physique for judo.[57]
+    Joshi-goshinhō (女子護身法, Methods of self-defence for women). An exercise completed in 1943, and of which the development was ordered by Jirō Nangō, the second Kodokan president.[58]
+
+Central to Kano's vision for judo were the principles of seiryoku zen'yō (精力善用, maximum efficiency, minimum effort) and jita kyōei (自他共栄, mutual welfare and benefit). He illustrated the application of seiryoku zen'yō with the concept of jū yoku gō o seisu (柔能く剛を制す - 柔能剛制, softness controls hardness):
+jūdō (柔道, "Judo"), written in kanji
+
+Judo in Azerbaijan has developed over the years and has become deep rooted and considered a top sport in the country. It's very similar to Georgian Judo, as its mostly focused on the practitioner's strength during throws. It's a hybrid of the original Kodokan Judo and the traditional Azerbaijan style of wrestling called Azeri, whose techniques consist of unorthodox grips and positioning during counter-attacks.[97][98]
+Israeli Judo
+
+In 1923, Jigoro Kano opened a women's section of the Kodokan. He focused on the technical study and on kata but did not allow the practice in competition considered dangerous to the health of future mothers. Keiko Fukuda, granddaughter of Hachinosuke Fukuda, who taught Jujutsu to Kano, dedicated her life to spreading women's judo worldwide.
+
+This distinctive style of judo was influenced by the Soviet martial art of Sambo. It is represented by well-known coaches such as Alexander Retuinskih and Igor Yakimov, and mixed martial arts fighters such as Fedor Emelianenko, Oleg Taktarov, Khabib Nurmagomedov, and Karo Parisyan. In turn, Russian judo has influenced mainstream judo, with techniques such as the flying armbar being accepted into Kodokan judo.[87][88]
+Mongolian Judo
+
+    Ippon seoinage (一本背負投): Single-handed shoulder throw
+    Kata guruma (肩車): Shoulder wheel
+    Kibisu gaeshi (踵返): One-hand reversal
+    Morote gari (双手刈): Two-hand reap
+    Obi otoshi (帯落): Belt drop
+    Seoi nage (背負投): Shoulder throw
+    Seoi otoshi (背負落): Shoulder drop
+    Sukui nage (掬投): Scoop throw
+    Sumi otoshi (隅落): Corner drop
+    Tai otoshi (体落): Body drop
+    Uchi mata sukashi (内股透): Inner thigh void throw
+    Uki otoshi (浮落): Floating drop
+    Yama arashi (山嵐): Mountain storm
+    Kouchi gaeshi (小内返): Small inner reap reversal
+    Kuchiki taoshi (朽木倒): Single leg takedown
+
+    Daki wakare (抱分): High separation
+    Hane makikomi (跳巻込): Springing wraparound
+    Harai makikomi (払巻込): Hip sweep wraparound
+    Kani basami (蟹挟): Crab or scissors throw. (Forbidden in competition.)
+    Kawazu gake (河津掛): One-leg entanglement. (Forbidden in competition.)
+    Osoto makikomi (大外巻込): Big outer wraparound
+    Soto makikomi (外巻込): Outer wraparound
+    Tani otoshi (谷落): Valley drop
+    Uchi makikomi (内巻込): Inner wraparound
+    Uchi mata makikomi (内股巻込): Inner thigh wraparound
+    Uki waza (浮技): Floating technique
+    Yoko gake (横掛): Side prop
+    Yoko guruma (横車): Side wheel
+    Yoko otoshi (横落): Side drop
+    Yoko wakare (横分): Side separation
+    Ko-uchi-makikomi (小内巻込): Small inner wrap-around throw
+
+The highest black belt ranks have no formal requirements and are decided by the president of the Kodokan. Kano Jigoro's grandson Kano Yukimitsu served as the fourth president from 1980 until 2009. As an educator by profession, Kanō believed that there should be no end to an individual's learning, and therefore no limit to the number of dan ranks. As of 2011, fifteen Japanese men have been promoted to jūdan (十段, 10th dan) by the Kodokan;[119] the IJF and Western and Asian national federations have promoted another eleven who are not recognized at that level of rank by the Kodokan. On 28 July 2011, the promotion board of USA Judo awarded Keiko Fukuda the rank of 10th dan, who was the first woman to be promoted to judo's highest level, albeit not a Kodokan-recognized rank.
+
+    The philosophy of jiu-jitsu: Jiu-jitsu has a philosophy that revolves around using an opponent’s strength against them in battle. This is in contrast to fighting styles that teach a more offensive strategy in combat. Jiu-jitsu also teaches the pillars of patience, efficiency, and control in the ring. (Source: Melbourne Jiu-Jitsu)
+    The philosophy of judo: Even though judo is a fighting style that focuses on self-defense, it emphasizes non-harm and teaches fighters to take down their opponent without causing them permanent harm. It also places a strong emphasis on the welfare and betterment of society at large. (Source: Hanabi Judo)
+
+    Daki age (抱上): Hugging high lift. (Forbidden in competition.)
+    Hane goshi (跳腰): Spring hip throw
+    Harai goshi (払腰): Sweeping hip throw
+    Koshi guruma (腰車): Hip wheel
+    O goshi (大腰): Full hip throw
+    Sode tsurikomi goshi (袖釣込腰): Sleeve lifting-and-pulling hip throw
+    Tsuri goshi (釣腰): Lifting hip throw
+    Tsurikomi goshi (釣込腰): Lifting-and-pulling hip throw
+    Uki goshi (浮腰): Floating hip throw
+    Ushiro goshi (後腰): Rear hip throw
+    Utsuri goshi (移腰): Shifting hip throw
+
+In competitive judo, Kansetsu-waza is currently limited to elbow joint manipulation.[41] Manipulation and locking of other joints can be found in various kata, such as Katame-no-kata and Kodokan goshin jutsu.[42]
+Juji gatame (十字固, cross lock)(armbar), a kansetsu-waza
+Katame-waza (固技)
+grappling techniques 	Osaekomi-waza (抑込技)
+holding or pinning techniques
+Shime-waza (絞技)
+strangulation techniques
+Kansetsu-waza (関節技)
+Joint techniques (locks)
+Atemi-waza (striking techniques)
+
+    Keiko Fukuda (Japan/United States, 1913–2013), USA Judo and USJF 10th dan (promoted in 2011),[16] Kōdōkan Joshi 9th dan.[17] She was part of a group of three women, including also Masako Noritomi, who were the first to be promoted to Joshi 6th dan after a glass ceiling prior to 1972 apparently held back women from being awarded promotions above Joshi 5th dan. Fukuda also was the first woman to be promoted to Joshi 9th dan by the Kōdōkan and the 32nd or 33rd person in the world ever to be promoted to 10th dan in judo.[18]
+
+    Judo-club Hadamar. Judo von A - Z Archived 2005-05-06 at the Wayback Machine. www.judoclubhadamar.de. URL last accessed February 5, 2006. (In German)
+
+In 1909, Kano was appointed to the International Olympic Committee. He became the first IOC Asian member and devoted his life to the development of education through judo and through sports in Japan and around the world.
+
+In February 1882, Kano founded a school and dojo at the Eisho-ji, a small buddhist temple. Iikubo, Kano's last instructor, came three days a week to help Kano teach. Although Kano didn't get his Menkyo in Kitō-ry yet, and the temple would be called "Kodokan" only after two years from this point, this moment is regarded as the founding of the Kōdōkan Judo Institute[11]. Kano took resident and non-resident students, the first two being Tomita Tsunejirō and Shiro Saigo. In August, the following year, the pair were granted shodan (初段, "first rank", the lowest black belt rank) grades, the first that had been awarded in any martial art[11].
+History and Culture
+
+The early history of judo is inseparable from its founder, Japanese polymath and educator Kanō Jigorō (嘉納 治五郎, Jigoro Kano, 1860–1938), born Shinnosuke Jigorō (新之助 治五郎, Jigorō Shinnosuke). Kano was born into a relatively affluent family. His father, Jirosaku, was the second son of the head priest of the Shinto Hiyoshi shrine in Shiga Prefecture. He married Sadako Kano, daughter of the owner of Kiku-Masamune sake brewing company and was adopted by the family, changing his name to Kano. He ultimately became an official in the Shogunate government.[11]
+
+This fighting style has only continued to evolve as it spread outside of Japan. Within Japan, sparring at jiu-jitsu schools became a popular way for warriors to challenge each other to duels peacefully under a government that no longer allowed armed civilians.
+
+    Jigoku-jime (地獄絞): Hell strangle[8] The Kodokan officially also refers to this technique as Okuri-eri-jime.
+    Koshi-jime: The Kodokan officially also refers to this technique as Okuri-eri-jime.
+    Ura-juji-jime (裹十字絞): The Kodokan officially also refers to this technique as Kata-juji-jime.
+    Arm triangle choke: The Kodokan officially considers this an osaekomi-waza Kata-gatame.
+
+    Te Guruma (手車): Hand wheel. The Kodokan officially also refers to this technique as Sukui nage.
+    Morote seoi nage: Double handed shoulder throw
+    Eri seoi nage: Collar shoulder throw
+    Kata seoi nage: Shoulder throw with both hands
+
+Finally, judo was first contested as an Olympic sport for men in the 1964 Games in Tokyo. The Olympic Committee initially dropped judo for the 1968 Olympics, meeting protests.[70] Dutchman Anton Geesink won the first Olympic gold medal in the open division of judo by defeating Akio Kaminaga of Japan. The women's event was introduced at the Olympics in 1988 as a demonstration event, and an official medal event in 1992.
+Use of judo at the Summer Paralympic Games
+See also: Judo at the Summer Paralympics
+
+Competitive judo
+History
+Japanese judoka Takamasa Anai Vs French judoka Thierry Fabre during the 2010 World Judo Championships held in Tokyo
+Yoshihiko Yoshimatsu attempting to throw Toshiro Daigo with an uchi mata in the final of the 1951 All-Japan Judo Championships
+
+In contrast, jiu-jitsu is designed to come out when street fighting turns dirty, and judo is practically designed to stop the fight before it even starts.
+
+Mental training is an emerging modality of training in judo that aims to improve the performance of high-performance athletes in training and competition and also to promote health and well-being in the daily life of athletes and their entourage through the learning and application of psychological skills. The first publication of a judo-specific practical mental training approach based on sports training principles was in 2005 with the work of Boris Blumenstein, Ronnie Lidor and Gershon Tenenbaum.[108] In 2022, Caio Gabriel published the first article on mental training that appeared in the scientific journal of the International Judo Federation, "The Arts and Sciences of Judo".[109]
+Judoka (practitioner)
+Two judoka wearing judogi
+
+Korean Judo is also very technical but what really separates it from other styles is the speed at which its techniques are performed. Korean Judo it is not powerful in terms of using strength but instead, the practitioners use speed, movement and technique in order to create fast and powerful snaps. This styles produced various olympic champions, like Ahn Byeong-keun, Cho Min-sun, Choi Min-ho, Ha Hyung-joo, Jeon Ki-young, Kim Jae-bum, Kim Jae-yup, Lee Kyung-keun, Lee Won-hee, Song Dae-nam and others.[91][92]
+French Judo
+
+Penalties may be given for: passivity or preventing progress in the match; for safety infringements (for example by using prohibited techniques), or for behavior that is deemed to be against the spirit of judo. Fighting must be stopped if a participant is outside the designated area on the mat.[71]
+Weight divisions
+
+    Yoshitsugu Yamashita (Japan, 1865–1935) (his first name is sometimes mispronounced as Yoshiaki) promoted to Kōdōkan 10th dan in 1935, the first person awarded 10th dan by the Kōdōkan. Although he was promoted posthumously his promotion was antedated to be effective two days before his passing. He was also a pioneer of judo in the United States, where he taught judo to President Theodore Roosevelt.
+    Hajime Isogai (Japan, 1871–1947) promoted to Kōdōkan 10th dan in 1937. He was the first person to receive and actually hold this rank while still alive.
+    Hideichi Nagaoka (Japan, 1876–1952) (his first name is sometimes mispronounced as either Hidekazu or Shūichi) promoted to Kōdōkan 10th dan in 1937. He was the last of only three people to be promoted to 10th dan by Kanō-shihan himself.
+    Kyūzō Mifune (Japan, 1883–1965) promoted to Kōdōkan 10th dan in 1945 under the presidency of Jirō Nangō. Mifune is considered to be one of the greatest judo technicians ever.[5] Mifune also held the title of Meijin and the rank of 10th dan awarded by the Kokusai Budō Renmei/IMAF.
+    Kunisaburō Iizuka (Japan, 1875–1958) promoted to Kōdōkan 10th dan in 1946.
+    Kaichirō Samura (Japan, 1880–1964) promoted to Kōdōkan 10th dan in 1948.
+    Shotarō Tabata (Japan, 1884–1950) promoted to Kōdōkan 10th dan in 1948.
+    Yoshitarō Okano (Japan, 1885–1967) promoted to Kōdōkan 10th dan in 1967.
+    Matsutarō Shōriki (Japan, 1885–1969) promoted to Kōdōkan 10th dan in 1969. He was also known as the father of Japanese professional baseball.
+    Shōzō Nakano (Japan, 1888–1977) promoted to Kōdōkan 10th dan in 1977.
+    Tamio Kurihara (Japan, 1896–1979) promoted to Kōdōkan 10th dan in 1979.
+    Sumiyuki Kotani (Japan, 1903–1991) promoted to Kōdōkan 10th dan in 1984.
+    Ichirō Abe (Japan, 1922–2022) promoted to Kōdōkan 10th dan on 8 January 2006, at age 83. Abe was international chairperson of the All Nippon Judo Federation and had strong links internationally through coaching in Europe.
+    Toshirō Daigo (Japan, 1926–2021) promoted to Kōdōkan 10th dan on 8 January 2006, at age 80. Daigo was a two-time winner of the All Nippon Judo Tournament (1951 and 1954), and a former manager of the Japanese national team, and until his retirement was the Chief-Instructor at the Kōdōkan. Daigo was known by the nickname Mr. Kōdōkan.
+    Yoshimi Ōsawa (Japan, 1926–2022) promoted to Kōdōkan 10th dan on 8 January 2006, at age 79. Ōsawa coached at the Kōdōkan for a long time, and was recognised for his support of women's judo. Ōsawa was known by the nickname Current Ushiwakamaru (Ushiwakamaru was the childhood name of a legendary twelfth-century samurai who was small but quick.)
+
+This new school of martial arts in Japan focused on takedown moves and economy of movement, making it a popular hand-to-hand style for stopping a fight in its tracks. This emphasis on quick, efficient takedowns made it popular with the Japanese military and police, who quickly adopted it as part of their standardized martial arts training.
+Are There Still Jiu-Jitsu Schools?
+
+On October 28 of every year, the judo community celebrates the World Judo Day in the honor of the birth of Judo's founder, Jigoro Kano. The theme of the World Judo Day changes from year to year, but the goal is always to highlight the moral values of Judo. The first celebration was held in 2011.[121] Past themes for the celebration have included:
+
+Japanese old-style jiu-jitsu is not the most popular form of the martial art that is currently practiced abroad. That honor goes to Brazilian jiu-jitsu (BJJ). Brazilian jiu-jitsu is a martial arts style that is relatively new but has still gained enormous popularity over the 20th century, both in exclusive BJJ dojos and in mixed martial arts studios.
+Japanese Jiu-Jitsu vs. Brazilian Jiu-Jitsu
+
+Judo practitioners typically devote a portion of each practice session to ukemi (受け身, break-falls), in order that nage-waza can be practiced without significant risk of injury. Several distinct types of ukemi exist, including ushiro ukemi (後ろ受身, rear breakfalls); yoko ukemi (横受け身, side breakfalls); mae ukemi (前受け身, front breakfalls); and zenpo kaiten ukemi (前方回転受身, rolling breakfalls)[30]
+
+A number of living judoka have been promoted to 10th dan by the Olympic Games-affiliated International Judo Federation. Some national (country) associations, continental unions and independent (often multi-style) bodies have also promoted judoka to 10th dan.
+
+    Kenshiro Abbe (Japan, 1915–1985), Kōdōkan 8th dan, was the youngest student to gain his 4th Dan in Judo. Founded the British Judo Council alongside Masutaro Otani. He also founded the British Kendo Council, the British Karate Council, and the International Budo Council, and is credited with the introduction of aikido to the UK and Europe.
+    Masutaro Otani (Japan, 1896–1977), 8th Dan was a master of judo and a pioneer of judo in the United Kingdom. He founded the British Judo Council alongside Kenshiro Abbe. He was also the leading student of Yukio Tani, another pioneer of judo and jujutsu in the UK.
+    Shozo Awazu (Japan/France, 1923–2016), Kōdōkan 9th dan, pioneer of judo in France.
+    Haku Michigami (Japan/France, 1912–2002), FFJDA (French Judo Federation) 9th dan, Kōdōkan 7th dan, sent in France by Tamio Kurihara (10th dan) in 1953. Teacher of Anton Geesink.
+    Kiyoshi Kobayashi (Japan, 1925-2013), Kōdōkan 9th dan, was the «father» of Portuguese judo and one of the founders of the Portuguese Judo Federation.
+    Masahiko Kimura (Japan, 1917–1993), Kōdōkan 7th dan, defeated Helio Gracie, only lost four times in his entire career.
+    Gunji Koizumi (Japan, 1885–1965), Kōdōkan 8th dan, president and founder of the Budokwai. He spent over sixty-four years in judo, teaching it until the day before he died in April 1965.
+    Tsunejirō Tomita (Japan, 1865–1937), Kōdōkan 7th dan, teacher of Mitsuyo Maeda. One of the first two students to be awarded Kōdōkan first grade (shodan). One of the four Guardians of the Kōdōkan.
+    Shirō Saigō (Japan, 1886–1922), Kōdōkan 5th dan. One of the first two students to be awarded Kōdōkan first grade (shodan), and the first student to be promoted by Jigorō Kanō to Kōdōkan 4th dan. One of the four Guardians of the Kōdōkan. Inspiration for Akira Kurosawa's 1943 directorial debut, Sugata Sanshirō.
+    Sakujirō Yokoyama (Japan, 1864–1912), Kōdōkan 8th dan. First person to obtain the rank of 8th dan (was also the first 6th and 7th dan but shared this honor together with Yoshitsugu Yamashita), and one of the earliest disciples of Jigorō Kanō, considered the most formidable of all judo experts of his time. One of the four Guardians of the Kōdōkan.
+    Mitsuyo Maeda (Japan, 1878–1941), Kōdōkan 7th dan, pioneer of judo in Brazil, the UK, and other countries, fundamental to the creation of Brazilian jiu-jitsu.
+    Kenji Tomiki (Japan, 1900–1979), Kōdōkan 8th dan and Aikido 8th dan. Tomiki is perhaps best known in the judo world for his significant role in the committee that developed Kodokan Goshin Jutsu. His work Judo Appendix: Aikido, published in 1956, is considered a classic.
+    Minoru Mochizuki (Japan, 1907–2003), Kōdōkan 8th dan and Aikido 10th dan. Under the tutelage of Jigorō Kanō, the founder of judo, Mochizuki became the youngest member of the Kobudō Kenkyūkai – an organization for the study, preservation and development of classical martial arts – established within the Kōdōkan. In 1930, he was sent by Jigorō Kanō to study aikijujutsu with Morihei Ueshiba. He was the uchi-deshi of Morihei Ueshiba at the Kōbukan dōjō for one year before opening his own dōjō in Shizuoka City in 1931.
+    Ryuzo Ogawa (Japan/Brazil, 1883–1975), Kōdōkan 8th dan, pioneer of judo in Brazil, founder of the Brazilian Budokan Association.[19]
+
+Georgian Judo is influenced by Chidaoba (Georgian cultural jacket wrestling). Chidaoba's major influence on the Georgian style of judo is in its unorthodox grips as well as its throws and takedowns. Georgian Judo is also known for its countering techniques through the use of power moves such as bear hugs and double underhooks into throws and takedowns.[85][86] It is represented by various olympic winners and World Champions, such as Lasha Bekauri, Lukhumi Chkhvimiani, Shota Chochishvili, Tato Grigalashvili, Zaza Kedelashvili, David Khakhaleishvili, Luka Maisuradze,Lasha Shavdatuashvili and others.
+Russian Judo
+
+Unlike other Far East styles of Judo, Mongolian Judo focuses much more on power rather than technique. The influence of Bokh on Mongolian Judo can be seen in its grips and body positioning. Judo grips such as the over under, double underhooks and the heavy use of grips on the belt.[89][90] It is represented by various world champions, such as Khaliuny Boldbaatar, Tsendiin Damdin, Boldyn Gankhaich, Naidangiin Tüvshinbayar, Mönkhbatyn Urantsetseg, Ganbatyn Boldbaatar.
+Korean Judo
+
+    Tama guruma (球車):Jade wheel. The Kodokan officially also refers to this technique as Kata guruma.
+    Ude gaeshi (腕返): Arm reversal. The Kodokan officially also refers to this technique as Yoko wakare.
+    Yoko Tomoe Nage (横巴投): Side circle throw. The Kodokan officially also refers to this technique as Tomoe nage.
+    Kubi Nage Neck throw. The Kodokan officially also refers to this thechnique as Koshi guruma.
+
+The Eisho-ji dōjō was originally shoin. It was a relatively small affair, consisting of a 12 jo[21] (214 sq ft) training area. Kano took in resident and non-resident students, the first two being Tomita Tsunejirō and Shiro Saigo.[22] In August, the following year, the pair were granted shodan (初段, first rank) grades, the first that had been awarded in any martial art.[23]
+Judo versus jujutsu
+Main article: Kodokan–Totsuka rivalry
+
+Although dan ranks tend to be consistent between national organizations there is more variation in the kyū grades, with some countries having more kyū grades. Although initially kyū grade belt colours were uniformly white, today a variety of colours are used. The first black belts to denote a dan rank in the 1880s, initially the wide obi was used; as practitioners trained in kimono, only white and black obi were used. It was not until the early 1900s, after the introduction of the judogi, that an expanded colored belt system of awarding rank was created.[119] Written accounts from the archives of London's Budokwai judo club, founded in 1918, record the use of coloured judo belts at the 1926 9th annual Budokwai Display, and a list of ranked colored judokas appears in the Budokwai Committee Minutes of June 1927. Kawaishi visited London and the Budokwai in 1928, and was probably inspired to bring the coloured belt system to France.[120]
+World Judo Day
+
+The reasons why jiu-jitsu is not a part of the Olympics while judo is are complicated. These are just a few of them (Source: Gracie Raleigh):
+
+In the USA and in many countries of the world, Jujutsu first spreads in the army and the police. At the same time, the martial art is taught in fitness centers (Sandow in England Desbonnet in France, the McFadden in the USA, etc.)
+
+    Tsuki-dashi: Hand Thrust
+    Ryogan-tsuki: Strike both eyes with fingertips
+    Suri-age: Face slide or forehead thrust [pic] [pic]
+    Yahazu: Strikes with the V-shape of the hand
+    Me-tsubushi: Whipping the back of fingers to strike opponent's eyes
+
+In the early twentieth century, the Western world discovered the artistic beauty and the military power of Japanese civilization and the effectiveness of strong Japanese soldiers based on their warrior spirit, the bushido, and their fighting techniques, Jujutsu. In many countries, the Japanese art is introduced in military curriculum. Jujutsu also appears on the stage of music halls, circuses and fairs.
+
+Judo was an optional sport included in the three editions of the Commonwealth Games: 1990 Commonwealth Games in Auckland, 2002 Commonwealth Games in Manchester and 2014 Commonwealth Games in Glasgow. From 2022, judo will become a core sport in the 22nd edition of the Commonwealth Games, in Birmingham and also the 23rd edition of the Commonwealth Games in Glasgow.
+Current international contest rules
+All-Japan Judo Championships, 2007 men's final
+Main article: Judo rules
+
+Men’s judo competitions were first included at the Olympic Games in Tokyo in 1964 and were held regularly from 1972. World judo championships for women began in 1980, and women’s Olympic competition began in 1992. Japan, Korea, France, Germany, and Great Britain have consistently fielded the strongest teams in the Olympics, as did the Soviet Union during its existence.
+
+Atemi-waza are techniques in which tori disables uke with a strike to a vital point. Atemi-waza are not permitted outside of kata.[43]
+Pedagogy
+Children practicing judo in Tokyo
+Randori (free practice)
+
+Judo was introduced as a Paralympic sport at the 1988 Summer Paralympics in Seoul, with women's events contested for the first time at 2004 Summer Paralympics.
+Use of judo at the Commonwealth Games
+See also: Judo at the Commonwealth Games
+
+Only fifteen people have been promoted to 10th dan by the Kōdōkan. Twelve were promoted between 1935 and 1984.[3] The other three were promoted together on 8 January 2006. However, as of October 2022-end, all three of the 2006 promotion receivers are deceased.[4]
+Male – Kōdōkan 10th dan
+Toshirō Daigo after being crowned All-Japan Judo Champion in 1954
+
+The European Judo Union was reconstituted after World War II. On July 11, 1951 in London, its representatives (Great Britain, France, Italy, Belgium, The Netherlands, Germany, Austria and Switzerland) received the candidacy of Argentina and the International Judo Federation was created. The Italian Aldo Torti became the first President of the IJF.
+
+    Do-jime (胴絞): Trunk strangle. Do-jime is a prohibited technique in Judo,[5] and is considered a 'slight infringement' according to IJF rules, Section 27: Prohibited acts and penalties, article 21[7]
+    Gyaku Jūji-jime (逆十字絞): Reverse cross strangle
+    Nami-juji-jime (並十字絞): Normal cross strangle
+    Kata-juji-jime (片十字絞): Half cross strangle
+    Hadaka-jime (裸絞): Naked strangle
+    Kata-ha-jime (片羽絞): Single wing strangle
+    Kata-te-jime (片手絞): One-hand strangle
+    Okuri-eri-jime (送襟絞): Sliding lapel strangle
+    Ryo-te-jime (両手絞): Two-hand strangle
+    Sankaku-jime (三角絞): Triangular strangle, triangle choke
+    Sode-guruma-jime (袖車絞): Sleeve wheel strangle (Eziquiel/Ezekiel choke)
+    Tsukkomi-jime (突込絞): Thrust choke
+
+In 2017, the International Judo Federation announced changes in evaluation of points. There will only be ippon and waza-ari scores given during a match with yuko scores now included within waza-ari.[73]
+
+Kano realised that seiryoku zen'yō, initially conceived as a jujutsu concept, had a wider philosophical application. Coupled with the Confucianist-influenced jita kyōei, the wider application shaped the development of judo from a bujutsu (武術, martial art) to a budō (武道, martial way). Kano rejected techniques that did not conform to these principles and emphasized the importance of efficiency in the execution of techniques. He was convinced that practice of jujutsu while conforming to these ideals was a route to self-improvement and the betterment of society in general.[25] He was, however, acutely conscious of the Japanese public's negative perception of jujutsu:
+
+The belt colour embodies the expertise of the judoka. Beginners successively wear a white belt, yellow, orange, green, blue and brown before passing a special examination (technical and competition) to obtain the rank of black belt, or dan (1st to 10th dan). The colour belt system was developed in England in the mid-1920s  and gained in popularity thanks to the Kawaishi Method.
+
+    Charlie Palmer (United Kingdom, 1930–2001), IJF 10th Dan (promoted in 1996), was the first non-Japanese to be the President of the IJF. He was inducted to the IJF Hall of Fame on 8 September 2003.[1]
+    Anton Geesink (Netherlands, 1934–2010), IJF 10th Dan (promoted in 1997), was the first non-Japanese ever to have won a World Championship. He was inducted to the IJF Hall of Fame on 8 September 2003.[1]
+    George Kerr (United Kingdom, 1937–) IJF 10th dan (promoted in 2010).
+    Yoshihirō ‘Yosh’ Uchida (United States, 1920–2024), USA Judo 10th dan, July 19, 2013 - subsequently acknowledged and recognized by the IJF.[6] Head judo coach at San Jose State University for over 70 years, and served as the coach of the first US Olympic Judo Team at the 1964 Games held in Tokyo.[7]
+    Franco Capelletti (Italy, 1938–) IJF 10th dan (promoted in August 2017). Capelletti is a former Technical Director (1975–1988) and (2004–2008) and vice-president (2004–2016) of the Italian Judo Federation FIJLKAM, Sports Director of the EJU (1995–2003), and President of the IJF Kata Commission (2008-date). The intent to promote Capellettti to this rank was announced in July 2017, with the promotion being awarded in August 2017 at the Senior World Judo Championships in Budapest.
+    Jean-Luc Rougé (France, 1949–) IJF 10th dan (promoted in December 2023).
+    Peter Herrmann (Germany/Australia, 1941–) IJF 10th dan (promoted in October 2024).
+
+The application of joint manipulation and strangulation/choking techniques is generally safe under controlled conditions typical of judo dōjō and in competition. It is usual for there to be age restrictions on the practice and application of these types of techniques, but the exact nature of these restrictions will vary from country to country and from organization to organization.
+Nage waza
+
+    1951: European Championships in Paris
+    1956: 1st World Championships in Tokyo (Competition without weight category)
+    1961: 3rd World Championships in Paris (Competition without weight category)
+    1964: Olympic Games in Tokyo (-68 kg ; -80 kg ; +80 kg ; Open)
+    1980: 1st female World Championships in New-York
+    1988: Female judo is present in the Seoul Olympic Games as a demonstration sport
+    1992: Since the Barcelona Olympic Games, both male and female competition are part of the Olympic programme.
+
+No matter which fighting style you ultimately decide to go with, a comparison between Judo and Jiu-jitsu shows that each of these fighting styles has a ton to offer prospective students.
+
+At the 57th general session of the International Olympic Committee, held in Rome on 22 August 1960, the IOC members formally decided to include Judo among the events to be contested at the Olympic Games. The proposal, which was placed before the session by the Japanese delegation, was welcomed by all participants. The few who opposed had nothing against Judo itself but against increasing the number of Olympic events as a whole. There were only two dissenting votes in the final poll. For the first time in history a traditional Japanese sport has been included in the Olympic competition.[69]
+
+    Judo and jiu-jitsu are grappling styles. Similar to wrestling, this means that a majority of the techniques in this fighting style focus on subduing your opponent on the ground in a fight rather than fighting them standing up. Grappling styles feature several chokeholds and other holds that are used to force an opponent into submission.
+    Both styles teach how to escape a hold. Once your enemy gets you on the ground, mounts you, and pins you down, it’s very easy to lose a fight from this point on. Judo and jiu-jitsu teach you how to remove yourself from a pinned ground position and regain the upper hand on your opponent.
+    Both styles offer students a variety of general benefits. From improved physical health to a more effective mind-body connection, learning any martial art can be beneficial for your mind, body, and spirit. Either judo or jiu-jitsu will help you achieve this level of physical, mental, and emotional discipline.
+    Both styles use fighting robes and a belted ranking system. Like many martial arts, judo and jiu-jitsu students are ranked on their level of progression in the sport according to colored belts that easily distinguish them from each other in the ring.
+
+Official sporting events started to take place in the early 20th century. And was in Germany on August 11th, 1932, that the European Judo Union was created. The first European Championships were held in Dresden in 1934. The Kano Method was chosen as a demonstration sport for the Tokyo Olympic Games in 1940, which never took place because of the Second World War. It was not until the 1964 Olympic Games that judo officially entered the Olympic programme.
+
+Whether you want to start jiu-jitsu for self-defense or you want to get involved in serious judo competitions, you’ll know you’re learning skills you can apply in a real fight.
+
+    Kuzushi (崩し): the opponent becoming off balanced;[32]
+    Tsukuri (作り): turning in and fitting into the throw;[33]
+    Kake (掛け): execution and completion of the throw.[33]
+
+Tachi-waza are further subdivided into te-waza (手技, hand techniques),[36] in which tori predominantly uses their arms to throw uke; koshi-waza (腰技, hip techniques)[37] throws that predominantly use a lifting motion from the hips; and ashi-waza (足技, foot and leg techniques),[38] throws in which tori predominantly utilises their legs.[35]
+Harai goshi (払腰, sweeping hip), a koshi-waza
+Nage-waza (投げ技)
+throwing techniques 	Tachi-waza (立ち技)
+standing techniques 	Te-waza (手技)
+hand techniques
+Koshi-waza (腰技)
+hip techniques
+Ashi-waza (足技)
+foot and leg techniques
+Sutemi-waza (捨身技)
+sacrifice techniques 	Ma-sutemi-waza (真捨身技)
+rear sacrifice techniques
+Yoko-sutemi-waza (橫捨身技)
+side sacrifice techniques
+Katame-waza (grappling techniques)
+
+    Lack of global popularity: While jiu-jitsu is the older of the two fighting styles, it doesn’t have as much appeal to popular culture as judo does, especially since judo has been an Olympic sport since the mid-20th century.
+    Too similar to judo: Even though the philosophy and techniques in judo and jiu-jitsu are slightly different, in a competitive match they are considered too similar as a spectator sport to justify both fighting styles.
+    No governing committee: A major roadblock to jiu-jitsu becoming a recognized Olympic sport is that there is no overarching global governing committee for the sport of jiu-jitsu. The original old-style Japanese jiu-jitsu was itself just a collection of different indigenous grappling techniques, and each Brazilian jiu-jitsu dojo is slightly different.
+
+    Mae-keri (前蹴): Front kick [pic]
+    Mae-naname-keri (前斜蹴): Front crossing kick or oblique kick
+    Naname-keri (斜蹴) or Mawashi geri: Roundhouse Kick
+    Taka-keri (高蹴): High front kick
+
+Even though Judo evolved out of Jiu-Jitsu, that doesn’t mean that Jiu-Jitsu went extinct as a fighting style. If anything, Jiu-Jitsu is more popular than ever.
+
+Judo and jiu-jitsu are both popular Japanese fighting styles that put a lot of focus into the groundwork. However, there are some distinct differences between these two styles that can make a big difference in a mixed martial arts match. It’s also a good idea for people considering both martial arts to look at them side by side before deciding which art to pursue.
+
+On Fukuda's death in 1880, Kano, who had become his keenest and most able student in both randori and kata, was given the densho (伝書, scrolls) of the Fukuda dōjō.[17] Kano chose to continue his studies at another Tenjin Shin'yō-ryū school, that of Iso Masatomo (c. 1820–1881). Iso placed more emphasis on the practice of "kata", and entrusted randori instruction to assistants, increasingly to Kano.[18] Iso died in June 1881 and Kano went on to study at the dōjō of Iikubo Tsunetoshi (1835–1889) of Kitō-ryū (起倒流).[6] Like Fukuda, Iikubo placed much emphasis on randori, with Kitō-ryū having a greater focus on nage-waza (投げ技, throwing techniques).[19]
+Founding of the Kodokan
+Eisho-ji temple, Tokyo
+
+    The History of Judo vs. The History of Jiu-Jitsu
+        The Rise of Judo From Jiu-Jitsu
+        Are There Still Jiu-Jitsu Schools?
+        Japanese Jiu-Jitsu vs. Brazilian Jiu-Jitsu
+    How Judo and Jiu-Jitsu Are Similar
+    How Judo and Jiu-Jitsu Are Different
+        What Is the Biggest Difference Between Judo and Jiu-Jitsu?
+    Is Judo or Jiu-Jitsu Better for Self-Defense?
+    Is Jiu-Jitsu More Effective Than Judo?
+    Judo vs. Jiu-Jitsu in Mixed Martial Arts
+    Judo vs. Jiu-Jitsu in the Olympics
+        Why Is Jiu-Jitsu Not in the Olympics?
+    How to Choose Between Judo and Jiu-Jitsu
+    Can You Learn Judo and Jiu-Jitsu at the Same Time?
+    Judo and Jiu-Jitsu Are Both Effective Styles
+
+Kano removed the dangerous Jujutsu techniques, by improving the art of falling. He imposed that both fighters grab each other and created his own method by synthesizing the oldest forms of defence. In 1882, he opened a dojo that he called the Kodokan, the "Place where the way is studied".
+
+Katame-waza is further categorised into osaekomi-waza (抑込技, holding techniques), in which tori traps and pins uke on their back on the floor; shime-waza (絞技, strangulation techniques), in which tori attempts to force a submission by choking or strangling uke; and kansetsu-waza (関節技, joint techniques), in which tori attempts to submit uke by painful manipulation of their joints.[39]
+
+    Trevor Leggett (United Kingdom), (1914–2000) was one of the first Europeans to study martial arts in Japan, and the first Western ever to hold the rank of 6th dan in judo awarded by the Kōdōkan (or any other organization) (January 1955). Leggett was also a scholar and prolific writer on Japanese culture. He was honoured for this by being awarded the Order of the Sacred Treasure by the Emperor of Japan in 1984.
+    Willy Cahill (US, 1935–), has been teaching and coaching Judo since 1963. His pupils have captured more than 1200 national and international titles[3]. A former judo coach at Stanford, Cahill was the U.S. Olympic judo mentor in 1988. He also coached the U.S. national judo team from 1980 to 1990.
+    Anthony Clarke (Australia, 1961–), two-time World blind judo champion and gold medalist in the paralympics. Two-time Australian champion against sighted opponents.
+    Gene LeBell (US, 1932–2022), two time AAU Judo Champion. Later turned to wrestling, stunt work, and refereeing matches including Muhammad Ali vs. Antonio Inoki. Prolific author.
+    Gokor Chivichyan (Armenia, 1963–), United States Ju-Jitsu Federation 7th dan in judo,[22] mostly known from sambo, MMA, and popular Internet websites.
+    Jason Morris (US, 1967–), 8th dan 92 Olympic Silver Medalist with 20 gold medals in international competition, 2008 Olympic coach.
+    Jan Snijders (Netherlands, 1943–), instructor and referee at the World Championships and Olympic games. Awarded a silver medal by the International Judo Federation in 2003 for his contributions to judo. 8th dan grade holder.
+    Rena Kanokogi (US, 1935–2009), 7th dan, dubbed "founding mother" of Judo for fighting for equal women's rights and competitions in the sport.
+    Vladimir Putin (Russian Federation, 1952–), Putin was awarded 8th dan in 2012 and became the first Russian to have been awarded the eighth dan, joining a handful of judo fighters in the world who have achieved such status.[23] Putin was awarded 7th dan in 2009[24] and 6th dan (prestigious red & white belt) at the Kodokan in 2000.[25] In the 1970s, he was awarded a Master of Sports in both judo and sambo. Putin has described judo as "my favorite sport", and he continues to practice it.
+    Naoki Murata, (Japan, 1949–2020), 8th dan. Authored many books on judo, curator of the Kōdōkan Judo Museum.
+    Ilham Zakiyev (Azerbaijan, 1980–), two-time World and five-time blind judo champion and two-time gold medalist in the paralympics.
+    Kyu-ha Kim (Korea, 1935–2021) 10th dan two-time Grand Champion of South Korea in the late 1950s
+
+    Tsukkake or Tsuki-kake: Straight punch
+    Mae-naname-ate: Front crossing blow
+    Naname-tsuki or Mawashi-tsuki: Roundhouse punch or circular punch
+    Tsuki-age or Ago-tsuki: Uppercut
+    Uchi-oroshi or Uchi-kake: Downward strike or hammer fist
+    Yoko-ate: Side strike or backfist
+    Yoko-uchi: Strike to side
+    Gammen-tsuki: Thrust punch or jab
+    Kami-ate or Ue-ate: Upward blow
+    Shimo-tsuki: Downward blow
+    Ushiro-sumi-tsuki: Rear corner blow
+    Ushiro-uchi: Rear blow
+    Ushiro-tsuki: Rear strike (over shoulders)
+    Ryote-tsuki: Two hand blow
+
+    Kesa-gatame (袈裟固): Scarf hold
+    Kuzure-kesa-gatame (崩袈裟固): Broken scarf hold
+    Ushiro-kesa-gatame (後袈裟固): Reverse Scarf Hold. The Kodokan officially also referred to this technique as kuzure-kesa-gatame until 2017.[5][6]
+    Kata-gatame (肩固): Shoulder hold
+    Kami-shiho-gatame (上四方固): Upper four quarter hold down
+    Kuzure-kami-shiho-gatame (崩上四方固): Broken upper four quarter hold down
+    Tate-shiho-gatame (縦四方固): Vertical four quarter hold
+    Yoko-shiho-gatame (横四方固): Side four quarter hold
+    Ura-gatame (裹固) (1/1/2014 this is now recognized as a valid competition technique)
+    Uki-gatame (浮固): Floating hold
+
+The art of the ‘weak against the strong’ is not reserved for men, and women start practicing the Japanese art early on. In London, the "jujutsuffragettes" used the Japanese art as a tool in the service of their political struggle to gain the right to vote.
+
+    Jiu-jitsu is a much older sport. Jiu-jitsu (or jujutsu) is a Japanese umbrella term that references many different grappling fighting styles that have existed in Japan over the centuries. As an offshoot of jiu-jitsu, judo is a newer fighting style that incorporates many features of jiu-jitsu.
+    In Judo, you can win with a throw. In jiu-jitsu, you can’t. In competition, judo puts as much focus on takedowns from a standing position as it does on the ground holds. In a judo match, you can win without ever going to the mat.
+    Judo is scored on several different moves. Jiu-jitsu is mainly scored on submissions and holds. Since judo incorporates more standing combat, fighters can be scored in competition on several standing techniques such as throws and pins. Jiu-jitsu focuses more on chokes and ground holds. (Source: Absolute MMA)
+    Judo matches tend to be faster. Since judo focuses on taking down an opponent as quickly as possible, a judo match can be over in a matter of seconds. Jiu-jitsu matches tend to run a little bit longer since both opponents end up grappling on the mat.
+
+    Tenjin Shin'yō-ryū
+    Yoshin ryu
+    Shiten ryu
+    Sekiguchi Ryu
+    Sosuishi Ryu
+    Fusen Ryu
+    Kito Ryu
+    Takenouchi Ryu
+    Miura Ryu
+    Kyushin Ryu
+    Ryōi Shintō-ryū
+    Tsutsumi Hozan Ryu
+
+The above categorization of techniques is orthogonal to the categorization of domains of combat, which include tachi-waza (立技, standing) and ne-waza (寝技, ground). Some techniques can be used only in one of these domains, and some can be used in both.[1] In practice, ne-waza is often used as a synonym of katame-waza (固技, grappling techniques),[2] or some of its subcategories, most often osaekomi-waza (抑込技, holding techniques) and possibly also kansetsu-waza (関節技, joint techniques).[3]
+
+Enthusiasts for jiu-jitsu and judo will both tell you that their chosen fighting style is the most effective, but the reality is that it all depends on the person fighting. An advanced judo fighter can usually take down a novice jiu-jitsu student easily, and vice versa.
+
+Safety in the practice of throwing techniques depends on the skill level of both tori and uke. Inexpertly applied throws have the potential to injure both tori and uke, for instance when tori compensates for poor technique by powering through the throw. Similarly, poor ukemi can result in injury, particularly from more powerful throws that uke lacks the skill to breakfall from. For these reasons, throws are normally taught in order of difficulty for both tori and uke. This is exemplified in the Gokyo (五教, literally "five teachings"), a traditional grouping of throws arranged in order of difficulty of ukemi. Those grouped in Dai ikkyo (第一教, literally "first teaching") are relatively simple to breakfall from whereas those grouped in dai gokyo (第五教, literally "fifth teaching") are difficult to breakfall from.[citation needed]
+Mental training
+
+However, the emphasis on speed in judo makes a good argument for judo being more effective. By taking down your enemy as quickly as possible with a judo throw, you don’t leave them time to inflict any damage in the first place.
+Judo vs. Jiu-Jitsu in Mixed Martial Arts
+
+Training in judo and jiu-jitsu at the same time can be challenging for both your body and your wallet. However, for dedicated MMA students, there’s no better way to gain mastery over your opponent on both the ground and in standing conflicts.
+
+    List of celebrity judoka
+    List of Olympic medalists in judo
+    List of world champions in judo
+    List of Canadian judoka
+
+Jiu-jitsu is undoubtedly more popular as a secondary fighting style in MMA, especially the Brazilian style of jiu-jitsu. Almost all MMA instructors have a repertoire of ground techniques that are derived from jiu-jitsu influences. MMA fighters who specialize in standing techniques and judo takedowns are few and far between.
+
+The person who performs a Waza is known as tori (取り, literally "taker") and the person to whom it is performed is known as uke (受け, "receiver").[31]
+Nage-waza (throwing techniques)
+
+    Anton Geesink (Netherlands, 1934–2010), World Champion 1961 as first Judoka not from Japan, Olympic Champion 1964 in Tokio, 20-times European champion, First European Judoka with highest Dangrade 10th Dan.
+    Ezio Gamba (Italy, 1958-), Olympic gold and silver medalist, first Italian who won Olympic gold, currently is the coach of Russian team.
+    Neil Adams (Great Britain, 1958-), World Champion 1981 (first non Japanese to win the title in u78kg), Olympic Silver Medallist in 1980 Moscow & 1984 Los Angeles, 5x European Champion in two consecutive weights 71 kg & 78 kg, 9th Dan presented by the IJF in Paris 2019.
+    Ilias Iliadis (Greece, 1984–), Olympic gold and bronze medalist and gold medalist on Masters and three times world champion).
+    Teddy Riner (France, 1989–), three-time Olympic gold medalist and eleven-time World Champion.
+    David Douillet (France, 1969–), two-time Olympic gold medalist and four-time World Champion.
+    Isao Okano (Japan, 1944–), Olympic gold medalist, World Champion, and two time All-Japan champion.
+    Kosei Inoue (Japan, 1978–), Olympic gold medalist and three-time World Champion.
+    Ole Bischof (Germany, 1979–), Olympic gold and silver medalist.
+    Udo Quellmalz (Germany, 1967–), Olympic gold and bronze medalist and two times World Champion).
+    Jeon Ki-young (South Korea, 1973–), Olympic gold medalist and three-time World Champion.
+    Toshihiko Koga (Japan, 1967–2021), Olympic gold medalist and three-time World Champion.
+    Wim Ruska (Netherlands, 1940–2015), two-time Olympic gold medalist and two-time Olympic World Champion.
+    Hitoshi Saitō (Japan, 1961–2015), two-time Olympic gold medalist and World Champion. Coached 2004 Japanese Olympic judo team.
+    Yasuhirō Yamashita (Japan, 1957–), four-time World Champion and one-time Olympic gold medalist. Compiled a streak of 203 victories (with 7 draws) up until his retirement.
+    Hidehiko Yoshida (Japan, 1969–), World Champion, Olympic gold medalist, and MMA fighter.
+    Tadahirō Nomura (Japan, 1974–), 3-times olympic gold medalist and one-time World Champion (under 60 kg)
+    Antal Kovács (Hungary, 1972–), first Hungarian Olympic gold medalist and World Champion, ten-time World Cup Champion, six-time International Tournament winner.
+    Peter Seisenbacher (Austria, 1960–), two-time Olympic gold medalist and one-time World Champion.
+    Lukáš Krpálek (Czechia, 1990–) current world champion, former European champion and two-time Olympic gold medalist (-100 kg and +100 kg). He is the most successful judoka in Czech and Czechoslovakian history.
+
+    Hikikomi gaeshi (引込返): Pulling in reversal
+    Sumi gaeshi (隅返): Corner reversal
+    Tawara gaeshi (俵返): Rice bag reversal throw
+    Tomoe nage (巴投): Circle throw
+    Ura nage (裏投): Rear throw
+
+    Judo by country
+    List of celebrity judoka
+    List of judo techniques, partial list of judo techniques
+    List of judoka
+    List of World Champions in Judo
+    Jacket wrestling
+
+This means there are more counterstrikes and other defensive techniques in jiu-jitsu compared to judo. If your main goal in self-defense is to prevent yourself from getting hurt, this makes jiu-jitsu slightly more effective defense.
+
+    Kazuo Itō (Japan, 1898–1974), Kokusai Budō Renmei/IMAF, 10th dan Meijin (promotion date unknown). Itō, a student of Mifune, also held the rank of Kōdōkan 9th dan.
+    Taksasue Itō (Japan, 1887–1981), Kokusai Budō Renmei/IMAF, 10th dan Meijin (promotion date unknown). Itō, a previous personal secretary to Jigorō Kanō, also held the rank of Kōdōkan 9th dan.
+    Tokuji Oshita (Japan, date of birth unknown) (in some sources his first name omitted and instead substituted by the initial K.), Kokusai Budō Renmei/IMAF, 10th dan Meijin (promotion date unknown).
+    Philip S. Porter (United States, 1925–2011), USMA 10th dan, January 1, 2005.
+    Dieter Teige (Germany, 1939–), Deutsches Dan Kollegium, 10th dan, October 30, 2010. Teige, a former president of the Deutsches Dan Kollegium, is the first German 10th dan-holder. His rank is recognized neither by the national governing body, the German Judo Federation (DJB) nor was it homologated by the International Judo Federation.
+    Brian Jacks (UK, 1946–), still listed with his official judo rank of 8th dan since November 1994,[14] is now also listed by a British multi-martial arts organization called World Martial Arts Council, as a 10th dan.[15] No specific promotion date was mentioned. Brian Jacks was the first judoka to win a medal in the World Championships for the UK (bronze, 1967, Salt Lake City). He also competed at three Olympic Games - winning bronze, 1972, Munich.
+    Jack Hearn (UK, 1923–), FESECAM 10th dan September 2020. Achievements unknown.
+
+    Mikinosuke Kawaishi (Japan/France, 1899–1969) FFJDA (French Judo Federation) 10th dan[8]
+    Seok Jin-gyeong (Korea, 1912–1990) (his surname is also sometimes spelled Suk), Korean Judo Association (KJA), 1990. First Korean to be promoted to the rank of 10th dan.
+    Shin Do-hwan (Korea, approx. 1920–2004), KJA 10th dan, promoted approx. 2000.
+    Chae Jung Gyum Suhn Sang Nim (Korea, date of birth currently unknown–2007[9]) (his name is also sometimes spelled Lee Suhn Sang Nim), KJA 10th dan, May 20, 2007.
+    Henri Courtine (France, 1930–2021), FFJDA 10th dan (promoted in 2007).
+    Jeremy L. Glick (United States, 1970–2001), USJA Honorary 10th dan, September 17, 2008. A press release in 2011 from the USJA mentions George Harris' 10th dan promotion as the first USJA 10th dan promotion hence suggesting that Glick's promotion was an honorary promotion.[10]
+    Jaap Nauwelaerts de Agé (Netherlands, 1917–2016), Dutch Judo Federation (JBN), 10th dan, November 15, 2008.
+    Yi Bang-geun (Korea/US, 1924–) (his surname is also sometimes spelled Lee), KJA 10th dan, January 2010.
+    Jang Kyeong-sun (Korea, 1922–2022) (his name is also sometimes spelled Chang Kyung Soon), KJA 10th dan, date of promotion unknown.
+    George Harris (United States, 1933–2011), USJA 10th dan, January 15, 2011. First 10th dan recognized by the three major judo organizations in the US. Placed 5th in the 1956 World Championships, won six Air Force judo championships, four US National titles, two gold medals in the Pan-American Games, and represented the United States in the 1964 Olympics, and was one of the leaders of the Armed Forces Judo Association (AFJA) that later evolved into the United States Judo Association (USJA), founded in 1968.[10]
+    Karl Geis (United States, 1933–2014), USJA 10th dan, March 12, 2014. Geis was one of the founders of the USJA. During the late 1950s and early 1960s Geis practiced in Japan where his judo sensei included Osawa, Daigo, Kotani, Kudo, Miyake, Kobayashi, and Ushijima. Miyake Tsunako and Tomiki Kenji were his primary Aikido teachers, from which he received Rokudan directly from Tomiki-shihan. Upon his return to the US he opened his own dōjō in Houston which he ran until shortly before his death on April 7, 2014. Geis contributed to the development of some of our early U.S. judo Olympians and many well-known American judo leaders.
+    Massao Shinohara (Brazil, 1925–2020), Brazilian National Federation 10th dan, 18 November 2017.
+    Haruo Imamura (1933–2017), previously a Kōdōkan 8th dan (since 2000) and a USJF 9th dan (since 2007), was posthumously promoted to judo 10th dan by the USJF on May 12, 2018. In 1956 Imamura was captain of Tenri University's successful judo team. He later moved to the US, where he won the 1960 US Nationals in the -180 lbs division and also won the overall Grand Champion title.
+    Jim Bregman (United States, 1941–), USJA 10th dan, January 19, 2018. Bregman represented the U.S. at judo in the 1964 Tokyo Olympic Games, winning a bronze medal in the under 60 kg category. He was presented with his 10 dan certificate on July 7, 2018.
+    Harold E. Sharp[11] (United States, 4-9-1927 to 3-21-2021), Nanka 10th dan, November 12, 2020. The Nanka Judo Yudanshakai (SoCal Judo Association) recognized by Jigoro Kano in 1930, bestowed the highest rank on Sensei Harold E. Sharp 'Hal'. Known worldwide for his 1955 book 'The Sport of Judo' and subsequent books including his latest ' The Road to Black Belt', Sharp Sensei was gifted by the Prince of Japan in 1954 for great achievements in Japan for winning an international judo competition, and being instrumental to the growth of judo after WWII leading to its inclusion in the Olympics. The Hal Sharp Teacher's Foundation documents his 75+ years of dedication to spreading judo's positive philosophy.
+    Kyu-ha Kim[12] (United States, 1935–2021), USJA 10th dan, May 17, 2021. Kim was two-time Grand Champion of South Korea in the late 1950s prior to his move to the United States in 1960 where he settled in Pittsburgh, PA. He ran his own judo school and developed a cadre of renown students including Gary Goltz[13] and was the US Olympic Judo Coach in 1980. He also taught judo at the University of Pittsburgh since 1972.
+
+Since judo is a school of martial arts training that came out of jiu-jitsu, there are many ways in which these two fighting styles are similar. Here are a few of the biggest similarities between judo and jiu-jitsu:
+
+News • San Francisco Tenderloin police officers hold judo classes for neighborhood kids • Feb. 25, 2025, 2:43 AM ET (CBS)
+
+    Ura-kesa-gatame (裹袈裟固): The Kodokan officially also refers to this technique as Kuzure-kesa-gatame.
+    Sangaku-Gatame : Triangular Hold (三角固): The Kodokan officially also refers to this technique as Kuzure-kami-shiho-gatame.
+    Mune gatame: Chest Hold (胸固め): The Kodokan officially also refers to this technique as Kuzure-yoko-shiho-gatame.
+
+Japanese jiu-jitsu and Brazilian jiu-jitsu are similar in that they’re both grappling-heavy styles that focus on taking down potentially larger and stronger opponents, but there are also some differences between the two styles of jiu-jitsu. Here are a few of them (Source: Way of Martial Arts):
