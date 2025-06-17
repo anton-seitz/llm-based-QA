@@ -37,7 +37,7 @@
   ),
   at-university: true,
   city: "Stuttgart",
-  abstract: "Führende Large Language Models (LLMs) werden im Zuge des aktuellen Hypes häufig als Alleskönner dargestellt. Aus vorangegangenen Studien ist jedoch ersichtlich, dass diese Modelle oftmals ein mangelhaftes Faktenwissen aufweisen und selbst bei bekannten Informationen natürlichsprachliche Fragen fehlerhaft beantworten. Sogar das beste getestete Modell, GPT-4, erreichte hier nur 40,3% korrekte Antworten. Diese Diskrepanz zwischen den Erwartungen und der tatsächlichen Leistungsfähigkeit bildet die Motivation für diese Arbeit. Das Ziel ist, die Grenzen der Leistungsfähigkeit von LLM systematisch zu erforschen.
+  abstract: "Führende Large Language Models (LLMs) werden im Zuge des aktuellen Hypes häufig als Alleskönner dargestellt. Aus vorangegangenen Studien ist jedoch ersichtlich, dass diese Modelle oftmals ein mangelhaftes Faktenwissen aufweisen und selbst bei bekannten Informationen natürlichsprachliche Fragen fehlerhaft beantworten. Sogar das beste getestete Modell, GPT-4, erreichte hier nur 40,3% korrekte Antworten. Diese Diskrepanz zwischen den Erwartungen und der tatsächlichen Leistungsfähigkeit ist sehr problematisch, da sich Millionen von Menschen täglich auf LLMs wie ChatGPT verlassen. Ergebnisse werden selten hinterfragt, was zu Desinformation und Verwirrung führt. Das Ziel ist daher, die Grenzen der Leistungsfähigkeit von LLM systematisch zu erforschen. Insgesamt lassen sich die Ergebnisse der vorangegangenen Studien bestätigen. Wir fanden hier im Schnitt eine Performance von immerhin etwa 69%. Basierend auf diesen Erkenntnissen müsste man daher in etwa einem Drittel der Fälle mit einer falschen Antwort rechnen. 
 ",
   date: datetime.today(),
   language: "de",
@@ -51,7 +51,7 @@
 #set text(size: 12pt)
 
 = Kurzbeschreibung der Arbeit
-In dieser Studienarbeit wird die Leistungsfähigkeit moderner Large Language Models (LLMs) im Bereich des Question Answering (QA) systematisch untersucht. Ausgangspunkt ist die Erkenntnis, dass selbst hochentwickelte Modelle wie GPT-4 nur rund 40 % der Fragen korrekt beantworten, obwohl ihnen häufig universelle Problemlöserfähigkeiten zugeschrieben werden @head-to-tail. Zunächst wird ein thematisch geeigneter Textkorpus ausgewählt und für die spätere Evaluierung aufbereitet. Darauf aufbauend werden Testfragen formuliert und Referenzantworten erstellt, um eine belastbare Vergleichsbasis zu schaffen.
+In dieser Studienarbeit wird die Leistungsfähigkeit moderner Large Language Models (LLMs) im Bereich des Question Answering (QA) systematisch untersucht. Dabei betrachten wir ausschließlich Faktenwissen, da LLMs hier notorisch schlecht abschneiden. Ausgangspunkt hierfür ist die Erkenntnis, dass selbst hochentwickelte Modelle wie GPT-4 nur rund 40 % der Fragen korrekt beantworten, obwohl ihnen häufig universelle Problemlöserfähigkeiten zugeschrieben werden @head-to-tail. Zunächst wird ein thematisch geeigneter Textkorpus ausgewählt und für die spätere Evaluierung aufbereitet. Darauf aufbauend werden Testfragen formuliert und Referenzantworten erstellt, um eine belastbare Vergleichsbasis zu schaffen.
 
 Anschließend wird ein ausgewähltes LLM in einer speziell eingerichteten Testumgebung eingesetzt. Hierbei werden sowohl quantitative Metriken wie Genauigkeit und Vollständigkeit als auch qualitative Kriterien zur Bewertung herangezogen. Die Experimentierphase umfasst Tests unter variierenden Modellparametern und Anpassungen der Pipeline, um deren Einfluss auf die Antwortqualität zu erfassen.
 
@@ -60,7 +60,7 @@ Im letzten Schritt erfolgt die systematische Auswertung der gewonnenen Daten. Da
 = Einleitung
 
 == Motivation
-Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Genauigkeit im Fakten‑#acr("QA") @head-to-tail. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit. Die Zuverlässigkeit und Limitationen solcher Systeme zu untersuchen sollen hier Anhand eines Test-Environment systematisch untersucht werden.
+Heutige #acrpl("LLM") wie GPT‑4 erreichen teils überraschend niedrige Genauigkeit im Fakten‑#acr("QA") @head-to-tail. Diese Diskrepanz zwischen Erwartung und Realität motiviert die vorliegende Arbeit. Die Zuverlässigkeit und Limitationen solcher Systeme soll hier Anhand eines Test-Environment systematisch untersucht werden.
 
 == Zielsetzungen
 - Aufbau eines wiederholbaren #acr("QA")‑Test‑Environments  
@@ -74,10 +74,10 @@ Die Arbeit gliedert sich in drei Phasen: eine Vorbereitungs­phase mit Literatur
 = Grundlagen und Definitionen
 Zunächst werden die nötigen Grundlagen für das Verständnis der Arbeit geschaffen.
 == Question‑Answering‑ Systeme
-Question‑Answering‑Systeme (#acr("QA")‑Systeme) sind Anwendungen, die automatisch auf natürlichsprachliche Fragen Text­antworten liefern. Sie kombinieren Information Retrieval (z. B. Dokumentensuche) und Natural Language Processing (z. B. Named Entity Recognition, Parsing), um in einem Korpus oder internem Modellwissen die richtige Antwort zu finden @qa-bert. 
+Question‑Answering‑Systeme (#acr("QA")‑Systeme) sind Anwendungen, die automatisch auf natürlichsprachliche Fragen Text­antworten liefern. Sie kombinieren Information Retrieval (z. B. Dokumentensuche) und Natural Language Processing (z. B. Named Entity Recognition, Parsing) und KI, um in einem Korpus oder internem Modellwissen die richtige Antwort zu finden @qa-bert. 
 
 === Arten von Wissen  
-Knowledge lässt sich in verschiedene Kategorien unterteilen, die für #acr("QA")‑Systeme relevant sind. Basierend auf  *Types and qualities of knowledge* @knowledge lassen sich folgende Typen unterscheiden:
+Knowledge lässt sich in verschiedene Kategorien unterteilen, die für #acr("QA")‑Systeme relevant sind. Basierend auf  *types and qualities of knowledge* @knowledge lassen sich folgende Typen unterscheiden:
 
 - *Factual Knowledge* (auch *Conceptual knowledge*):  
   Dieses Wissen umfasst statische Fakten und Konzepte, z. B. „Berlin ist die Hauptstadt Deutschlands“. #acr("QA")‑Systeme greifen hier häufig auf explizite Datenbanken oder Textpassagen zurück @knowledge.
@@ -94,7 +94,7 @@ Knowledge lässt sich in verschiedene Kategorien unterteilen, die für #acr("QA"
 - *Contextual Knowledge*:  
   Form von Wissen, das an einen bestimmten Kontext gebunden ist (z. B. aktuelle Nachrichten, persönliche Vorlieben). Open‑Domain‑#acr("QA")‑Systeme müssen dynamisch darauf zugreifen.
 
-Wir konzentrieren uns in dieser Arbeit auf *Factual Knowledge* („Conceptual knowledge“), da aktuelle LLMs hier erhebliche Defizite zeigen. Studien belegen, dass selbst GPT‑4 im Fakten‑#acr("QA") nur ca. 40,3 % korrekte Antworten liefert, obwohl diese Informationen während Pre‑Training oft mehrfach auftauchen @head-to-tail.
+Wir konzentrieren uns in dieser Arbeit auf *Factual Knowledge* („Conceptual knowledge“), da aktuelle LLMs hier erhebliche Defizite zeigen. Studien belegen, dass selbst GPT‑4 im Fakten‑#acr("QA") nur ca. 40,3 % korrekte Antworten liefert, obwohl diese Informationen während des Pre‑Training oft mehrfach auftauchen @head-to-tail.
 
 === Typen von #acr("QA")‑Systemen
 
@@ -111,7 +111,7 @@ Im Folgenden werden die üblichen Typen des #acr("QA") beschrieben und erläuter
   Hier erzeugt das Modell die Antwort eigenständig aus Frage und Kontext, statt sie wortwörtlich zu übernehmen. Moderne LLMs wie GPT‑Modelle erstellen frei formulierte Fließtext-Antworten @wolf2020transformers.
 
 - *Closed‑Book #acr("QA")*  
-  Das Modell nutzt nur im Pretraining erworbenes Wissen, ohne zusätzliche Kontext-Eingabe. Typisches Beispiel sind GPT‑basierten Chatbots, die über intern gelernten Wissensspeicher verfügen @wolf2020transformers.
+  Das Modell nutzt nur im Pre-Training erworbenes Wissen, ohne zusätzliche Kontext-Eingabe. Typisches Beispiel sind GPT‑basierten Chatbots, die über intern gelernten Wissensspeicher verfügen @wolf2020transformers.
 
 - *Open‑Domain #acr("QA")*  
   Systeme greifen auf ein großes Wissensreservoir (z.B. Wikipedia) zu. Ein Retriever identifiziert relevante Dokumente, die ein Reader oder Generator anschließend für die Antwort nutzt (Retrieval-Augmented Generation) @lewis2020rag.
@@ -162,7 +162,7 @@ $ "head"_i = "Attention"(Q W_i^Q, K W_i^K, V W_i^V) $
 */
 === Trainingsverfahren  
 LLMs durchlaufen zwei Phasen:
-- *Pretraining*  
+- *Pre-Training*  
   • Masked Language Modeling (BERT) @devlin2019bert  
   • Autoregressive Next-Token-Prediction (GPT) @wolf2020transformers  
 - *Fine‑Tuning*  
@@ -171,13 +171,11 @@ LLMs durchlaufen zwei Phasen:
 
 == Fine‑Tuning
 
-Fine‑Tuning bezeichnet das Anpassen eines vortrainierten #acr("LLM") an eine konkrete Aufgabe durch weiteres Training mit gelabelten Beispielen. Dabei wird die Performance des Modells gezielt auf domänenspezifische Eingaben optimiert.
-
-Das Ziel ist, das bereits vorhandene Sprachverständnis des Modells durch zusätzliche, oft kleinere Datenmengen so zu verfeinern, dass es auf die Zielanwendung zugeschnittene Antworten liefern kann.
+Fine‑Tuning bezeichnet das Anpassen eines vortrainierten #acr("LLM") an eine konkrete Aufgabe durch weiteres Training mit gelabelten Beispielen. Das heißt, dass den Trainingsbeispielen jeweils eine korrekte Antwort zugewiesen wurde. Dabei wird die Performance des Modells gezielt auf domänenspezifische Eingaben optimiert.
 
 === Full‑Parameter‑Fine‑Tuning
 
-Beim klassischen Fine‑Tuning werden alle Modellgewichte $ bold(W) in RR^(d times k) $ aktualisiert. Die Gewichte werden dabei durch Minimierung einer passenden Verlustfunktion wie Kreuzentropie angepasst:
+Beim klassischen Fine‑Tuning werden alle Modellgewichte $ bold(W) in RR^(d times k) $ aktualisiert. Die Gewichte werden dabei durch Minimierung einer passenden Verlustfunktion wie z.B. der Kreuzentropie angepasst:
 
 $ min_(bold(W)) sum_(i=1)^N cal(L)(f(bold(x)_i; bold(W)), y_i) $
 
@@ -187,6 +185,7 @@ $ min_(bold(W)) sum_(i=1)^N cal(L)(f(bold(x)_i; bold(W)), y_i) $
   - Hoher Speicherverbrauch (alle Parameter müssen im Training gehalten werden)
   - Geringe Wiederverwendbarkeit des Modells (Task-spezifisch)
   - Lange Trainingsdauer und hoher Rechenbedarf
+  - Da alle Gewichte geändert werden ist es schwerer, den Einfluss einzelner Parameter auf Vorhersagen nachzuvollziehen.
 
 === LoRA‑Fine‑Tuning
 
@@ -204,9 +203,7 @@ Dabei sind:
     image("fine-tuning.png"),
     caption: [Full‑Parameter‑Fine‑Tuning vs #acr("LoRA") @intel-ft]
 )
-@intel-ft zeigt, dass beim Full-Parameter-Tuning alle Gewichte (inklusive Bias) eines vortrainierten Layers direkt angepasst werden, während #acr("LoRA") die ursprünglichen Parameter einfriert und ausschließlich zwei low-rank, bzw. Matrizen A und B trainiert, deren skaliertes Produkt als Residual zum ursprünglichen Layer-Output addiert wird. Dadurch reduziert #acr("LoRA") den Speicher- und Rechenaufwand beim Fine-Tuning erheblich, da nur ein Bruchteil der Parameter trainiert werden. Das bedeutet, anstelle von $d dot k$ Parametern werden nur $(d + k) dot r$ Parameter trainiert:
-
-$ frac((d + k) dot r, d dot k) "ll" 1 $
+Eine von Intel durchgeführte Studie zeigt, dass beim Full-Parameter-Tuning alle Gewichte (inklusive Bias) eines vortrainierten Layers direkt angepasst werden, während #acr("LoRA") die ursprünglichen Parameter einfriert und ausschließlich zwei low-rank, bzw. Matrizen A und B trainiert, deren skaliertes Produkt als Residual zum ursprünglichen Layer-Output addiert wird @intel-ft. Dadurch reduziert #acr("LoRA") den Speicher- und Rechenaufwand beim Fine-Tuning erheblich, da nur ein Bruchteil der Parameter trainiert werden. Das bedeutet, anstelle von $d dot k$ Parametern werden nur $(d + k) dot r$ Parameter trainiert.
 
 Beispiel: Für $d = k = 768$, $r = 8$ ergibt sich eine Reduktion auf nur ca. 2% der ursprünglichen Parameteranzahl.
 
@@ -231,7 +228,7 @@ Da $r$ typischerweise deutlich kleiner ist als $d$ und $k$, fällt der Parameter
 == #acr("SQuAD")
 
 Ein beliebter Datensatz für #acr("QA")-Systeme ist #acr("SQuAD"). Dort wurden in einem strukturierten Format über 100000 Fragen zu Wikipedia-Artikeln aufbereitet @rajpurkar2016squad.
-SQuAD 2.0 ergänzt unanswerable Fragen @rajpurkar2018squad2.
+SQuAD 2.0 ergänzt unbeantwortbare Fragen @rajpurkar2018squad2.
 /*
 - Exact Match EM berechnet den Anteil exakter Übereinstimmungen
 - F1-Score misst den Token-Overlap zwischen prognostiziertem und Gold-Span
@@ -245,32 +242,35 @@ $ "F1" = 2 |P ∩ G| / (|P| + |G|) $
 
 == Metriken zur #acr("QA")-Bewertung
 
-In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die Qualität von Question‑Answering-Systemen messen. Jede Metrik beleuchtet einen spezifischen Aspekt: von der reinen Worttreue bis zur semantischen Tiefe der Antwort. Für unseren Use Case sind besonders robuste Metriken wie F1‑Score und Semantic Answer Similarity (SAS) entscheidend, da sie auch bei variierenden Formulierungen zuverlässige Bewertungen ermöglichen @metrics, @sas-qa.
+In diesem Kapitel werden die zentralen Kennzahlen erläutert, mit denen wir die Qualität von Question‑Answering-Systemen messen. Jede Metrik beleuchtet einen spezifischen Aspekt: von der reinen Worttreue bis zur semantischen Tiefe der Antwort. Für unseren Use Case sind besonders robuste Metriken wie F1‑Score und Semantic Answer Similarity (SAS) entscheidend, da sie auch bei variierenden Formulierungen zuverlässige Bewertungen ermöglichen @metrics, @sas-qa. Im Folgenden sind die wichtigsten Begriffe zum Verständnis der Arbeit kurz definiert.
 
 #definition("Accuracy")[
-  Misst den Anteil aller Antworten, die als korrekt klassifiziert werden können – unabhängig von der Antwortlänge oder Position. In unserem Fall bedeutet das: Die generierte Antwort stimmt entweder exakt mit der Referenzantwort überein oder übersteigt eine definierte Schwelle semantischer Ähnlichkeit. Da jede Frage genau eine Antwort generiert, wird Accuracy hier als binäre Bewertungsmetrik verwendet. Der Einfachheit halber wird auf _halb_ korrekte Antworten verzichtet.
+  Misst den Anteil aller Antworten, die als korrekt klassifiziert werden können – unabhängig von der Antwortlänge oder Position. 
 
   $ "Accuracy" = frac("Anzahl korrekter Antworten", "Gesamtanzahl Fragen") $
 ]
+In unserem Fall bedeutet Accuracy: Die generierte Antwort stimmt entweder exakt mit der Referenzantwort überein oder übersteigt eine definierte Schwelle semantischer Ähnlichkeit. Da jede Frage genau eine Antwort generiert, wird Accuracy hier als binäre Bewertungsmetrik verwendet. Der Einfachheit halber wird auf _halb_ korrekte Antworten verzichtet.
 
 #definition("F1-Score")[
-  Das harmonische Mittel aus Precision und Recall. F1 vereint beide Perspektiven und ist besonders dann sinnvoll, wenn ein ausgewogenes Verhältnis von Genauigkeit und Vollständigkeit gefordert ist – typisch in #acr("QA"), wo man sowohl richtige als auch vollständige Antworten benötigt.
+  Das harmonische Mittel aus Precision und Recall. F1 vereint beide Perspektiven und ist besonders dann sinnvoll, wenn ein ausgewogenes Verhältnis von Genauigkeit und Vollständigkeit gefordert ist.
 
   $ "F1" = frac(2 dot "Precision" dot "Recall", "Precision" + "Recall") $
 ]
+Der F1-Score ist wird oft bei #acr("QA") vewendet, wo man sowohl richtige als auch vollständige Antworten benötigt.
 
 #definition("Exact Match (EM)")[
-  Misst den Anteil der Antworten, die exakt mit den Referenzantworten übereinstimmen. EM ist besonders streng, da nur ganz genaue Textübereinstimmungen als korrekt gewertet werden. Für #acr("QA")-Systeme, die exakte Textspans ausgeben, bildet EM den härtesten Qualitätsmaßstab.
-
+  Misst den Anteil der Antworten, die exakt mit den Referenzantworten übereinstimmen. EM ist besonders streng, da nur ganz genaue Textübereinstimmungen als korrekt gewertet werden. 
   $ "EM" = frac("Anzahl exakter Antworten", "Gesamtanzahl Fragen") $
 ]
+Für #acr("QA")-Systeme, die exakte Textspans ausgeben, bildet EM den härtesten Qualitätsmaßstab. Für die meisten Fragen ist ein Exact Match nicht nötig um eine Antwort objektiv für korrekt zu befinden.
+
 #definition("Semantic Answer Similarity (SAS)")[
-  Ein lernbarer semantischer Metrik-Score im Bereich $[0,1]$. #acr("SAS") bewertet, wie inhaltlich ähnlich eine generierte Antwort zur Gold-Antwort ist, selbst wenn sie anders formuliert ist. Diese Metrik ergänzt string-basierte Maße und ist in unserem Use Case wichtig, weil sie semantisch korrekte Paraphrasen erkennt @mrr.
+  Ein lernbarer semantischer Metrik-Score im Bereich $[0,1]$. #acr("SAS") bewertet, wie inhaltlich ähnlich eine generierte Antwort zur Gold-Antwort ist, selbst wenn sie anders formuliert ist. 
   $ "SAS" "liegt im Intervall" [0,1] $
   Hier verwenden wir Cosine-Similariy zur Berechnung der #acr("SAS"). Die Formel hierfür lautet:
 $ "cosine similarity" = frac(sum a_i b_i, (sum a_i^2)^(1/2) (sum b_i^2)^(1/2)) $  
 ]
-
+Diese Metrik ergänzt string-basierte Maße und ist in unserem Use Case wichtig, weil sie semantisch korrekte Paraphrasen erkennt @mrr.
 
 Diese Metriken kombiniert erlauben eine umfassende Beurteilung:  
 - *Accuracy* bietet eine einfache Erfolgsquote in binärer Form.  
@@ -283,45 +283,12 @@ Für unseren Use Case ist #acr("SAS") zentral, da sie sowohl Teil‑ als auch se
 
 = Realisierung
 
-/*
-== Umsetzung eines #acr("QA")-Testframeworks
-
-Für die Reproduzierbarkeit und Skalierbarkeit unseres QA‑Testframeworks setzen wir auf folgende technische Infrastruktur:
-
-- *Programmiersprache & Umgebung:*  
-  Python 3.8+ in Jupyter-Notebooks oder Colab.
-
-- *Kernbibliotheken:*  
-  - `transformers` für Modell‑Loading und Inferenz  
-  - `datasets` zum Laden und Verarbeiten von QA‑Datensätzen (SQuAD, NaturalQuestions)  
-  - `peft` für PEFT/LoRA‑Fine‑Tuning  
-  - `evaluate` für standardisierte Metriken (EM, F1, MRR)  
-
-- *Logging & Monitoring:*  
-  Weights & Biases (`wandb`) für Hyperparameter‑Tracking, Loss‑Kurven und Metriken.
-
-- *Versionierung & Reproduzierbarkeit:*  
-  - Git-Repository mit `requirements.txt` zur Paketverwaltung  
-  - Festlegung von Zufallskeimen:
-
-- *Notebook‑Struktur:*  
-  1. *Datenaufbereitung:*  
-     Einlesen des Korpus (`complete_context.txt`, `question-sets/q_v2.json`)  
-  2. *Chunking & semantisches Ranking:*  
-     Context in Abschnitte teilen und Top‑K‑Chunks per Sentence‑Transformer auswählen  
-  3. *Modellinferenz:*  
-     QA‑Pipeline (`deepset/roberta-base-squad2`) für FullContext und ReducedContext  
-  4. *LoRA‑Fine‑Tuning:*  
-     Adapter mittels `peft` hinzufügen, Training mit Kontext‑Chunks als MLM‑Daten  
-  5. *Evaluation:*  
-     EM, F1, MRR berechnen mit `evaluate`  
-  6. *Visualisierung:*  
-     Barplots, Heatmaps, Trainingskurven  
-*/
+In diesem Kapitel wird die praktische Umsetzung des Projekts beschrieben.
+Es wird erklärt, wie der Textkorpus erstellt und aufbereitet wurde, welche Fragesätze daraus abgeleitet wurden und wie darauf basierend Prototypen und Experimente zur Kontextreduktion und Modellanpassung umgesetzt wurden.
 
 == Textkorpus
 
-Zunächst wurde ein umfangreicher Textkorpus zusammengestellt. Als Thema wurde *Judo* gewählt, da sich der Entwickler gut damit auskennt und Judo sich für Faktenwissen-Tests eignet. Es gibt zahlreiche Details – von Technikklassifizierungen über historische Daten bis hin zu Wettkampfergebnissen, die sich gut abfragen lassen. Dabei wurden für den Textkorpus folgende Quellen gewählt:
+Zunächst wurde ein umfangreicher Textkorpus zusammengestellt. Als Thema wurde *Judo* gewählt, da sich der Autor damit auskennt und Judo sich für Faktenwissen-Tests eignet. Es gibt zahlreiche Details – von Technikklassifizierungen über historische Daten bis hin zu Wettkampfergebnissen, die sich sinnvoll abfragen lassen. Dabei wurden für den Textkorpus folgende Quellen gewählt:
 
 
 #set table(
@@ -356,7 +323,7 @@ Diese verbosen Rückgaben führten zu schlechter Performance, da das QA-Modell a
 Zudem waren manche Fragen nicht rein auf Faktenwissen ausgelegt, sondern erforderten etwas längere Erklärungen, was die Auswertung zusätzlich erschwerte.
 
 *Prototyp 2 – atomare Antworten*  
-Um die Performance deutlich zu steigern, wurden die Fragen so angepasst, dass jede Antwort *atomar* ist – also nur das absolut Notwendige enthält, _ground truth_.  
+Um die Performance deutlich zu steigern, wurden die Fragen so angepasst, dass jede Antwort *atomar* ist – also nur das absolut Notwendige enthält, die sogenannte _ground truth_.  
 Beispiel: Anstelle „Judo bedeutet ‚der sanfte Weg‘ und wurde 1882 von Kanō Jigorō gegründet“ steht nur noch „der sanfte Weg“.  
 Durch diese Reduktion auf einfache Stichwortantworten verringerte sich der Fehleranteil spürbar.
 
@@ -373,12 +340,12 @@ Dieser Abschnitt dokumentiert die iterative Entwicklung und Evaluierung verschie
 === Baseline: Vollständiger Korpus
 
 *Vorgehen*:  
-Für jede Frage wurde der gesamte Textkorpus (bestehend aus mehreren Quellen) als Kontext an das Frage-Antwort-Modell übergeben. Dieser Kontext wurde in einer Text-Datei abgelegt und beinhaltet die o.g. Webseitinhalte, die einfach aneinander konkateniert wurden. Dabei erreicht er eine Länge von ca. 140 000 Zeichen.
+Für jede Frage wurde der gesamte Textkorpus (bestehend aus mehreren Quellen) als Kontext an das Frage-Antwort-Modell übergeben. Dieser Kontext wurde in einer Text-Datei abgelegt und beinhaltet die o.g. Webinhalte, die einfach aneinander konkateniert wurden. Dabei erreicht er eine Länge von ca. 140 000 Zeichen.
 
 *Beobachtungen*:
 - *Laufzeit*: Sehr hohe Antwortzeiten aufgrund des umfangreichen Kontextes: Jede Frage benötigt etwa 2 Minuten Rechenzeit auf dem Laptop des Entwicklers. Später wurde das Jupyter-Notebook auf Google Colab ausgeführt, was eine deutlich schnellere Laufzeit ermöglichte (ca. 10-20x schneller).
-- *Genauigkeit*: Solide, jedoch nicht optimal, da irrelevante Informationen den Kontext evtl. verwässern. 
-- *Token-Limit*: Gefahr des Überschreitens des maximalen Token-Limits des Modells, was zu abgeschnittenen Kontexten führen kann. Das verwendete Modell deepset-roberta-squad2
+- *Genauigkeit*: Besser als in früheren Studien, aber nicht optimal.
+- *Token-Limit*: Gefahr des Überschreitens des maximalen Token-Limits des Modells, was zu abgeschnittenen Kontexten führen kann (deepset-roberta-squad2).
 
 
 == Kontextreduktion mittels semantischem Chunking
@@ -392,17 +359,22 @@ Der ursprüngliche Textkorpus setzt sich aus verschiedenen Quellen zusammen (Wik
 === Methodik
 
 - Segmentierung in Chunks  
-  Der vollständige Korpus wurde in Absätze bzw. thematische Einheiten unterteilt und ergab zunächst 378 Chunks.  
+
+  Der vollständige Korpus wurde durch Methoden einer Bibliothek _sentence-transformers_ in Absätze bzw. thematische Einheiten unterteilt und ergab zunächst 378 Chunks.  
 - Filterung nach Mindestlänge  
+
   Nur Chunks mit mindestens 20 Wörtern blieben erhalten, um triviale oder zu kurze Abschnitte auszuschließen. Nach diesem Filter verblieben 215 Chunks, die als *potenziell relevant* galten.
 
 === Semantische Ähnlichkeitsberechnung
 
 - Embedding-Repräsentation  
+
   Für jeden der 215 Chunks erzeugen wir ein *SBERT-Embedding* (Modell: `all-MiniLM-L6-v2`). Ebenso wird jede Frage in ein SBERT-Embedding überführt.  
 - Cosine-Similarity  
+
   Für jede Frage berechnen wir die Cosine Similarity zwischen dem Frage-Embedding und jedem Chunk-Embedding. Anschließend sortieren wir die Chunks nach ihrem Similarity-Score ( höherer Score → größere semantische Relevanz).  
-- Auswahl der Top-K Chunks  
+- Auswahl der Top-K Chunks 
+
   Für verschiedene Reduktionsstufen wählen wir jeweils die *Top K* Chunks aus, um den reduzierten Kontext zu bilden. K entspricht einem Prozentsatz der 215 relevanten Chunks (z. B. 75 % von 215 ≈ 161).
 
 === Experimenteller Versuchsaufbau
@@ -456,12 +428,15 @@ Die Farben basieren auf einer Rot–Gelb–Grün-Skala, wobei niedrige Accuracy-
 == Beobachtungen
 
 - *Starker Genauigkeitsverlust unter 50 % Reduktion*  
-  Ab 50 % Reduktion sinkt die Accuracy auf 50.0 % oder darunter, was für faktische QA-Anwendungen zu ungenau ist. Wenn der für eine bestimmte Frage relevante Teil des Textkorpus nicht mehr im reduzierten Kontext enthalten ist, entstehen Nonsense-Antworten. Diese wurde hier besonders bei der 50% Schwelle bemerkbar, wo teilweise auch gar keine Antwort geliefert wurde. 
+
+  Ab 50 % Reduktion sinkt die Accuracy auf 50.0 % oder darunter, was für faktische QA-Anwendungen zu ungenau ist. Wenn der für eine bestimmte Frage relevante Teil des Textkorpus nicht mehr im reduzierten Kontext enthalten ist, entstehen Nonsense-Antworten. Dies konnte hier allerdings nichtmehr weiter behandelt werden, da man manuell wenig Einfluss auf das interne Chunking-Vefahren. Diese wurde hier besonders bei der 50% Schwelle bemerkbar, wo teilweise auch gar keine Antwort geliefert wurde. 
 
 - *Semantische Qualität der Chunks*  
+
   Top-Chunks (Score > 0.7) enthalten häufig Definitionen oder Listen mit QA-relevanten Fakten (z. B. Judo-Grundbegriffe). Chunks mit Scores < 0.5 liefern eher allgemeine oder philosophische Inhalte und sind weniger hilfreich.  
 
 - *Kompromiss zwischen Vollständigkeit und Präzision*  
+
   Eine adaptive Auswahlstrategie könnte sinnvoll sein, indem man beispielsweise alle Chunks mit einem Score ≥ 0.6 einbezieht, statt fixe Prozentsätze zu verwenden.  
 
 - *Optimierungsmöglichkeiten*  
@@ -477,12 +452,12 @@ Die semantische Chunk-Reduktion erweist sich als effektive Methode, um QA-Perfor
 - LoRA ermöglichte effizientes Fine-Tuning durch Anpassung einer kleinen Anzahl von Parametern, wodurch der Speicherbedarf reduziert wurde.
 
 Für diesen konkreten Usecase hat das Finetuning allerdings keinen Genauigkeitszuwachs im Vergleich zum Basis-Modell bewirkt. Es wurden hier erneut 
-#figure(image("assets/finetuned.png"), caption: "Fine-Tuning liefert in diesem Fall zwar teils andere und subjektiv bessere Antworten, erhöht aber nicht die Accuracy")
+#figure(image("finetuned.png"), caption: "Fine-Tuning liefert in diesem Fall zwar teils andere und subjektiv bessere Antworten, erhöht aber nicht die Accuracy")
 === Evaluation der Modelle
+<sec:eva>
+In der ersten Evaluierungsphase kam eine *rein stringbasierte* Methodik zum Einsatz, bei der Antworten als korrekt galten, wenn sie exakt mit den Musterantworten übereinstimmten oder eine hohe Zeichen­übereinstimmung (≥ 80 %) aufwiesen. Dieses Verfahren zeigte allerdings deutliche Schwächen:
 
-In der ersten Evaluierungsphase kam eine *rein stringbasierte* Methodik zum Einsatz, bei der Antworten als korrekt galten, wenn sie exakt mit den Musterantworten übereinstimmten oder eine hohe Zeichen­übereinstimmung (z. B. ≥ 80 %) aufwiesen. Dieses Verfahren zeigte allerdings deutliche Schwächen:
-
-- *Synonyme und Namensvarianten* werden nicht erkannt, z. B. „Jigoro Kano“ vs. „Kanō Jigorō“ oder „International Judo Federation“ vs. „IJF“.
+- *Synonyme und Namensvarianten* werden nicht erkann: „Jigoro Kano“ vs. „Kanō Jigorō“ oder „International Judo Federation“ vs. „IJF“.
 - *Unterschiedliche Formulierungen und Satzstellungen* gelten als falsch, z. B. „sanfter Weg“ vs. „der sanfte Weg“ oder „1882 gründete Kanō Jigorō den Kōdōkan“ vs. „Der Kōdōkan wurde 1882 von Kanō Jigorō gegründet“.
 - *Mehrdeutigkeit bei offenen Fragen*, etwa „Nenne einen Hüftwurf“, erlaubt mehrere gültige Antworten, die stringbasiert schwer zu erfassen sind.
 
@@ -499,7 +474,7 @@ Zur ganzheitlichen Beurteilung der Prototypen wurden folgende Metriken definiert
 
 == Klassifikation nach Schwierigkeit
 
-In Anlehnung an das *head-to-tail*-Paper wurde ein mehrstufiges Schema entwickelt, um die Fragen systematisch in *Easy*, *Medium* und *Hard* zu unterteilen. Ziel war es, eine nachvollziehbare Balance zwischen *häufig vorkommendem Basiswissen* und *tiefgehenden Spezialfragen* herzustellen. Die Einteilung erfolgte in einem iterativen Prozess, bei dem quantitative Heuristiken mit qualitativen Einschätzungen kombiniert wurden.
+In Anlehnung an das _Head-to-Tail_-Paper wurde ein mehrstufiges Schema entwickelt, um die Fragen systematisch in *Easy*, *Medium* und *Hard* zu unterteilen @head-to-tail. Ziel war es, eine nachvollziehbare Balance zwischen *häufig vorkommendem Basiswissen* und *tiefgehenden Spezialfragen* herzustellen. Die Einteilung erfolgte in einem iterativen Prozess, bei dem quantitative Heuristiken mit qualitativen Einschätzungen kombiniert wurden.
 
 Die Klassifikation basiert auf vier zentralen Heuristiken:
 
@@ -507,8 +482,9 @@ Die Klassifikation basiert auf vier zentralen Heuristiken:
 Zunächst wurde die Verteilung von Schlüsselbegriffen im Korpus analysiert. Häufig zitierte Begriffe wie *judo*, *Kanō Jigorō* oder *Kōdōkan* markieren grundlegende Konzepte und bilden damit das Fundament für *Easy*-Fragen. Selten auftretende oder nur in Fachabschnitten erwähnte Terme weisen dagegen auf eine höhere Schwierigkeit hin.
 
 - *Informationsdichte und Antwortkomplexität*  
-Der Umfang und die Struktur der erwarteten Antworten wurden berücksichtigt: Sehr kurze, prägnante Antworten (z. B. ein oder zwei Wörter) kennzeichnen Fragen der Stufe *Easy*. Im Gegensatz dazu erfordern mittellange Antworten in zusammengesetzten Fachbegriffen (*Medium*), während lange oder mehrteilige Antworten—etwa diejenigen, die Kombinationen von Datum, Ort und Person enthalten—typischerweise als *Hard* eingestuft wurden. In der Praxis zeigte sich, dass übermäßig komplexe Frageformate die QA-Performance deutlich verschlechtern und daher eher vermieden wurden.
+Der Umfang und die Struktur der erwarteten Antworten wurden berücksichtigt: Sehr kurze, prägnante Antworten (ein oder zwei Wörter) kennzeichnen Fragen der Stufe *Easy*. Im Gegensatz dazu erfordern mittellange Antworten in zusammengesetzten Fachbegriffen (*Medium*), während lange oder mehrteilige Antworten—etwa diejenigen, die Kombinationen von Datum, Ort und Person enthalten—typischerweise als *Hard* eingestuft wurden. In der Praxis zeigte sich, dass übermäßig komplexe Frageformate die QA-Performance deutlich verschlechtern und daher eher vermieden wurden.
 
+#linebreak()
 - *Kognitive Anforderungen und Kontextverknüpfung*  
 Nicht nur die Länge, sondern auch der Grad der gedanklichen Verknüpfung spielt eine Rolle: 
 
@@ -525,7 +501,7 @@ Die Fragen wurden manuell nach definierten Heuristiken in Schwierigkeitsgrade un
 
 == Beispiele der Einordnung
 
-Um das Schema anschaulich zu machen, hier exemplarische Fragestellungen je Kategorie:
+Um das Schema anschaulich zu machen, werden hier exemplarische Fragestellungen je Kategorie aufgelistet:
 
 *Easy*  
 
@@ -561,7 +537,7 @@ Für QA-Systeme, die in einem homogenen Korpus kurze, atomare Fakten abfragen, s
 - *Paraphrasen*:  
   In vielen Fällen ist eine inhaltlich korrekte Paraphrase (_maximum efficiency, minimum effort_ statt _maximum efficient use of energy_) möglich, wird aber von reinen String-Vergleichen nicht erkannt.  
 - *Fehleinschätzung von Teilantworten*:  
-  Der F1-Score auf Token-Ebene kann zwar Teilkorrektheit bewerten, nimmt aber an, dass beide Antworttexte dieselben Token-Vokabulare verwenden (Stoppwörter, Zeichensetzung etc.).
+  Der F1-Score auf Token-Ebene kann zwar Teilkorrektheit bewerten, nimmt aber an, dass beide Antworttexte dieselben Token-Vokabulare verwenden (Stoppwörter, Zeichensetzung etc.) @sec:eva.
 
 Durch den Einsatz von #acr("SAS") und Cosine Similarity in Kombination mit der Bibliothek sentence-transformers werden genau diese Einschränkungen umgangen:
 #pagebreak()
@@ -588,7 +564,7 @@ Für jede Frage gehen wir wie folgt vor:
    
 2. Die Cosine Similarity zwischen den beiden Vektoren wird berechnet als:  
    $ "sim"(bold(e)_"gold", bold(e)_"pred") = frac(bold(e)_"gold" dot bold(e)_"pred", norm(bold(e)_"gold") norm(bold(e)_"pred")) $
-   wobei der Skalarprodukt im Zähler und das Produkt der Normen im Nenner steht.
+   wobei das Skalarprodukt im Zähler und das Produkt der Normen im Nenner steht.
 
 3. Die Antwort gilt als korrekt, wenn  
    $ "sim"(bold(e)_"gold", bold(e)_"pred") >= 0.7 $
@@ -600,7 +576,7 @@ Für jede Frage gehen wir wie folgt vor:
 Der Schwellenwert von 0.7 wurde folgendermaßen bestimmt:
 
 - Einschluss semantischer Äquivalenz:  
-  In internen Testreihen zeigte sich, dass Paraphrasen und Synonyme meist eine Cosine Similarity $>= 0.7$ erreichen.  
+  In Testreihen zeigte sich, dass Paraphrasen und Synonyme meist eine Cosine Similarity $>= 0.7$ erreichen.  
 - Ausschluss zufälliger Koinzidenzen:  
   Werte deutlich unter 0.7 (z. B. 0.5–0.6) traten bei thematisch verwandten, aber inhaltlich unterschiedlichen Phrasen auf (z. B. „throwing" vs. „grappling").  
 - Abwägung Präzision vs. Recall:  
@@ -631,7 +607,7 @@ Durch die ausschließliche Verwendung von #acr("SAS") (Cosine Similarity $>= 0.7
 - Stabile Evaluation ohne das Rauschen, das stringbasierte Metriken bei kleinen Änderungen verursachen.  
 - Klare Entscheidungsbasis durch einen festen Schwellenwert, der in Validierungs-Experimenten empirisch gerechtfertigt wurde.
 
-Mit dieser Metrik stellen wir sicher, dass das QA-Modell nicht nur wortwörtlich korrekt antwortet, sondern vor allem inhaltlich stimmige und kontextuell passende Antworten liefert.
+Dadurch wird gewährleistet, dass unsere Evaluation semantisch besonders robust ist und vielfältige, inhaltlich korrekte Antwortvariationen zulässt, dabei mit minimalem Implementierungsaufwand auskommt, stabil gegenüber kleinen Textänderungen bleibt und dank eines fest definierten, empirisch begründeten Schwellenwerts eine klare und nachvollziehbare Entscheidungsgrundlage bietet.
 
 = Analyse falsch beantworteter Fragen
 
@@ -651,12 +627,12 @@ Die folgenden Easy-Fragen wurden vom Modell fehlerhaft oder ungenau beantwortet.
 
 #underline[Prüfung der Antwort:]
   
-_Free practice_ (jp.: randori) ist nicht das Ziel eines Kampfes, sondern eher das Ziel einer Trainingseinheit bzw. deren Hauptfokus. Die Frage richtet sich jedoch auf das Ziel eines Wettkampfes. Die Antwort wurde aus der Passage _Kano's emphasis on randori (free practice) in Judo_ extrahiert.
+_Free practice_ (jp.: randori) ist *nicht* das Ziel eines Kampfes, sondern eher das Ziel einer Trainingseinheit bzw. deren Hauptfokus. Die Frage richtet sich jedoch auf das Ziel eines Wettkampfes. Die Antwort wurde aus der Passage _Kano's emphasis on randori (free practice) in Judo_ extrahiert.
 
 
 #underline[Mögliche Ursachen:]
 
- Verwechslungsgefahr ähnlicher Phrasen: In der Nähe der Definition des Wettkampf-Ziels steht die Erwähnung vom Fokus einer Trainingseinheit.
+ Verwechslungsgefahr ähnlicher Phrasen: In der Nähe der Definition des Wettkampf-Ziels steht die Erwähnung des Fokus einer Trainingseinheit.
 
 Verbesserungsmöglichkeit: Präzisierung durch zusätzliche Schlagworte: Frage eventuell als _What is the objective in a judo competition?_ oder _How to win a judo match?_ formulieren, um klar auf Wettkampfaspekte hinzuweisen.  
 
@@ -682,7 +658,7 @@ _Judoka_ ist ein allgemeiner Begriff für Personen, die Judo machen und funktion
 - Einführung eines Fachbegriffs-Lexikons: Eine Nachschlage-Liste bereitstellen, die das Modell bei Antworten zwingt, zwischen generischen und spezifischen Termini zu unterscheiden (z. B. _tori_ vs. _judoka_).  
 - Frage umformulieren: Mit _What is the specific Japanese term for the person performing the throw?_ das Modell noch stärker auf Fachbegriffe lenken.
 
-
+#linebreak()
 
 #underline[Verbesserungsvorschläge:]
   
@@ -708,7 +684,7 @@ Alle drei Fragen verlangen spezifische Techniken aus unterschiedlichen Kategorie
 
 #underline[Verbesserungsvorschläge:]
 
-- Das Hauptproblem bei der Auswertung, ist dass es viele mögliche korrekte Antworten gibt, und selbst eine semantische Evaluierungsmethode wie Cosine Similarity (@cos) wahrscheinlich falsch evaluiert. Es wäre daher sinnvoll für zukünftige Iterationen solche fragen entweder völlig wegzulassen oder eine komplette Liste der möglichen Antworten in dem _answer_-Feld der JSON-Datei abzulegen. 
+- Das Hauptproblem bei der Auswertung, ist dass es viele mögliche korrekte Antworten gibt, und selbst eine semantische Evaluierungsmethode wie Cosine Similarity (@cos) wahrscheinlich falsch evaluiert. Es wäre daher sinnvoll für zukünftige Iterationen solche Fragen entweder völlig wegzulassen oder eine komplette Liste der möglichen Antworten in dem _answer_-Feld der JSON-Datei abzulegen. 
 
 ==== _Is judo mixed-sex?_
 
@@ -800,7 +776,7 @@ _nage waza_ (Wurftechniken im Allgemeinen) ist eine Oberkategorie, die _sutemi-w
 
 #underline[Prüfung der Antwort:]
   
-_Traditional forms of combat_ eine etwas weniger präzise, aber durchaus plausible Antwort. Hier zeigt sich demnach nicht die Schwäche des QA-Modells sondern die der Evaluierungsmethodik mit Cosine-Similariy.
+_Traditional forms of combat_ eine etwas weniger präzise, aber durchaus plausible Antwort. Hier zeigt sich demnach nicht die Schwäche des QA-Modells sondern die der Evaluierungsmethodik mit Cosine-Similarity.
 
 ==== _Which American judoka is also an MMA fighter?_
 
@@ -913,6 +889,8 @@ Aus den erwähnten Punkten folgt, dass Textkorpus, Frageformulierung und Evaluie
 In dieser Arbeit wurde der Fokus auf Extractive-Question-Answering-Systeme (QA) gelegt, die sowohl Faktenwissen als auch konzeptuelle Zusammenhänge extrahieren. Im Folgenden werden zentrale Einsatzfelder kurz skizziert.
 
 QA-Systeme mit Fokus auf Fakten- und Konzeptwissen bieten in zahlreichen Domänen hohen Mehrwert. Sie beschleunigen Recherche, verbessern Informationszugang und unterstützen komplexe Entscheidungsprozesse. Zukünftige Fortschritte in semantischen Repräsentationen und multimodaler Integration werden die Einsatzmöglichkeiten weiter ausdehnen.
+#linebreak()
+#linebreak()
 
 #show table.cell.where(y: 0): set text(weight: "light")
 #table(
@@ -925,49 +903,49 @@ QA-Systeme mit Fokus auf Fakten- und Konzeptwissen bieten in zahlreichen Domäne
     Bildung & E-Learning
   ],
   [
-    Interaktives Lernen liefert präzise Fakten und kontextuelle Erklärungen zu Lehrtexten. Lehrkraft-Unterstützung erstellt automatisch Quizfragen und erläutert komplexe Konzepte.
+    Unterstützt interaktives Lernen durch präzise Fakten und kontextuelle Erklärungen zu Lehrtexten und entlastet Lehrkräfte, indem es automatisch Quizfragen generiert und komplexe Inhalte erläutert.
   ],
   [
     Customer Support & Helpdesk
   ],
   [
-    Automatisierte FAQ-Bearbeitung extrahiert Produktfakten und Prozessabläufe aus Dokumentationen. Multimodale Fehlerdiagnose identifiziert Fehlermeldungen und erklärt dahinterstehende Konzepte.
+    Automatisiert die Bearbeitung von FAQs durch Extraktion von Produktinformationen und Prozessschritten aus Dokumentationen und verbessert die Fehlerdiagnose, indem es Fehlermeldungen erkennt und zugrunde liegende Konzepte erklärt.
   ],
   [
     Enterprise Knowledge Management
   ],
   [
-    Dokumentenrecherche fördert schnelle Faktenfindung (z. B. Ansprechpartner, Fristen) und semantische Extraktion von Prozessabläufen. Compliance/Audit liefert zitierfähige Passagen und erklärt Risiken bei Nichteinhaltung.
+    Beschleunigt die Dokumentenrecherche durch schnelle Faktenfindung (z. B. Ansprechpartner, Fristen) und semantische Extraktion von Prozessabläufen; liefert im Compliance- und Audit-Kontext zitierfähige Textstellen und erklärt Risiken bei Nichteinhaltung.
   ],
   [
     Medizinische Informationssysteme
   ],
   [
-    Patienten-Information beantwortet Dosierungsfragen und erklärt Krankheitszusammenhänge. Forschungsunterstützung extrahiert Studiendaten und konzeptuelle Hypothesen aus Publikationen.
+    Beantwortet patientenbezogene Fragen zu Dosierungen und erklärt Krankheitszusammenhänge; unterstützt die Forschung durch Extraktion von Studiendaten und Identifizierung konzeptioneller Hypothesen aus Fachliteratur.
   ],
   [
     Recht & Compliance
   ],
   [
-    Juristische Recherche zitiert Gesetzesartikel und erläutert rechtliche Konzepte. Vertragsanalyse identifiziert wesentliche Klauseln und bewertet deren rechtliche Wirkung.
+    Ermöglicht juristische Recherchen durch Zitieren relevanter Gesetzesartikel und Erklären rechtlicher Konzepte; vereinfacht die Vertragsanalyse, indem es zentrale Klauseln erkennt und deren juristische Tragweite bewertet.
   ],
   [
     Wissenschaftliche Forschung & Literaturübersicht
   ],
   [
-    Studienauswertung liefert Stichprobengrößen und konzeptuelle Limitationen aus Papers. Interdisziplinäre Recherchen erklären Methodenübertragungen und vergleichen Fachbegriffe.
+    Extrahiert aus Fachartikeln Stichprobengrößen und konzeptionelle Limitationen; erleichtert interdisziplinäre Recherchen durch Erklärung von Methodenübertragungen und Vergleich zentraler Fachbegriffe.
   ],
   [
     Öffentliche Dienste & Behörden
   ],
   [
-    Verwaltungsportale beantworten Unterlagenfragen und erläutern rechtliche Grundlagen. Krisenkommunikation liefert Notfallfakten und konzeptuelle Empfehlungen aus Leitfäden.
+    Beantwortet Fragen zu benötigten Unterlagen in Verwaltungsportalen und erläutert rechtliche Grundlagen; liefert in der Krisenkommunikation Notfallinformationen und konzeptionelle Handlungsempfehlungen aus Leitfäden.
   ],
   [
     Digitale Bibliotheken & Archive
   ],
   [
-    Historische Recherche findet Datumsfakten und bietet konzeptuelle Einordnungen zu Ereignissen. Multilinguale Dokumentenerschließung übersetzt Fragen und liefert Fakten sowie Konzepte aus fremdsprachigen Quellen.
+    Unterstützt historische Recherchen durch Auffinden von Datumsangaben und kontextuelle Einordnung von Ereignissen; vereinfacht die multilingualen Dokumentenerschließung durch Übersetzung von Fragestellungen und Extraktion von Fakten sowie Konzepten aus fremdsprachigen Quellen.
   ],
 )
 
@@ -984,7 +962,8 @@ Die Studienarbeit untersuchte systematisch die Leistungsfähigkeit von LLM-basie
 - *Evaluierungsmetrik entscheidend*:  
   Herkömmliche String-Metriken (EM, F1) scheitern an semantischen Nuancen. SAS (Cosine Similarity ≥0.7) erwies sich als robuste Alternative zur Bewertung inhaltlicher Korrektheit.
 
-- *Fehlerprofile zusammengefasst*:
+- *Fehlerprofile*:
+  Um eine genauere Evaluation zu ermöglichen wurden Fehlerprofile in Anlehnung definiert @head-to-tail. Dabei kommen in den Kategorien folgende Fehler besonders vor:
   - *Easy-Fragen*: Fehler durch Generalisierung
   - *Medium/Hard-Fragen*: Kategorienverwechslungen und Kontextinkonsistenzen.
   - *Geschlossene Fragen*: (Ja/Nein) bereiten LLMs besondere Schwierigkeiten.
@@ -1005,7 +984,7 @@ Basierend auf den Erkenntnissen ergeben sich folgende Forschungs- und Optimierun
   Kombination von SAS mit regelbasierten Filtern (z. B. Fachbegriffslexika) zur Reduktion von Fehlklassifikationen bei Synonymen. Dies ist auch durch die Angabe von mehreren Musterantworten pro Frage realisierbar.
 
 - *Strukturierte Kontextanreicherung*:  
-  Integration von Knowledge Graphs zur expliziten Modellierung von Begriffs-Hierarchien (z. B. _sutemi-waza ⊂ nage-waza_).
+  Integration von Knowledge Graphs zur expliziten Modellierung von Begriffs-Hierarchien (z. B. sutemi-waza ⊂ nage-waza).
 
 == Architekturinnovationen
 
